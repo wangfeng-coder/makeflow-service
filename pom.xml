@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.makeid.makeflow</groupId>
+  <artifactId>makeflow-service</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+
+  <name>makeflow-service</name>
+  <modules>
+    <module>makeflow-template-api</module>
+    <module>makeflow-template-service</module>
+    <module>makeflow-workflow-api</module>
+    <module>makeflow-workflow-service</module>
+    <module>makeflow-form-api</module>
+    <module>makeflow-form-service</module>
+    <module>makeflow-service-application</module>
+    <module>makeflow-form-data</module>
+    <module>makeflow-template-data</module>
+    <module>makeflow-workflow-data</module>
+  </modules>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spring-boot.version>2.2.13.RELEASE</spring-boot.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.24</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <repositories>
+    <repository>
+      <id>maven-public</id>
+      <name>maven-public</name>
+      <url>https://nexus.wewin.com.cn:9500/repository/maven-public/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <!--上传maven私服-->
+  <distributionManagement>
+    <repository>
+      <id>maven-public</id>
+      <name>maven-public</name>
+      <url>https://nexus.wewin.com.cn:9500/repository/maven-public/</url>
+    </repository>
+  </distributionManagement>
+</project>
