@@ -19,13 +19,17 @@
     <module>makeflow-form-data</module>
     <module>makeflow-template-data</module>
     <module>makeflow-workflow-data</module>
+    <module>makeflow-document-api</module>
+    <module>makeflow-document-service</module>
+    <module>makeflow-push-service</module>
+    <module>makeflow-basic-service</module>
   </modules>
 
   <properties>
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring-boot.version>2.2.13.RELEASE</spring-boot.version>
+    <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
   </properties>
 
   <dependencyManagement>
@@ -46,16 +50,6 @@
     </dependencies>
   </dependencyManagement>
 
-  <repositories>
-    <repository>
-      <id>maven-public</id>
-      <name>maven-public</name>
-      <url>https://nexus.wewin.com.cn:9500/repository/maven-public/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
   <build>
     <plugins>
       <plugin>
@@ -70,12 +64,5 @@
       </plugin>
     </plugins>
   </build>
-  <!--上传maven私服-->
-  <distributionManagement>
-    <repository>
-      <id>maven-public</id>
-      <name>maven-public</name>
-      <url>https://nexus.wewin.com.cn:9500/repository/maven-public/</url>
-    </repository>
-  </distributionManagement>
+
 </project>

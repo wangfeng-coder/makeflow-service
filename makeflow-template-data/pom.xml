@@ -10,4 +10,24 @@
     <artifactId>makeflow-template-data</artifactId>
     <name>Archetype - makeflow-template-data</name>
     <url>http://maven.apache.org</url>
+    <version>${parent.version}</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.makeid.makeflow</groupId>
+            <artifactId>makeflow-template-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
 </project>
