@@ -9,4 +9,18 @@
     <artifactId>makeflow-workflow-data</artifactId>
     <name>Archetype - makeflow-workflow-data</name>
     <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.makeid.makeflow</groupId>
+            <artifactId>makeflow-template-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.makeid.makeflow</groupId>
+            <artifactId>makeflow-workflow-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 </project>

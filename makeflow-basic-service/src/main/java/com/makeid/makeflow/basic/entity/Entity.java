@@ -1,71 +1,35 @@
 package com.makeid.makeflow.basic.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
-*@program makeflow-service
-*@description 数据库通用实体类
-*@author feng_wf
-*@create 2023-05-19
-*/
-public class Entity implements Serializable {
+ * @author feng_wf
+ * @program makeflow-service
+ * @description
+ * @create 2023-06-01
+ */
+public interface Entity {
 
-    private String id;
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-    /**
-     * 创建者id
-     */
-    private String creator;
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-    /**
-     * 更新者id
-     */
-    private String updator;
+    String getId();
 
-    public String getId() {
-        return id;
-    }
+    void setId(String id);
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    Date getCreateTime();
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+    void setCreateTime(Date date);
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+    void setUpdateTime(Date date);
 
-    public String getCreator() {
-        return creator;
-    }
+    Date getUpdateTime();
 
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
+    String getCreator();
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+    void setCreator(String creator);
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+    boolean isDelete();
 
-    public String getUpdator() {
-        return updator;
-    }
+    void setDelete(boolean delete);
 
-    public void setUpdator(String updator) {
-        this.updator = updator;
-    }
+
+
 }

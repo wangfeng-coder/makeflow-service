@@ -79,6 +79,10 @@ public class BpmnModel {
     return processes;
   }
 
+  public Process getMainProcess() {
+    return processes.get(0);
+  }
+
   public void addProcess(Process process) {
     processes.add(process);
   }

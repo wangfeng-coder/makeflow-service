@@ -12,7 +12,6 @@
  */
 package com.makeid.makeflow.template.bpmn.model;
 
-import com.makeid.makeflow.template.flow.base.Element;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;

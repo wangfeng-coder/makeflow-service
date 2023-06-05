@@ -12,9 +12,6 @@
  */
 package com.makeid.makeflow.template.bpmn.model;
 
-import com.makeid.makeflow.template.flow.activity.StartActivity;
-import com.makeid.makeflow.template.flow.base.Element;
-
 import java.util.ArrayList;
 import java.util.List;
 
