@@ -13,13 +13,13 @@
 package com.makeid.makeflow.workflow.process;
 
 
-import com.makeid.makeflow.workflow.runtime.ActivityExecution;
+import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
 
 import java.io.Serializable;
 
 
 public interface Condition extends Serializable {
 
-  boolean evaluate(ActivityExecution execution);
+  boolean evaluate(ActivityPvmExecution execution);
 
 }

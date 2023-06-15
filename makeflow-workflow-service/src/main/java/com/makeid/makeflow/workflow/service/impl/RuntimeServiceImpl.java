@@ -1,7 +1,10 @@
 package com.makeid.makeflow.workflow.service.impl;
 
+import com.makeid.makeflow.workflow.cmd.StartDefiniteProcessInstanceCmd;
 import com.makeid.makeflow.workflow.config.ProcessEngineConfigurationImpl;
+import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
 import com.makeid.makeflow.workflow.service.RuntimeService;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
@@ -11,6 +14,7 @@ import java.util.Map;
 *@author feng_wf
 *@create 2023-05-30
 */
+@Service
 public class RuntimeServiceImpl extends ServiceImpl implements RuntimeService {
     public RuntimeServiceImpl() {
     }
@@ -20,7 +24,7 @@ public class RuntimeServiceImpl extends ServiceImpl implements RuntimeService {
     }
 
     @Override
-    public ProcessInstance startDefiniteProcessInstanceById(String processDefinitionId, String processInstanceId, Map<String, Object> variables) {
+    public PvmProcessInstance startDefiniteProcessInstanceById(String processDefinitionId, String processInstanceId, Map<String, Object> variables) {
         return commandExecutor.execute(new StartDefiniteProcessInstanceCmd(
                 processDefinitionId, processInstanceId, variables));
     }

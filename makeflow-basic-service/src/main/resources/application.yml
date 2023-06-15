@@ -1,0 +1,38 @@
+redisson:
+  server:
+    # 单机：stand-alone
+    host: 127.0.0.1
+    password: 123456
+    port: 6379
+    database: 0
+    type: stand-alone
+    #     哨兵：sentinel ；主从： 或者 master-slave  集群：cluster
+    #        master: mymaster
+    #        nodes: 172.16.39.18:26376,172.16.39.18:26377,172.16.39.18:26378
+    #        password: csp172@eb5g
+    #        database: 0
+    #        type: sentinel
+    #     集群：cluster
+    #    nodes: 172.16.39.18:26376,172.16.39.18:26377,172.16.39.18:26378
+    #    password: csp172@eb5g
+    #    database: 0
+    #    type: cluster
+    #获取锁最长等待时间,单位秒
+    waitTime: 10
+    #锁过期最长时间，单位秒
+    leaseTime: 10
+
+# MongoDB
+mongo:
+  replicaSet: 127.0.0.1:27017
+  dbname: makflow
+  connectionsPerHost: 200
+  threadsAllowedToBlockForConnectionMultiplier: 10
+  maxWaitTime: 4000
+  connectTimeout: 4000
+  socketTimeout: 5000
+  autoConnectRetry: true
+  readPreference: primaryPreferred
+  username: root
+  password: root
+  authdb: admin

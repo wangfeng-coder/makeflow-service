@@ -5,6 +5,7 @@ import com.makeid.makeflow.workflow.entity.ExecuteEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
 *@program makeflow-service
@@ -26,4 +27,11 @@ public class ExecutionService {
         executeEntityDao.save(executeEntity);
     }
 
+    public ExecuteEntity findById(String s) {
+        return executeEntityDao.findById(s);
+    }
+
+    public List<ExecuteEntity> findByParentId(String parentId) {
+        return executeEntityDao.findByParentId(parentId);
+    }
 }

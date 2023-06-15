@@ -16,7 +16,7 @@ import java.util.Date;
 */
 @Getter
 @Setter
-@Document
+@Document(collection = "makeflow_execute")
 public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
 
     protected String flowInstId;
@@ -35,6 +35,11 @@ public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
      * 当前活动id
      */
     protected String activityId;
+
+    /**
+     * 设计时的id
+     */
+    protected String activityCodeId;
 
     /**
      * 流程定义id

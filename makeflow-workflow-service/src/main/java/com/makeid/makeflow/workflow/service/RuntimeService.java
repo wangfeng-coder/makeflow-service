@@ -1,8 +1,7 @@
 package com.makeid.makeflow.workflow.service;
 
 
-
-import com.makeid.makeflow.workflow.process.ProcessInstance;
+import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
 
 import java.util.Map;
 
@@ -15,7 +14,7 @@ import java.util.Map;
 public interface RuntimeService {
 
 
-	ProcessInstance startDefiniteProcessInstanceById(
+	PvmProcessInstance startDefiniteProcessInstanceById(
 			String processDefinitionId, String processInstanceId,
 			Map<String, Object> variables);
 }

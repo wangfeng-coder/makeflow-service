@@ -38,5 +38,7 @@ public class Lazy<T> implements Supplier<T> {
         return new Lazy<>(()->function.apply(this.get()));
     }
 
-
+    public void setValue(T value) {
+        this.value = value;
+    }
 }

@@ -13,15 +13,25 @@
 
 package com.makeid.makeflow.workflow.process;
 
+import com.makeid.makeflow.template.flow.model.base.FlowNode;
+import com.makeid.makeflow.template.flow.model.definition.FlowProcessTemplate;
+import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
+
 /**
  * @author
  */
-public interface PvmProcessDefinition extends PvmProcessElement {
+public interface PvmProcessDefinition extends PvmScope {
 
-	ProcessInstanceExecution createProcessInstanceExecution();
+	PvmProcessInstance createProcessInstanceExecution();
 
 	PvmActivity findInitial();
 
+	FlowNode findFlowNode(String codeId);
+
+	/**
+	 * 获取流程模板数据模型
+	 */
+	FlowProcessTemplate findFlowProcessTemplate();
 
 //	PvmProcessInstance createProcessInstance(PvmActivity initial);
 

@@ -27,11 +27,4 @@ public class StartDefiniteProcessInstanceCmd extends StartProcessInstanceCmd {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Override
-	void initial(ExecutionImpl processInstance,
-			ProcessDefinitionImpl processDefinition) {
-		// TODO Auto-generated method stub
-
-	}
 }

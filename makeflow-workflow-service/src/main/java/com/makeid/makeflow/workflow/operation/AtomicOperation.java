@@ -1,6 +1,6 @@
 package com.makeid.makeflow.workflow.operation;
 
-import com.makeid.makeflow.workflow.process.Execution;
+import com.makeid.makeflow.workflow.process.PvmExecution;
 
 /**
  * @author feng_wf
@@ -8,7 +8,7 @@ import com.makeid.makeflow.workflow.process.Execution;
  * @description 操作
  * @create 2023-06-05
  */
-public interface AtomicOperation <T extends Execution> {
+public interface AtomicOperation <T extends PvmExecution> {
 
     void execute(T execution);
 }

@@ -10,7 +10,7 @@ import com.makeid.makeflow.template.flow.model.sequence.SequenceFlow;
 /**
  * 流程模板节点参数
  * 
- * @author jianguo_ran
+ *
  *
  */
 public enum ElementTypeEnum {

@@ -7,7 +7,7 @@ import com.makeid.makeflow.template.flow.model.settings.ApprovalSettings;
 /**
  * 多重审批节点
  * 
- * @author Administrator
+ *
  *
  */
 public class ApprovalTaskActivity extends BaseActivity {

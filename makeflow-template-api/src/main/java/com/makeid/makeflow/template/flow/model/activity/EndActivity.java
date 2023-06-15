@@ -19,9 +19,10 @@ public class EndActivity  extends BaseActivity{
 	}
 
 	@Override
-	public FlowElement clone() {
+	public EndActivity clone() {
 		EndActivity endActivity = new EndActivity();
 		super.setValues(endActivity);
-		return null;
+		return endActivity;
 	}
+
 }

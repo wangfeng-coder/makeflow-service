@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 */
 @Getter
 @Setter
-@Document("makeflow_flow_inst")
+@Document("makeflow_flowInst")
 public class FlowInstEntityImpl extends BaseEntity implements FlowInstEntity {
 
 

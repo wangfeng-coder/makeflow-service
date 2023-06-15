@@ -19,13 +19,17 @@ import com.makeid.makeflow.workflow.behavior.ActivityBehavior;
 import java.util.List;
 
 
-public interface PvmActivity extends PvmProcessElement {
+public interface PvmActivity extends PvmScope {
+
+	TransitionImpl findDefaultOutgoingTransition();
 		
-	PvmTransition findDefaultOutgoingTransition();	
-		
-	List<PvmTransition> findOutgoingTransitions();
+	List<TransitionImpl> findOutgoingTransitions();
 
 	ActivityBehavior findActivityBehavior();
+
+	boolean isStartActivity();
+
+
 
 	
 

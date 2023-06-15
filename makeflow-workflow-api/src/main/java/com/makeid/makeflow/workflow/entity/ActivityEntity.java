@@ -22,17 +22,38 @@ public interface ActivityEntity extends Entity {
 
     void setActivityCodeId(String activityCodeId);
 
-    Date getStartDate();
+    Date getStartTime();
 
-    void setStartDate(Date date);
+    void setStartTime(Date date);
 
-    Date getEndDate();
+    Date getEndTime();
 
-    void setEndDate(Date date);
+    void setEndTime(Date date);
 
     int getStatus();
 
     void setStatus(int status);
+
+    String getFlowInstId();
+
+    void setFlowInstId(String flowInstId);
+
+    void setExecutionId(String executionId);
+
+    String getExecutionId();
+
+    void setParentId(String parentId);
+
+    String getParentId();
+
+    void setPreCodeId(String preCodeId);
+
+    String getPreCodeId();
+
+    void setNextCodeId(String nextCodeId);
+
+    String getNextCodeId();
+
 
 
 }

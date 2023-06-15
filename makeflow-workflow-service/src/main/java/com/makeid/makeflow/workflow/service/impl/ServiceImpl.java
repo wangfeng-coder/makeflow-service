@@ -26,6 +26,10 @@ import com.makeid.makeflow.workflow.interceptor.CommandExecutor;
  */
 public class ServiceImpl {
 
+  public void setProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration) {
+    this.processEngineConfiguration = processEngineConfiguration;
+  }
+
   protected ProcessEngineConfigurationImpl processEngineConfiguration;
 
   public ServiceImpl() {

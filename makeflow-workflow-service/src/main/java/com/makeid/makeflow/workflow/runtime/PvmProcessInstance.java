@@ -1,0 +1,20 @@
+package com.makeid.makeflow.workflow.runtime;
+
+import com.makeid.makeflow.workflow.process.PvmExecution;
+
+/**
+ * @author feng_wf
+ * @program makeflow-service
+ * @description
+ * @create 2023-06-01
+ */
+public interface PvmProcessInstance extends PvmExecution {
+
+    String getProcessDefinitionId();
+
+
+    String rootProcessInstanceId();
+
+    boolean suspended();
+
+}

@@ -13,10 +13,10 @@
 package com.makeid.makeflow.workflow.behavior;
 
 
-import com.makeid.makeflow.workflow.runtime.ActivityExecution;
+import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
 
 public interface ActivityBehavior {
 
-	void execute(ActivityExecution execution);
+	void execute(ActivityPvmExecution execution);
 	
 }

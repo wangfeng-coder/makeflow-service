@@ -12,5 +12,7 @@ public interface BaseDao<T> {
 
     T create();
 
+    T findById(String id);
+
 
 }

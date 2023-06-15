@@ -2,6 +2,10 @@ package com.makeid.makeflow.workflow.interceptor;
 
 
 import com.makeid.makeflow.workflow.cmd.CheckCommand;
+import com.makeid.makeflow.workflow.constants.FlowStatusEnum;
+import com.makeid.makeflow.workflow.context.Context;
+import com.makeid.makeflow.workflow.entity.FlowInstEntity;
+import com.makeid.makeflow.workflow.exception.EngineException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,21 +24,15 @@ public class CheckInterceptor extends AbstractCommandInterceptor {
 				log.info("command instanceof CheckCommand");
 				CheckCommand checkCommand = (CheckCommand) command;
 				String processInstanceId = checkCommand.getProcessInstanceId();
-				FlowInst flowInst = Context.getExecutionService()
-						.findFlowInstById(processInstanceId);
+				FlowInstEntity flowInst = Context.getFlowInstService()
+						.findById(processInstanceId);
 				if (flowInst == null) {
-					throw new EngineException(ErrCodeEnum.WORKFLOW_INST_NOT_EXIST);
+					throw new EngineException("不存在");
 				}
-				FlowStatus flowStatus = flowInst.getStatus();
-				if(flowStatus == null){
-					throw new EngineException(ErrCodeEnum.WORKFLOW_FLOW_STATUS_IS_NULL);
+				if(flowInst.getStatus() != FlowStatusEnum.RUNNING.status) {
+					throw new EngineException("流程不在运行中");
 				}
-				switch (flowStatus) {
-				case RUNNING:
-					break;
-				default:
-					throw new EngineException(ErrCodeEnum.WORKFLOW_FLOW_IS_NOT_RUNNING);
-				}
+
 			}
 			return next.execute(config, command);
 		} finally {

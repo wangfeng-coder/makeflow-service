@@ -13,27 +13,12 @@
 package com.makeid.makeflow.workflow.config;
 
 import com.makeid.makeflow.template.service.FlowProcessTemplateService;
-import com.yunzhijia.cloudflow.workflow.adapter.OpenOrgAndUserRPCClientService;
-import com.yunzhijia.cloudflow.workflow.dao.*;
-import com.yunzhijia.cloudflow.workflow.pvm.interceptor.CommandExecutor;
-import com.yunzhijia.cloudflow.workflow.pvm.service.ActivityService;
-import com.yunzhijia.cloudflow.workflow.pvm.service.ExecutionService;
-import com.yunzhijia.cloudflow.workflow.pvm.service.RuntimeService;
-import com.yunzhijia.cloudflow.workflow.service.FlowExceptionService;
-import com.yunzhijia.cloudflow.workflow.service.TaskService;
-import com.yunzhijia.cloudflow.workflow.service.impl.FlowAbandonService;
-import com.yunzhijia.cloudflow.workflow.service.impl.InitialDataService;
-import com.yunzhijia.cloudflow.workflow.service.local.AskOpinionService;
-import com.yunzhijia.cloudflow.workflow.service.local.RobotService;
-import com.yunzhijia.cloudflow.workflow.thread.AsyncTaskExecutor;
-import com.yunzhijia.cloudflow.workflow.util.PushUtil;
+import com.makeid.makeflow.workflow.service.ActivityService;
+import com.makeid.makeflow.workflow.service.ExecutionService;
+import com.makeid.makeflow.workflow.service.RuntimeService;
+import com.makeid.makeflow.workflow.service.TaskService;
 
 
-/**
- * Interface implemented by all classes that expose the Activiti services.
- * 
- * feihui
- */
 public interface EngineServices {
 
 	RuntimeService getRuntimeService();
@@ -43,33 +28,7 @@ public interface EngineServices {
 	FlowProcessTemplateService getFlowProcessDefinitionService();
 	
 	ActivityService getActivityService();
-
-	AskOpinionService getAskOpinionService();
 	
 	TaskService getTaskService();
 	
-	InitialDataService getInitialDataService();
-
-	AsyncTaskExecutor getAsyncTaskExecutor();
-
-	
-	
-	FlowExceptionService getFlowExceptionService();
-	
-	ErrorMessageDao getErrorMessageDao();
-	
-	CcListDao getCcListDao();
-
-	ExecutionControlInfoDao getExecutionControlInfoDao();
-	
-	CommandExecutor getCommandExecutor();
-	PushUtil getPushUtil();
-	
-	FlowInstRelatedInfoDao getFlowInstRelatedInfoDao();
-	FlowInstDao getFlowInstDao();
-	FlowAbandonService getFlowAbandonService();
-
-	OpenOrgAndUserRPCClientService getOpenOrgAndUserService();
-
-	RobotService getRobotService();
 }

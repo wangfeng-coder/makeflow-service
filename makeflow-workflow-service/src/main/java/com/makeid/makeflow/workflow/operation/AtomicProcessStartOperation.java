@@ -1,6 +1,6 @@
 package com.makeid.makeflow.workflow.operation;
 
-import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
+import com.makeid.makeflow.workflow.process.ProcessInstancePvmExecution;
 
 /**
 *@program makeflow-service
@@ -8,10 +8,10 @@ import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 *@author feng_wf
 *@create 2023-06-05
 */
-public class AtomicProcessStartOperation implements AtomicOperation<ProcessInstanceExecution>{
+public class AtomicProcessStartOperation implements AtomicOperation<ProcessInstancePvmExecution>{
     @Override
-    public void execute(ProcessInstanceExecution execution) {
+    public void execute(ProcessInstancePvmExecution execution) {
         //正常情况下开始节点已经在在前面设置了,直接执行活动开始
-
+        execution.performOperation(AtomicOperations.activity_start);
     }
 }

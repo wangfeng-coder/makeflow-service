@@ -7,5 +7,13 @@ package com.makeid.makeflow.template.flow.model.activity;
  * @create 2023-05-23
  */
 public enum ActivityTypeEnum {
+    START("start"),
 
+    END("end");
+
+    public final String type;
+
+    ActivityTypeEnum(String type) {
+        this.type = type;
+    }
 }

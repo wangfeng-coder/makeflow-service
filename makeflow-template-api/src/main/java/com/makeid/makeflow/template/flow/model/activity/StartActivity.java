@@ -20,7 +20,7 @@ public class StartActivity extends BaseActivity{
 		setElementType(ElementTypeEnum.ACTIVITYTYPE_START.getContext());
 	}
 
-	public StartActivity transferFrom(StartEvent startEvent) {
+	public static StartActivity transferFrom(StartEvent startEvent) {
 		StartActivity startActivity = new StartActivity();
 		startActivity.initiator = startEvent.getInitiator();
 		startActivity.setCodeId(startEvent.getId());

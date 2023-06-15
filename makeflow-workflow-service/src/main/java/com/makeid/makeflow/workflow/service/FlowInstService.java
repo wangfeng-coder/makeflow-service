@@ -1,9 +1,7 @@
 package com.makeid.makeflow.workflow.service;
 
-import com.makeid.makeflow.workflow.dao.FlowInstDao;
 import com.makeid.makeflow.workflow.dao.FlowInstEntityDao;
 import com.makeid.makeflow.workflow.entity.FlowInstEntity;
-import com.makeid.makeflow.workflow.entity.impl.FlowInstEntityImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,5 +24,9 @@ public class FlowInstService {
 
     public FlowInstEntity create() {
         return flowInstEntityDao.create();
+    }
+
+    public FlowInstEntity findById(String id) {
+        return flowInstEntityDao.findById(id);
     }
 }

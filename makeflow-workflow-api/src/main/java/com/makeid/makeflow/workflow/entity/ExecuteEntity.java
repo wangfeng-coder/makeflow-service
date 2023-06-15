@@ -28,5 +28,14 @@ public interface ExecuteEntity extends Entity {
 
     Date getStartTime();
 
+    void setActivityCodeId(String activityCodeId);
+
+    String getActivityCodeId();
+
+    String getActivityId();
+
+
+
+
 
 }
