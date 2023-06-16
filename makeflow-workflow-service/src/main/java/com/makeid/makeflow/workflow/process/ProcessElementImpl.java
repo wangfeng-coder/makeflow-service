@@ -14,13 +14,9 @@
 package com.makeid.makeflow.workflow.process;
 
 
-import com.makeid.makeflow.basic.utils.SpringContextUtils;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
-import com.makeid.makeflow.workflow.runtime.IdGenerator;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
-
-import java.util.Objects;
 
 /**
  * common properties for process definition, activity and transition including
@@ -31,9 +27,6 @@ import java.util.Objects;
 public class ProcessElementImpl implements PvmProcessElement {
 
 	private static final long serialVersionUID = 1L;
-
-	protected String id = new ObjectId().toString();
-
 	/**
 	 * 如果是定义 这是模板codeId 如果是节点这是节点codeId
 	 */
@@ -42,25 +35,17 @@ public class ProcessElementImpl implements PvmProcessElement {
 	protected String name;
 	protected ProcessDefinitionImpl processDefinition;
 
-	protected IdGenerator idGenerator;
 
 	public ProcessElementImpl() {
 
 	}
 
-	public ProcessElementImpl(String id,
-							  ProcessDefinitionImpl processDefinition) {
-		if (StringUtils.isNotBlank(id)) {
-			setId(id);
-		}
+	public ProcessElementImpl(ProcessDefinitionImpl processDefinition) {
 		this.processDefinition = processDefinition;
 	}
 
-	public ProcessElementImpl(String id,String codeId,
+	public ProcessElementImpl(String codeId,
 							  ProcessDefinitionImpl processDefinition) {
-		if (StringUtils.isNotBlank(id)) {
-			setId(id);
-		}
 		this.codeId = codeId;
 		this.processDefinition = processDefinition;
 	}
@@ -69,15 +54,6 @@ public class ProcessElementImpl implements PvmProcessElement {
 	@Override
 	public ProcessDefinitionImpl findProcessDefinition() {
 		return this.processDefinition;
-	}
-
-	@Override
-	public IdGenerator findIdGenerator() {
-		//TODO 根据具体情况查找id生成器
-		if (Objects.nonNull(idGenerator)) {
-			return idGenerator;
-		}
-		return SpringContextUtils.getBean(IdGenerator.class);
 	}
 
 
@@ -91,20 +67,12 @@ public class ProcessElementImpl implements PvmProcessElement {
 		return this instanceof PvmTransition;
 	}
 
-	/** setter **/
-	public void setId(String id) {
-		this.id = id;
-	}
+
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/** getter **/
-	@Override
-	public String getId() {
-		return this.id;
-	}
 
 	@Override
 	public String getCodeId() {

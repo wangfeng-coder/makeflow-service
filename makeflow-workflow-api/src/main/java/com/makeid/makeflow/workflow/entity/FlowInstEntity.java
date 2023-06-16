@@ -2,6 +2,8 @@ package com.makeid.makeflow.workflow.entity;
 
 import com.makeid.makeflow.basic.entity.Entity;
 
+import java.util.Date;
+
 /**
  * @author feng_wf
  * @program makeflow-service
@@ -9,17 +11,25 @@ import com.makeid.makeflow.basic.entity.Entity;
  * @create 2023-06-01
  */
 public interface FlowInstEntity extends Entity {
-    String getTemplateCodeId();
+    String getDefinitionCodeId();
 
-    void setTemplateCodeId(String templateCodeId);
+    void setDefinitionCodeId(String templateCodeId);
 
-    String getTemplateId();
+    String getDefinitionId();
 
-    void setTemplateId(String templateId);
+    void setDefinitionId(String definitionId);
 
     int getStatus();
 
     void setStatus(int status);
+
+    void setStartTime(Date startTime);
+
+    Date getStartTime();
+
+    void setEndTime(Date endTime);
+
+    Date getEndTime();
 
 
 }

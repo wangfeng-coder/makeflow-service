@@ -17,10 +17,9 @@ public class AtomicActivityStartOperation extends AbstractEventAtomicOperation<P
     @Override
     public void doExecute(ProcessInstancePvmExecution execution) {
         ActivityImpl activityInst = execution.findActivityInst();
-        activityInst.initData();
+        activityInst.create(execution);
         //更新活动状态
-        activityInst.setStartTime(new Date());
-        activityInst.setStatus(ActivityStatusEnum.RUNNING.status);
+        activityInst.start();
         //保存到数据库
         activityInst.save();
         //执行活动

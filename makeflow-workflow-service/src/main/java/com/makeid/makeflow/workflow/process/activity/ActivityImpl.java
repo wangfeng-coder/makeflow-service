@@ -1,16 +1,16 @@
 package com.makeid.makeflow.workflow.process.activity;
 
-import com.makeid.makeflow.template.flow.model.activity.ActivityTypeEnum;
+import com.makeid.makeflow.template.flow.model.base.ElementTypeEnum;
 import com.makeid.makeflow.template.flow.model.base.FlowNode;
 import com.makeid.makeflow.template.flow.model.sequence.SequenceFlow;
 import com.makeid.makeflow.workflow.behavior.ActivityBehavior;
+import com.makeid.makeflow.workflow.constants.ActivityStatusEnum;
 import com.makeid.makeflow.workflow.constants.ActivityTypeBehaviorProvider;
+import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.entity.ActivityEntity;
+import com.makeid.makeflow.workflow.entity.ExecuteEntity;
 import com.makeid.makeflow.workflow.exception.EngineException;
-import com.makeid.makeflow.workflow.process.InitialProData;
-import com.makeid.makeflow.workflow.process.PvmActivity;
-import com.makeid.makeflow.workflow.process.ScopeImpl;
-import com.makeid.makeflow.workflow.process.TransitionImpl;
+import com.makeid.makeflow.workflow.process.*;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,21 +34,11 @@ import static com.makeid.makeflow.workflow.process.TransitionImpl.transferFrom;
 @Getter
 public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProData {
 
-
-    protected String activityCodeId;
-
-    protected int status;
-
-    protected Date endTime;
-
-    protected Date startTime;
-
-    protected String preCodeId;
-
-    protected String nextCodeId;
-
     protected String activityType;
 
+    protected String preActivityId;
+
+    protected FlowNode flowNode;
 
     /**
      * 构造的时候会设置对应行为 一定不会为空
@@ -58,15 +48,18 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
     //通过模板定义拿到
     protected List<TransitionImpl> outGoingTransitions;
 
-    public ActivityImpl(String id,String activityCodeId, ProcessDefinitionImpl processDefinition) {
-        super(id,activityCodeId, processDefinition);
+    //对应的数据库实例
+    protected ActivityEntity activity;
+
+    public ActivityImpl(String activityCodeId, ProcessDefinitionImpl processDefinition) {
+        super(activityCodeId, processDefinition);
         initData();
     }
 
 
     @Override
     public TransitionImpl findDefaultOutgoingTransition() {
-        throw new EngineException("暂时不用");
+        throw new EngineException("暂时没支持默认路线");
     }
 
     @Override
@@ -93,13 +86,20 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
 
     @Override
     public boolean isStartActivity() {
-        return this.activityType.equals(ActivityTypeEnum.START.type);
+        return this.activityType.equals(ElementTypeEnum.ACTIVITYTYPE_START.getContext());
+    }
+
+    @Override
+    public String getId() {
+        return this.activity.getId();
     }
 
     @Override
     public void initData() {
+        this.flowNode = findFlowNode(this.codeId);
         this.outGoingTransitions = new ArrayList<>();
-        this.activityBehavior = ActivityTypeBehaviorProvider.get(this.findFlowNode(codeId).getClass());
+        this.activityType = flowNode.getElementType();
+        this.activityBehavior = ActivityTypeBehaviorProvider.get(flowNode.getClass());
     }
 
 
@@ -116,6 +116,32 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
 
     public void save() {
         // TODO 保存到数据库
+        Context.getActivityService().save(activity);
+    }
+
+    public ActivityEntity create(ProcessInstancePvmExecution execution) {
+         ActivityEntity activityEntity = Context.getGlobalProcessEngineConfiguration().getActivityService()
+                .create();
+         activityEntity.setActivityCodeId(this.getCodeId());
+         activityEntity.setActivityType(this.activityType);
+         activityEntity.setDefinitionId(getProcessDefinition().getDefinitionId());
+         activityEntity.setPreActivityId(getPreActivityId());
+         activityEntity.setName(flowNode.getName());
+         activityEntity.setStatus(ActivityStatusEnum.NOT_INIT.status);
+         activityEntity.setFlowInstId(execution.getFLowInstId());
+         activityEntity.setExecutionId(execution.getId());
+         this.activity = activityEntity;
+         return activityEntity;
+    }
+
+    public void start() {
+        activity.setStartTime(new Date());
+        activity.setStatus(ActivityStatusEnum.RUNNING.status);
+    }
+
+    public void end() {
+        activity.setEndTime(new Date());
+        activity.setStatus(ActivityStatusEnum.COMPLETE.status);
     }
 
 
@@ -126,6 +152,6 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
 
 
     public boolean isEndActivity() {
-        return this.activityType.equals(ActivityTypeEnum.END);
+        return this.activityType.equals(ElementTypeEnum.ACTIVITYTYPE_END.getContext());
     }
 }

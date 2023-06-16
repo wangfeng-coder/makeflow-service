@@ -46,13 +46,13 @@ public interface ActivityEntity extends Entity {
 
     String getParentId();
 
-    void setPreCodeId(String preCodeId);
+    void setDefinitionId(String definitionId);
 
-    String getPreCodeId();
+    String getDefinitionId();
 
-    void setNextCodeId(String nextCodeId);
+    String getPreActivityId();
 
-    String getNextCodeId();
+    void setPreActivityId(String preActivityId);
 
 
 

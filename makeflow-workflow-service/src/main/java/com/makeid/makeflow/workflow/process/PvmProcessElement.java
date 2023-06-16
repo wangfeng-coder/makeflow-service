@@ -14,23 +14,17 @@
 package com.makeid.makeflow.workflow.process;
 
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
-import com.makeid.makeflow.workflow.runtime.IdGenerator;
 
 import java.io.Serializable;
 
 
 public interface PvmProcessElement extends Serializable {
 
-	String getId();
-
 	String getCodeId();
 
 	String getName();
 
 	ProcessDefinitionImpl findProcessDefinition();
-
-	IdGenerator findIdGenerator();
-
 
 	//----
 	boolean isActivity();

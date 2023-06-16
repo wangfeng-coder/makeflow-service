@@ -33,6 +33,9 @@ public interface ActivityPvmExecution extends PvmProcessInstance {
 
     void take(List<? extends PvmTransition> transitionsToTake);
 
+    /**
+     * 寻找出线
+     */
     void take();
 
     void performOperation(AtomicOperation atomicOperation);

@@ -42,10 +42,13 @@ abstract class StartProcessInstanceCmd extends AbstractCommand<ProcessInstancePv
 				processDefinitionId, processInstanceId);
 		//流程已经提交现在 要重新开始  获取流程实列继续流转 TODO
 		//获取流程定义
-		ProcessDefinitionImpl processDefinition = ProcessDefinitionBuilder.create().createProcessDefinition(processDefinitionId)
+		//传入流程参数
+		ProcessDefinitionImpl processDefinition = ProcessDefinitionBuilder.builder()
+				.createProcessDefinition(processDefinitionId)
+				.setVariables(this.getVariables())
 				.build();
 		final ProcessInstancePvmExecution processInstanceExecution = (ProcessInstancePvmExecution)processDefinition.createProcessInstanceExecution();
-		processInstanceExecution.save();
+		processInstanceExecution.persist();
 		processInstanceExecution.start();
 		return processInstanceExecution;
 	}

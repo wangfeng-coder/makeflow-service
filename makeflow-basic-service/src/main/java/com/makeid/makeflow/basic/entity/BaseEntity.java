@@ -2,6 +2,7 @@ package com.makeid.makeflow.basic.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Date;
 @Setter
 public class BaseEntity implements Entity, Serializable {
 
+    @Id
     protected String id;
     /**
      * 创建时间

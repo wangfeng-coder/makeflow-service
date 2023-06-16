@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.utils;
 
+import com.makeid.makeflow.basic.utils.RedisUtils;
 import com.makeid.makeflow.workflow.constants.MakeflowRedisConstants;
 
 import java.util.concurrent.TimeUnit;

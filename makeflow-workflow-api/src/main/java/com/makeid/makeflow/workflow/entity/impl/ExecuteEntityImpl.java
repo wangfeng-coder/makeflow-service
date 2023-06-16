@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
 *@program makeflow-service
@@ -20,6 +21,8 @@ import java.util.Date;
 public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
 
     protected String flowInstId;
+
+    protected String definitionId;
 
     protected String rootFlowInstId;
 
@@ -44,7 +47,10 @@ public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
     /**
      * 流程定义id
      */
-    private String processDefinitionId;
+    protected String processDefinitionId;
 
-
+    /**
+     * 持久化参数
+     */
+    protected Map<String,Object> variables;
 }

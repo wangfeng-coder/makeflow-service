@@ -1,6 +1,5 @@
 package com.makeid.makeflow.workflow.constants;
 
-import com.makeid.makeflow.template.flow.model.activity.ActivityTypeEnum;
 import com.makeid.makeflow.template.flow.model.activity.ApprovalTaskActivity;
 import com.makeid.makeflow.template.flow.model.activity.EndActivity;
 import com.makeid.makeflow.template.flow.model.activity.StartActivity;

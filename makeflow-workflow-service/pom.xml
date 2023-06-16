@@ -19,6 +19,12 @@
 
         <dependency>
             <groupId>com.makeid.makeflow</groupId>
+            <artifactId>makeflow-template-service</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.makeid.makeflow</groupId>
             <artifactId>makeflow-workflow-api</artifactId>
             <version>1.0</version>
         </dependency>

@@ -5,6 +5,7 @@ import com.makeid.makeflow.workflow.constants.ErrCodeEnum;
 import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.exception.EngineException;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -17,7 +18,9 @@ public class ProcessDefinitionBuilder {
 
     private ProcessDefinitionImpl processDefinition;
 
-    public static ProcessDefinitionBuilder create() {
+    private Map<String,Object> variables;
+
+    public static ProcessDefinitionBuilder builder() {
         return new ProcessDefinitionBuilder();
     }
 
@@ -25,7 +28,7 @@ public class ProcessDefinitionBuilder {
         if (Objects.isNull(flowProcessTemplate)) {
             throw new EngineException(ErrCodeEnum.TEMPLATE_NULL);
         }
-        ProcessDefinitionImpl flowProcessDefinition = new ProcessDefinitionImpl(flowProcessTemplate);
+        this.processDefinition = new ProcessDefinitionImpl(flowProcessTemplate);
         return this;
     }
 
@@ -36,7 +39,13 @@ public class ProcessDefinitionBuilder {
         return createProcessDefinition(flowProcessTemplate);
     }
 
+    public ProcessDefinitionBuilder setVariables( Map<String,Object> variables) {
+        this.variables = variables;
+        return this;
+    }
+
     public ProcessDefinitionImpl build() {
+        processDefinition.addVariables(this.variables);
         return processDefinition;
     }
 }

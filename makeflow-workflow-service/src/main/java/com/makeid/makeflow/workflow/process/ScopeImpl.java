@@ -4,9 +4,11 @@ import com.makeid.makeflow.template.flow.model.base.FlowNode;
 import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 import com.makeid.makeflow.workflow.process.activity.CoreActivity;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
+import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author feng_wf
@@ -17,8 +19,6 @@ import java.util.Map;
 public abstract class ScopeImpl extends CoreActivity implements PvmScope{
 
 
-    protected ProcessDefinitionImpl processDefinition;
-
     protected HashMap<String,Object> variables;
 
     public ScopeImpl() {
@@ -28,8 +28,7 @@ public abstract class ScopeImpl extends CoreActivity implements PvmScope{
         this.processDefinition = processDefinition;
     }
 
-    public ScopeImpl(String id, String codeId, ProcessDefinitionImpl processDefinition) {
-        this.id = id;
+    public ScopeImpl(String codeId, ProcessDefinitionImpl processDefinition) {
         this.codeId = codeId;
         this.processDefinition = processDefinition;
     }
@@ -43,6 +42,14 @@ public abstract class ScopeImpl extends CoreActivity implements PvmScope{
     @Override
     public Map<String, Object> getVariables() {
         return variables;
+    }
+
+    @Override
+    public void addVariables(Map<String,Object> variables) {
+        if (Objects.isNull(this.variables)) {
+            this.variables = new HashMap<>();
+        }
+        variables.putAll(variables);
     }
 
     @Override

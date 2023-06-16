@@ -16,8 +16,7 @@ public class AtomicActivityEndOperation extends AbstractEventAtomicOperation<Pro
     @Override
     public void doExecute(ProcessInstancePvmExecution execution) {
         ActivityImpl currentActivityInst = execution.findActivityInst();
-        currentActivityInst.setStatus(ActivityStatusEnum.COMPLETE.status);
-        currentActivityInst.setEndTime(new Date());
+        currentActivityInst.end();
         currentActivityInst.save();
         if (currentActivityInst.isEndActivity()) {
             //结束 流程

@@ -19,9 +19,17 @@ public class ActivityService {
     @Resource
     private ActivityDao activityDao;
 
-    public ActivityImpl findById(String id) {
+    public ActivityEntity findById(String id) {
         ActivityEntity activityEntity = activityDao.findById(id);
         //转换成具体类型的活动节点实列
-        return null;
+        return activityEntity;
+    }
+
+    public ActivityEntity create() {
+        return activityDao.create();
+    }
+
+    public void save(ActivityEntity activity) {
+        activityDao.save(activity);
     }
 }

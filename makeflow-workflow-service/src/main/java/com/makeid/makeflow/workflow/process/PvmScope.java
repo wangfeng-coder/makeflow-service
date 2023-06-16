@@ -14,6 +14,8 @@ public interface PvmScope extends PvmProcessElement {
 
     Map<String, Object> getVariables();
 
+    void addVariables(Map<String,Object> variables);
+
     boolean isScope();
 
     PvmActivity findActivity(String codeId);

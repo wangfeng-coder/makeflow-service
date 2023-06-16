@@ -22,8 +22,8 @@ public abstract class CoreExecution extends ScopeImpl implements ActivityPvmExec
      * 到达这个节点就应该设置
      */
 
-    public CoreExecution(String id, String codeId, ProcessDefinitionImpl processDefinition) {
-        super(id, codeId, processDefinition);
+    public CoreExecution(String codeId, ProcessDefinitionImpl processDefinition) {
+        super(codeId, processDefinition);
     }
 
     @Override
@@ -89,5 +89,8 @@ public abstract class CoreExecution extends ScopeImpl implements ActivityPvmExec
     public void inactivate() {
 
     }
+
+    public abstract String getId();
+
 
 }

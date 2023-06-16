@@ -12,6 +12,9 @@ public class AtomicProcessStartOperation implements AtomicOperation<ProcessInsta
     @Override
     public void execute(ProcessInstancePvmExecution execution) {
         //正常情况下开始节点已经在在前面设置了,直接执行活动开始
+        //更新流程状态、执行状态
+        execution.runFlowInst();
+        execution.saveExecuteEntity();
         execution.performOperation(AtomicOperations.activity_start);
     }
 }

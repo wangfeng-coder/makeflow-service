@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 /**
 *@program makeflow-service
 *@description 流程实列数据库实体
@@ -17,12 +19,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("makeflow_flowInst")
 public class FlowInstEntityImpl extends BaseEntity implements FlowInstEntity {
 
+    private String definitionId;
 
-    private String templateId;
-
-    private String templateCodeId;
+    private String definitionCodeId;
 
     private int status;
 
+    private Date startTime;
+
+    private Date endTime;
 
 }

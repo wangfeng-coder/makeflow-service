@@ -3,6 +3,7 @@ package com.makeid.makeflow.workflow.entity;
 import com.makeid.makeflow.basic.entity.Entity;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author feng_wf
@@ -28,13 +29,23 @@ public interface ExecuteEntity extends Entity {
 
     Date getStartTime();
 
+    void setEndTime(Date endTime);
+
+    Date getEndTime();
+
     void setActivityCodeId(String activityCodeId);
 
     String getActivityCodeId();
 
     String getActivityId();
 
+    Map<String,Object> getVariables();
 
+    void setVariables(Map<String,Object> variable);
+
+    String getDefinitionId();
+
+    void setDefinitionId(String definitionId);
 
 
 

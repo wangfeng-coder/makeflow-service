@@ -4,6 +4,7 @@ import com.makeid.makeflow.template.flow.model.definition.FlowProcessTemplate;
 import com.makeid.makeflow.workflow.constants.ExecuteStatusEnum;
 import com.makeid.makeflow.workflow.constants.FlowStatusEnum;
 import com.makeid.makeflow.workflow.context.Context;
+import com.makeid.makeflow.workflow.entity.ActivityEntity;
 import com.makeid.makeflow.workflow.entity.ExecuteEntity;
 import com.makeid.makeflow.workflow.entity.FlowInstEntity;
 import com.makeid.makeflow.workflow.operation.AtomicOperations;
@@ -13,6 +14,7 @@ import com.makeid.makeflow.workflow.runtime.IdGenerator;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -27,40 +29,15 @@ import java.util.Objects;
  */
 @Getter
 @Setter
-public class ProcessInstancePvmExecution extends CoreExecution implements  InitialProData,ExecuteEntity {
-
-
-    protected Date createTime;
-
-    protected Date updateTime;
-
-    protected Date startTime;
-
-    protected Date endTime;
-
-    protected String flowInstId;
-
-    protected String rootFlowInstId;
-
-    protected int status;
-
-    protected String activityCodeId;
-
-    protected String parentId;
-
-    protected String activityId;
-
-    protected String processDefinitionId;
-
-    protected boolean delete;
-
-    protected String creator;
+public class ProcessInstancePvmExecution extends CoreExecution implements  InitialProData {
 
     ///////////////////////////////
-    private IdGenerator idGenerator;
+    //当前codeId
+    protected String activityCodeId;
 
     private FlowInstEntity flowInstEntity;
 
+    private ExecuteEntity executeEntity;
 
     private List<ProcessInstancePvmExecution> children;
 
@@ -72,7 +49,7 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
     protected ActivityImpl currentActivity;
 
     public ProcessInstancePvmExecution(ProcessDefinitionImpl processDefinition) {
-        super(null, null, processDefinition);
+        super(processDefinition.getCodeId(), processDefinition);
     }
 
 
@@ -91,6 +68,8 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
     public void start() {
         validateProviderNecessaryData();
         initialize();
+        activate();
+        this.executeEntity.setStartTime(new Date());
         super.start();
     }
 
@@ -98,12 +77,11 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
     public void take() {
         //获取当前节点
         ActivityImpl preActivity = this.findActivityInst();
-        this.currentActivity = transitionImpl.findDestination();
-        //保存更新节点信息
-        preActivity.setNextCodeId(currentActivity.getCodeId());
-        currentActivity.setPreCodeId(preActivity.getCodeId());
-        preActivity.save();
-        currentActivity.save();
+        String id = preActivity.getId();
+        ActivityImpl destination = transitionImpl.findDestination();
+        this.activityCodeId = destination.getCodeId();
+        this.currentActivity = destination;
+        currentActivity.setPreActivityId(id);
     }
 
     @Override
@@ -130,8 +108,6 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
      * 执行开始前 提供必要数据校验并设置
      */
     private void validateProviderNecessaryData() {
-        if (StringUtils.isNotEmpty(getParentId())) {
-        }
     }
 
 
@@ -139,11 +115,21 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
 
 
 
-    public void save() {
-        //保存流程实列到数据库
-        createFlowInst();
-        //保存执行实列
-        saveExecutionInst();
+
+
+    private void createExecuteEntity() {
+        ExecuteEntity executeEntity = Context.getExecutionService().create();
+        executeEntity.setStatus(ExecuteStatusEnum.IN_ACTIVEE.status);
+        executeEntity.setFlowInstId(this.getFlowInstEntity().getId());
+        executeEntity.setVariables(variables);
+        executeEntity.setActivityCodeId(this.activityCodeId);
+        executeEntity.setDefinitionId(getProcessDefinitionId());
+        this.executeEntity = executeEntity;
+    }
+
+
+    private void saveFlowInstEntity() {
+        Context.getFlowInstService().save(flowInstEntity);
     }
 
 
@@ -155,8 +141,12 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
      * @author feng_wf
      * @create 2023-05-31
      */
-    private void saveExecutionInst() {
-        Context.getExecutionService().save(this);
+    public void saveExecuteEntity() {
+        //暂时没有父子关系
+        executeEntity.setVariables(variables);
+        executeEntity.setActivityCodeId(activityCodeId);
+        executeEntity.setFlowInstId(this.flowInstEntity.getId());
+        Context.getExecutionService().save(executeEntity);
     }
 
     /**
@@ -167,18 +157,12 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
      * @author feng_wf
      * @create 2023-05-31
      */
-    private void createFlowInst() {
+    private void createFlowInstEntity() {
         FlowInstEntity flowInstEntity = Context.getFlowInstService().create();
         FlowProcessTemplate flowProcessTemplate = processDefinition.findFlowProcessTemplate();
-        flowInstEntity.setId(idGenerator.getNextId());
-        flowInstEntity.setTemplateCodeId(flowProcessTemplate.getFlowTemplateCodeId());
-        flowInstEntity.setTemplateId(flowProcessTemplate.getFlowTemplateId());
+        flowInstEntity.setDefinitionId(flowProcessTemplate.getFlowTemplateId());
+        flowInstEntity.setDefinitionCodeId(flowProcessTemplate.getFlowTemplateCodeId());
         flowInstEntity.setStatus(FlowStatusEnum.UNSUBMIT.status);
-        flowInstEntity.setCreateTime(new Date());
-        flowInstEntity.setUpdateTime(new Date());
-        Context.getFlowInstService().save(flowInstEntity);
-        this.flowInstId = flowInstEntity.getId();
-        this.rootFlowInstId = flowInstEntity.getId();
         this.flowInstEntity = flowInstEntity;
     }
 
@@ -186,7 +170,8 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
         if (Objects.nonNull(currentActivity)) {
             return currentActivity;
         }
-        ActivityImpl activity = new ActivityImpl(this.activityId, activityCodeId, processDefinition);
+        ActivityImpl activity = new ActivityImpl(activityCodeId, processDefinition);
+        this.currentActivity = activity;
         return activity;
     }
 
@@ -207,7 +192,7 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
 
     @Override
     public String getProcessInstanceId() {
-        return null;
+        return this.flowInstEntity.getId();
     }
 
 
@@ -216,11 +201,14 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
     }
 
 
-
+    @Override
+    public String getProcessDefinitionId() {
+        return this.getProcessDefinition().getDefinitionId();
+    }
 
     @Override
     public String rootProcessInstanceId() {
-        return rootFlowInstId;
+        return "";
     }
 
     @Override
@@ -230,16 +218,50 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
 
     public void end() {
         //更新流程状态 并保存
-        this.status = ExecuteStatusEnum.END.status;
-        this.endTime = new Date();
-        Context.getExecutionService().save(this);
+        this.executeEntity.setStatus(ExecuteStatusEnum.END.status);
+        this.executeEntity.setEndTime(new Date());
+        Context.getExecutionService().save(executeEntity);
         flowInstEntity.setStatus(FlowStatusEnum.END.status);
         //保存流程实列
         Context.getFlowInstService().save(flowInstEntity);
     }
 
     @Override
+    public void suspend(String message) {
+        super.suspend(message);
+    }
+
+    @Override
+    public void activate() {
+        this.executeEntity.setStatus(ExecuteStatusEnum.ACTIVE.status);
+    }
+
+    @Override
+    public String getId() {
+        return this.executeEntity.getId();
+    }
+
+
+    @Override
     public Map<String, Object> getVariables() {
         return this.variables;
+    }
+
+    public void persist() {
+        createFlowInstEntity();
+        saveFlowInstEntity();
+        //保存执行实列
+        createExecuteEntity();
+        saveExecuteEntity();
+    }
+
+    public void runFlowInst() {
+        this.flowInstEntity.setStatus(FlowStatusEnum.RUNNING.status);
+        this.flowInstEntity.setStartTime(new Date());
+        saveFlowInstEntity();
+    }
+
+    public String getFLowInstId() {
+        return this.flowInstEntity.getId();
     }
 }

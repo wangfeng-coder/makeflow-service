@@ -20,6 +20,7 @@ public class Translators {
         translateMap.put(EndEvent.class,new EndEventTranslator());
         translateMap.put(UserTask.class,new UserTaskTranslator());
         translateMap.put(SequenceFlow.class,new SequenceFlowTranslator());
+        translateMap.put(ExclusiveGateway.class,new ExclusiveGatewayTranslator());
 
     }
     public static Element translate(BaseElement baseElement) {

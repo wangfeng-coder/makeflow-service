@@ -7,9 +7,10 @@ package com.makeid.makeflow.workflow.constants;
  * @create 2023-05-31
  */
 public enum ExecuteStatusEnum {
-    ACTIVE(1),
 
-    SUSPEND(2),
+    IN_ACTIVEE(0),
+
+    ACTIVE(1),
 
     END(99);
 

@@ -37,11 +37,14 @@ public class ActivityEntityImpl extends BaseEntity implements ActivityEntity {
 
     protected String executionId;
 
+    protected String definitionId;
+
     protected String parentId;
 
-    protected String preCodeId;
-
-    protected String nextCodeId;
+    /**
+     * 当前节点的前一个节点
+     */
+    protected String preActivityId;
 
 
 }

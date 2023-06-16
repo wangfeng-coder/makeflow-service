@@ -30,7 +30,7 @@ public interface PvmActivity extends PvmScope {
 	boolean isStartActivity();
 
 
-
+	String getId();
 	
 
 }

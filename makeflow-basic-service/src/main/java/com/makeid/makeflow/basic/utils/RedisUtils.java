@@ -1,4 +1,4 @@
-package com.makeid.makeflow.workflow.utils;
+package com.makeid.makeflow.basic.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +18,12 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class RedisUtils {
 
-
-    private static RedisTemplate<String, Object> template;
     
     private static StringRedisTemplate redisTemplate;
 
 
     @Autowired
-    public RedisUtils(RedisTemplate<String, Object> t1, StringRedisTemplate t2) {
-        template = t1;
+    public RedisUtils( StringRedisTemplate t2) {
         redisTemplate = t2;
     }
 

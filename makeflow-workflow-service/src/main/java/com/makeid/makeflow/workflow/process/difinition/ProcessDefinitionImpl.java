@@ -11,6 +11,7 @@ import com.makeid.makeflow.workflow.process.PvmProcessDefinition;
 import com.makeid.makeflow.workflow.process.ScopeImpl;
 import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
+import org.springframework.util.Assert;
 
 import java.util.Date;
 import java.util.List;
@@ -30,8 +31,7 @@ public class ProcessDefinitionImpl extends ScopeImpl implements PvmProcessDefini
 
     public ProcessDefinitionImpl(FlowProcessTemplate flowProcessTemplate) {
         super();
-        this.id = processDefinition.getId();
-        this.codeId = processDefinition.getCodeId();
+        this.codeId = flowProcessTemplate.getFlowTemplateCodeId();
         this.processDefinition = this;
         this.flowProcessTemplate = flowProcessTemplate;
     }
@@ -40,14 +40,9 @@ public class ProcessDefinitionImpl extends ScopeImpl implements PvmProcessDefini
     public PvmProcessInstance createProcessInstanceExecution() {
         ProcessInstancePvmExecution processInstance = new ProcessInstancePvmExecution(this);
         StartActivity startActivity = flowProcessTemplate.findInitial();
-        processInstance.setIdGenerator(idGenerator);
-        processInstance.setStartTime(new Date());
-        processInstance.setStatus(ExecuteStatusEnum.ACTIVE.status);
-        processInstance.setCreateTime(new Date());
-        processInstance.setUpdateTime(new Date());
         processInstance.setActivityCodeId(startActivity.getCodeId());
-        processInstance.setProcessDefinitionId(this.getProcessDefinition().id);
         processInstance.setProcessDefinition(this.getProcessDefinition());
+        processInstance.addVariables(this.variables);
         return processInstance;
     }
 
@@ -65,7 +60,8 @@ public class ProcessDefinitionImpl extends ScopeImpl implements PvmProcessDefini
 
     @Override
     public FlowProcessTemplate findFlowProcessTemplate() {
-        return this.processDefinition.findFlowProcessTemplate();
+        Assert.notNull(flowProcessTemplate);
+        return flowProcessTemplate;
     }
 
     public ActivityImpl findInitial() {
@@ -73,7 +69,7 @@ public class ProcessDefinitionImpl extends ScopeImpl implements PvmProcessDefini
             return initial;
         }
         StartActivity initial = flowProcessTemplate.findInitial();
-        ActivityImpl activity = new ActivityImpl(null, initial.getCodeId(), processDefinition);
+        ActivityImpl activity = new ActivityImpl(initial.getCodeId(), processDefinition);
         this.initial = activity;
         return activity;
     }
@@ -82,5 +78,9 @@ public class ProcessDefinitionImpl extends ScopeImpl implements PvmProcessDefini
     @Override
     public String getCodeId() {
         return flowProcessTemplate.getFlowTemplateCodeId();
+    }
+
+    public String getDefinitionId() {
+        return flowProcessTemplate.getFlowTemplateId();
     }
 }

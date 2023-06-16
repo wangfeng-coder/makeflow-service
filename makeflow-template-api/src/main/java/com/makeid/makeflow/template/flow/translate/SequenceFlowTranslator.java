@@ -15,6 +15,7 @@ public class SequenceFlowTranslator implements Translator<SequenceFlow, com.make
         com.makeid.makeflow.template.flow.model.sequence.SequenceFlow target = new com.makeid.makeflow.template.flow.model.sequence.SequenceFlow();
         target.setTargetCodeId(sequenceFlow.getTargetRef());
         target.setSourceCodeId(sequenceFlow.getSourceRef());
+        target.setCodeId(sequenceFlow.getId());
         target.setConditionExpression(sequenceFlow.getConditionExpression());
         target.setElementType(ElementTypeEnum.ACTIVITYTYPE_LINE.getContext());
         return target;

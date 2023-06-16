@@ -4,6 +4,7 @@ import com.makeid.makeflow.template.flow.model.sequence.SequenceFlow;
 import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 import com.makeid.makeflow.workflow.process.condition.UelExpressionCondition;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
@@ -28,12 +29,12 @@ public class TransitionImpl extends ProcessElementImpl implements PvmTransition{
     protected ActivityImpl targetActivity;
 
 
-    public TransitionImpl(String id, ProcessDefinitionImpl processDefinition) {
-        super(id, processDefinition);
+    public TransitionImpl(ProcessDefinitionImpl processDefinition) {
+        super(processDefinition);
     }
 
-    public TransitionImpl(String id, String codeId, ProcessDefinitionImpl processDefinition) {
-        super(id, codeId, processDefinition);
+    public TransitionImpl(String codeId, ProcessDefinitionImpl processDefinition) {
+        super(codeId, processDefinition);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class TransitionImpl extends ProcessElementImpl implements PvmTransition{
     @Override
     public ActivityImpl findSource() {
         if(Objects.isNull(sourceActivity)) {
-            this.sourceActivity = new ActivityImpl(null, sourceCodeId, processDefinition);
+            this.sourceActivity = new ActivityImpl( sourceCodeId, processDefinition);
         }
         return sourceActivity;
     }
@@ -57,7 +58,7 @@ public class TransitionImpl extends ProcessElementImpl implements PvmTransition{
     @Override
     public ActivityImpl findDestination() {
         if(Objects.isNull(targetActivity)) {
-            this.targetActivity = new ActivityImpl(null, targetCodeId, processDefinition);
+            this.targetActivity = new ActivityImpl(targetCodeId, processDefinition);
         }
         return targetActivity;
     }
@@ -69,12 +70,14 @@ public class TransitionImpl extends ProcessElementImpl implements PvmTransition{
 
 
     public static TransitionImpl transferFrom(SequenceFlow sequenceFlow,ProcessDefinitionImpl processDefinition) {
-        TransitionImpl transition = new TransitionImpl(null,sequenceFlow.getCodeId(),processDefinition);
+        TransitionImpl transition = new TransitionImpl(sequenceFlow.getCodeId(),processDefinition);
         transition.setSequenceFlow(sequenceFlow);
         transition.setSourceCodeId(sequenceFlow.getSourceCodeId());
         transition.setTargetCodeId(sequenceFlow.getTargetCodeId());
-        //TODO 目前只有UEL表达式的条件 直接new
-        transition.condition = new UelExpressionCondition(sequenceFlow.getConditionExpression());
+        //TODO  目前只有UEL表达式的条件 直接new
+        if(StringUtils.isNotEmpty(sequenceFlow.getConditionExpression())) {
+            transition.condition = new UelExpressionCondition(sequenceFlow.getConditionExpression());
+        }
         return transition;
     }
 

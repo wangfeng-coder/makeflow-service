@@ -5,6 +5,7 @@ import com.makeid.makeflow.template.flow.model.activity.ApprovalTaskActivity;
 import com.makeid.makeflow.template.flow.model.activity.EndActivity;
 import com.makeid.makeflow.template.flow.model.activity.OperationGroup;
 import com.makeid.makeflow.template.flow.model.activity.StartActivity;
+import com.makeid.makeflow.template.flow.model.gateway.ExclusiveGateway;
 import com.makeid.makeflow.template.flow.model.sequence.SequenceFlow;
 
 /**
@@ -29,6 +30,9 @@ public enum ElementTypeEnum {
 	ACTIVITYTYPE_MULTIAPPROVAL("multiApproval", ApprovalTaskActivity.class),
 
 	ACTIVITYTYPE_OPERATIONGROUP("operationGroup", OperationGroup.class),
+
+
+	EXCLUSIVE_GATEWAY("exclusiveGateWay", ExclusiveGateway.class),
 
 	/**
 	 *  结束节点
