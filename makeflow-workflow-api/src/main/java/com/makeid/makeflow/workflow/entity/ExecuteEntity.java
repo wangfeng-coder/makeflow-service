@@ -1,6 +1,7 @@
 package com.makeid.makeflow.workflow.entity;
 
 import com.makeid.makeflow.basic.entity.Entity;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.Map;
  * @description
  * @create 2023-06-01
  */
+@Document(collection = "makeflow_execute")
 public interface ExecuteEntity extends Entity {
 
     String getFlowInstId();
@@ -21,9 +23,9 @@ public interface ExecuteEntity extends Entity {
 
     void setParentId(String parentId);
 
-    int getStatus();
+    String getStatus();
 
-    void setStatus(int status);
+    void setStatus(String status);
 
     void setStartTime(Date startTime);
 

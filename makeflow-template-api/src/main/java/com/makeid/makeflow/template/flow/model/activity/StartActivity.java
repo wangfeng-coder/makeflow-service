@@ -3,6 +3,8 @@ package com.makeid.makeflow.template.flow.model.activity;
 
 import com.makeid.makeflow.template.bpmn.model.StartEvent;
 import com.makeid.makeflow.template.flow.model.base.ElementTypeEnum;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *@program
@@ -10,6 +12,8 @@ import com.makeid.makeflow.template.flow.model.base.ElementTypeEnum;
  *@author feng_wf
  *@create 2023/5/23
  */
+@Getter
+@Setter
 public class StartActivity extends BaseActivity{
 
 	private String initiator;

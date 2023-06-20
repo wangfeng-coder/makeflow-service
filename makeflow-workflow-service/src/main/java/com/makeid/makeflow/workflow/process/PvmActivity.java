@@ -31,6 +31,12 @@ public interface PvmActivity extends PvmScope {
 
 
 	String getId();
-	
+
+
+	String getActivityType();
+
+
+	String getFlowInstId();
+
 
 }

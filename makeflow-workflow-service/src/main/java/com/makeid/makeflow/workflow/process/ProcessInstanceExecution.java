@@ -4,17 +4,13 @@ import com.makeid.makeflow.template.flow.model.definition.FlowProcessTemplate;
 import com.makeid.makeflow.workflow.constants.ExecuteStatusEnum;
 import com.makeid.makeflow.workflow.constants.FlowStatusEnum;
 import com.makeid.makeflow.workflow.context.Context;
-import com.makeid.makeflow.workflow.entity.ActivityEntity;
 import com.makeid.makeflow.workflow.entity.ExecuteEntity;
 import com.makeid.makeflow.workflow.entity.FlowInstEntity;
 import com.makeid.makeflow.workflow.operation.AtomicOperations;
 import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
-import com.makeid.makeflow.workflow.runtime.IdGenerator;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -29,7 +25,7 @@ import java.util.Objects;
  */
 @Getter
 @Setter
-public class ProcessInstancePvmExecution extends CoreExecution implements  InitialProData {
+public class ProcessInstanceExecution extends CoreExecution implements  InitialProData {
 
     ///////////////////////////////
     //当前codeId
@@ -39,7 +35,7 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
 
     private ExecuteEntity executeEntity;
 
-    private List<ProcessInstancePvmExecution> children;
+    private List<ProcessInstanceExecution> children;
 
     /**
      * 当前正在流转的线，没有流转就为空
@@ -48,8 +44,8 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
 
     protected ActivityImpl currentActivity;
 
-    public ProcessInstancePvmExecution(ProcessDefinitionImpl processDefinition) {
-        super(processDefinition.getCodeId(), processDefinition);
+    public ProcessInstanceExecution(ProcessDefinitionImpl processDefinition) {
+        super(processDefinition);
     }
 
 
@@ -59,17 +55,10 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
     }
 
     @Override
-    public String getName() {
-        return null;
-    }
-
-
-    @Override
     public void start() {
         validateProviderNecessaryData();
         initialize();
         activate();
-        this.executeEntity.setStartTime(new Date());
         super.start();
     }
 
@@ -100,7 +89,7 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
      * TODO
      */
     public void initialize() {
-
+        this.executeEntity.setStartTime(new Date());
     }
 
 
@@ -119,7 +108,7 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
 
     private void createExecuteEntity() {
         ExecuteEntity executeEntity = Context.getExecutionService().create();
-        executeEntity.setStatus(ExecuteStatusEnum.IN_ACTIVEE.status);
+        executeEntity.setStatus(ExecuteStatusEnum.NOT_ACTIVE.status);
         executeEntity.setFlowInstId(this.getFlowInstEntity().getId());
         executeEntity.setVariables(variables);
         executeEntity.setActivityCodeId(this.activityCodeId);
@@ -247,6 +236,7 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
         return this.variables;
     }
 
+
     public void persist() {
         createFlowInstEntity();
         saveFlowInstEntity();
@@ -261,7 +251,8 @@ public class ProcessInstancePvmExecution extends CoreExecution implements  Initi
         saveFlowInstEntity();
     }
 
-    public String getFLowInstId() {
+    public String getFlowInstId() {
         return this.flowInstEntity.getId();
     }
+
 }

@@ -7,21 +7,21 @@ package com.makeid.makeflow.workflow.constants;
  * @create 2023-06-05
  */
 public enum ActivityStatusEnum {
-    NOT_INIT(0),
+    NOT_INIT("not_init"),
 
-    RUNNING(1),
+    RUNNING("running"),
 
-    COMPLETE(2),
+    COMPLETE("complete"),
 
-    REJECT(3),
+    REJECT("reject"),
 
-    CANCEL(99);
+    CANCEL("cancel");
 
 
 
-    public final int status;
+    public final String status;
 
-    ActivityStatusEnum(int status) {
+    ActivityStatusEnum(String status) {
         this.status = status;
     }
 }

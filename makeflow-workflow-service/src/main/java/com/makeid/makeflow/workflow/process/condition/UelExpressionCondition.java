@@ -2,7 +2,7 @@ package com.makeid.makeflow.workflow.process.condition;
 
 import com.makeid.makeflow.workflow.process.Condition;
 import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
-import com.makeid.makeflow.workflow.utils.ConditionElUtil;
+import com.makeid.makeflow.template.util.ElUtil;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ public class UelExpressionCondition implements Condition {
     @Override
     public boolean evaluate(ActivityPvmExecution activityExecution) {
         Map<String, Object> variables = activityExecution.getVariables();
-        Boolean aBoolean = ConditionElUtil.checkFormDataByRuleEl(expression, variables);
+        Boolean aBoolean = ElUtil.checkFormDataByRuleEl(expression, variables);
         return aBoolean;
     }
 }

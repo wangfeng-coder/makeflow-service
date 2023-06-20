@@ -29,10 +29,6 @@ public class TransitionImpl extends ProcessElementImpl implements PvmTransition{
     protected ActivityImpl targetActivity;
 
 
-    public TransitionImpl(ProcessDefinitionImpl processDefinition) {
-        super(processDefinition);
-    }
-
     public TransitionImpl(String codeId, ProcessDefinitionImpl processDefinition) {
         super(codeId, processDefinition);
     }
@@ -50,7 +46,7 @@ public class TransitionImpl extends ProcessElementImpl implements PvmTransition{
     @Override
     public ActivityImpl findSource() {
         if(Objects.isNull(sourceActivity)) {
-            this.sourceActivity = new ActivityImpl( sourceCodeId, processDefinition);
+            this.sourceActivity = new ActivityImpl(sourceCodeId, processDefinition);
         }
         return sourceActivity;
     }

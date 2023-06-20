@@ -19,9 +19,9 @@ public class OperationGroup extends FlowElement {
 
 	private String checkType;// 或签 会签 依次
 
-	private List<Participant> participants;// 参与者
+	private List<PeopleHolder> participants;// 参与者
 	
-	private List<CarbonCopy> carbonCopys; //抄送
+	private List<PeopleHolder> carbonCopys; //抄送
 
 
 	public OperationGroup(){
@@ -36,11 +36,11 @@ public class OperationGroup extends FlowElement {
 		this.checkType = checkType;
 	}
 
-	public List<Participant> getParticipants() {
+	public List<PeopleHolder> getParticipants() {
 		return participants;
 	}
 
-	public void setParticipants(List<Participant> participants) {
+	public void setParticipants(List<PeopleHolder> participants) {
 		this.participants = participants;
 	}
 
@@ -52,11 +52,11 @@ public class OperationGroup extends FlowElement {
 		this.parentCodeId = parentCodeId;
 	}
 
-	public List<CarbonCopy> getCarbonCopys() {
+	public List<PeopleHolder> getCarbonCopys() {
 		return carbonCopys;
 	}
 
-	public void setCarbonCopys(List<CarbonCopy> carbonCopys) {
+	public void setCarbonCopys(List<PeopleHolder> carbonCopys) {
 		this.carbonCopys = carbonCopys;
 	}
 

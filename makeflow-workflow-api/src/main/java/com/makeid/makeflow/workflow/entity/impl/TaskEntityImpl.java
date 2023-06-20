@@ -30,11 +30,11 @@ public class TaskEntityImpl extends BaseEntity implements TaskEntity {
 
     protected String activityCodeId;
 
-    protected int status;
+    protected String status;
 
     protected Date completeTime;
 
-    protected int taskType;
+    protected String taskType;
 
 
 }

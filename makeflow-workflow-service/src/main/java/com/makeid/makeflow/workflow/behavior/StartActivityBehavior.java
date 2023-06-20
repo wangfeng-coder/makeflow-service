@@ -2,31 +2,40 @@ package com.makeid.makeflow.workflow.behavior;
 
 
 import com.makeid.makeflow.workflow.constants.TaskStatusEnum;
+import com.makeid.makeflow.workflow.context.Context;
+import com.makeid.makeflow.workflow.entity.TaskEntity;
+import com.makeid.makeflow.workflow.process.PvmActivity;
 import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
-import com.makeid.makeflow.workflow.task.StartTaskInst;
+import com.makeid.makeflow.workflow.service.TaskService;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
 public class StartActivityBehavior extends TaskActivityBehavior {
 
-
 	public StartActivityBehavior() {
+
 	}
 
 
 	@Override
 	public void doInternalExecute(ActivityPvmExecution execution, Map<String, Object> taskParams) {
-		//创建任务
-		StartTaskInst startTaskInst = new StartTaskInst();
-		//从当前线程 或者参数集合中 获取当前用户或者申请人
-		startTaskInst.setHandler("");
-		//开始节点直接过
-		startTaskInst.setStatus(TaskStatusEnum.DONE.status);
-		startTaskInst.setCompleteTime(new Date());
-		//保存入库
-		startTaskInst.save();
+		PvmActivity activityInst = execution.findActivityInst();
+		//这里要是流程创建人
+		List<TaskEntity> tasks = Context.getGlobalProcessEngineConfiguration()
+				.getTaskService()
+				.createTask(Arrays.asList(Context.getUserId()), activityInst);
+		Context.getGlobalProcessEngineConfiguration()
+				.getTaskService()
+						.completeTasks(tasks);
+		//保存入库;
+		Context.getGlobalProcessEngineConfiguration()
+						.getTaskService()
+								.save(tasks);
+		//任务已完成 往下个地方
 		completeTask(execution);
 	}
 

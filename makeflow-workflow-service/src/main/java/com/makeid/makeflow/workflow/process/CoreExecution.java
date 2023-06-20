@@ -26,6 +26,10 @@ public abstract class CoreExecution extends ScopeImpl implements ActivityPvmExec
         super(codeId, processDefinition);
     }
 
+    public CoreExecution(ProcessDefinitionImpl processDefinition) {
+        super(processDefinition);
+    }
+
     @Override
     public void start() {
         if (findActivityInst().isStartActivity()) {

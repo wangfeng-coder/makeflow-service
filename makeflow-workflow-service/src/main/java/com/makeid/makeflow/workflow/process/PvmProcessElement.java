@@ -13,6 +13,7 @@
 
 package com.makeid.makeflow.workflow.process;
 
+import com.makeid.makeflow.template.flow.model.base.FlowNode;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
 
 import java.io.Serializable;
@@ -23,6 +24,8 @@ public interface PvmProcessElement extends Serializable {
 	String getCodeId();
 
 	String getName();
+
+	FlowNode findFlowNode(String codeId);
 
 	ProcessDefinitionImpl findProcessDefinition();
 

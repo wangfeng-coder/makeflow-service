@@ -21,7 +21,9 @@ import com.makeid.makeflow.workflow.service.ActivityService;
 import com.makeid.makeflow.workflow.service.ExecutionService;
 import com.makeid.makeflow.workflow.service.FlowInstService;
 import com.makeid.makeflow.workflow.service.RuntimeService;
+import org.springframework.util.Assert;
 
+import java.util.Objects;
 import java.util.Stack;
 
 /**
@@ -33,7 +35,27 @@ public class Context {
 	protected static ThreadLocal<Stack<CommandContext>> commandContextThreadLocal = new ThreadLocal<>();
 	protected static ThreadLocal<Stack<ProcessEngineConfigurationImpl>> processEngineConfigurationStackThreadLocal = new ThreadLocal<>();
 
+	protected static ThreadLocal<UserContext> currentUserContextThreadLocal =  new ThreadLocal<>();
+
 	protected static ProcessEngineConfigurationImpl globalProcessEngineConfigurationImpl;
+
+	public static UserContext getCurrentUser() {
+		return currentUserContextThreadLocal.get();
+	}
+
+	public static void setCurrentUser(UserContext userContext){
+		currentUserContextThreadLocal.set(userContext);
+	}
+
+	public static void removeCurrentUser() {
+		 currentUserContextThreadLocal.remove();
+	}
+
+	public static String getUserId(){
+		UserContext userContext = currentUserContextThreadLocal.get();
+		Assert.notNull(userContext);
+		return userContext.getUserId();
+	}
 		
 	public static CommandContext getCommandContext() {
 		Stack<CommandContext> stack = getStack(commandContextThreadLocal);

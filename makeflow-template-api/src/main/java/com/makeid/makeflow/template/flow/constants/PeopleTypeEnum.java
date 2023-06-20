@@ -6,19 +6,31 @@ package com.makeid.makeflow.template.flow.constants;
  * @description
  * @create 2023-06-14
  */
-public enum ParticipantTypeEnum {
+public enum PeopleTypeEnum {
+
+
+    /**
+     * 通过el表达式来获取 当前参数中的人
+     *
+     */
+    EL("el"),
 
     /**
      * 指定人
      */
     PERSON("person"),
 
+
+    DEPARTMENT("department"),
+
     /**
      * 按角色
      */
     ROLE("role");
 
-    ParticipantTypeEnum(String type) {
+
+
+    PeopleTypeEnum(String type) {
         this.type = type;
     }
 

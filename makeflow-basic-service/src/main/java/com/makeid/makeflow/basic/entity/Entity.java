@@ -26,6 +26,11 @@ public interface Entity {
 
     void setCreator(String creator);
 
+
+    String getUpdator();
+
+    void setUpdator(String updator);
+
     boolean isDelete();
 
     void setDelete(boolean delete);

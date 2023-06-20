@@ -18,9 +18,7 @@ public interface PvmScope extends PvmProcessElement {
 
     boolean isScope();
 
-    PvmActivity findActivity(String codeId);
 
-    FlowNode findFlowNode(String codeId);
 
-    PvmTransition findTransition(String codeId);
+
 }

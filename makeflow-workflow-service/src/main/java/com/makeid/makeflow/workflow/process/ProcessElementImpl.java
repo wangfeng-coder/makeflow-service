@@ -14,9 +14,17 @@
 package com.makeid.makeflow.workflow.process;
 
 
+import com.makeid.makeflow.template.flow.model.base.Element;
+import com.makeid.makeflow.template.flow.model.base.FlowNode;
+import com.makeid.makeflow.workflow.exception.EngineException;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
+import com.mongodb.lang.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
+import org.springframework.util.Assert;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * common properties for process definition, activity and transition including
@@ -36,16 +44,25 @@ public class ProcessElementImpl implements PvmProcessElement {
 	protected ProcessDefinitionImpl processDefinition;
 
 
-	public ProcessElementImpl() {
-
-	}
-
+	/**
+	 *
+	 * @param processDefinition
+	 */
 	public ProcessElementImpl(ProcessDefinitionImpl processDefinition) {
 		this.processDefinition = processDefinition;
+		this.codeId = processDefinition.getCodeId();
+		this.name = processDefinition.getName();
 	}
 
+	/**
+	 * 模板中的元素 构造器
+	 * @param codeId
+	 * @param processDefinition
+	 */
 	public ProcessElementImpl(String codeId,
 							  ProcessDefinitionImpl processDefinition) {
+		Assert.notNull(processDefinition);
+		Assert.notNull(codeId);
 		this.codeId = codeId;
 		this.processDefinition = processDefinition;
 	}
@@ -90,5 +107,9 @@ public class ProcessElementImpl implements PvmProcessElement {
 
 	public void setProcessDefinition(ProcessDefinitionImpl processDefinition) {
 		this.processDefinition = processDefinition;
+	}
+
+	public FlowNode findFlowNode(String codeId) {
+		return this.processDefinition.findFlowNode(codeId);
 	}
 }

@@ -16,14 +16,13 @@ import java.util.Date;
 */
 @Getter
 @Setter
-@Document("makeflow_flowInst")
 public class FlowInstEntityImpl extends BaseEntity implements FlowInstEntity {
 
     private String definitionId;
 
     private String definitionCodeId;
 
-    private int status;
+    private String status;
 
     private Date startTime;
 

@@ -16,6 +16,7 @@ public class StartEventTranslator implements Translator<StartEvent, StartActivit
     public StartActivity translate(StartEvent startEvent) {
         StartActivity startActivity = new StartActivity();
         FlowNodePropertyHandler.fillFlowNodeProperty(startEvent,startActivity);
+        startActivity.setInitiator(startActivity.getInitiator());
         return startActivity;
     }
 }

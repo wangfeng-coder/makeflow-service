@@ -16,7 +16,6 @@ import java.util.Date;
  */
 @Setter
 @Getter
-@Document(collection = "makeflow_activity")
 public class ActivityEntityImpl extends BaseEntity implements ActivityEntity {
 
     protected String name;
@@ -31,7 +30,7 @@ public class ActivityEntityImpl extends BaseEntity implements ActivityEntity {
 
     protected Date endTime;
 
-    protected int status;
+    protected String status;
 
     protected String flowInstId;
 

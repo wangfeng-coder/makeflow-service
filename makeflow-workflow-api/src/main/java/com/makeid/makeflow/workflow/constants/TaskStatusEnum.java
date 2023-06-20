@@ -9,17 +9,19 @@ package com.makeid.makeflow.workflow.constants;
 public enum TaskStatusEnum {
 
     //未初始化
-    NOT_INIT(0),
+    NOT_INIT("not_init"),
 
     //正在进行待处理
-    DOING(1),
+    DOING("doing"),
+
+    REJECT("reject"),
 
     //已完成
-    DONE(99);
+    DONE("done");
 
-    public final int status;
+    public final String status;
 
-    TaskStatusEnum(int status) {
+    TaskStatusEnum(String status) {
         this.status = status;
     }
 }

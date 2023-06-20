@@ -21,16 +21,13 @@ public abstract class ScopeImpl extends CoreActivity implements PvmScope{
 
     protected HashMap<String,Object> variables;
 
-    public ScopeImpl() {
+
+    public ScopeImpl(String codeId, ProcessDefinitionImpl processDefinition) {
+        super(codeId,processDefinition);
     }
 
     public ScopeImpl(ProcessDefinitionImpl processDefinition) {
-        this.processDefinition = processDefinition;
-    }
-
-    public ScopeImpl(String codeId, ProcessDefinitionImpl processDefinition) {
-        this.codeId = codeId;
-        this.processDefinition = processDefinition;
+        super(processDefinition);
     }
 
     @Override
@@ -49,7 +46,7 @@ public abstract class ScopeImpl extends CoreActivity implements PvmScope{
         if (Objects.isNull(this.variables)) {
             this.variables = new HashMap<>();
         }
-        variables.putAll(variables);
+        this.variables.putAll(variables);
     }
 
     @Override
@@ -57,21 +54,4 @@ public abstract class ScopeImpl extends CoreActivity implements PvmScope{
         return false;
     }
 
-    @Override
-    public TransitionImpl findTransition(String codeId) {
-
-        return null;
-    }
-
-    @Override
-    public ActivityImpl findActivity(String codeId) {
-
-
-        return null;
-    }
-
-    @Override
-    public FlowNode findFlowNode(String codeId) {
-        return  this.processDefinition.findFlowNode(codeId);
-    }
 }

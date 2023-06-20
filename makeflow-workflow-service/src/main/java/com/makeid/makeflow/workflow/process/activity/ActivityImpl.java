@@ -2,13 +2,13 @@ package com.makeid.makeflow.workflow.process.activity;
 
 import com.makeid.makeflow.template.flow.model.base.ElementTypeEnum;
 import com.makeid.makeflow.template.flow.model.base.FlowNode;
+import com.makeid.makeflow.template.flow.model.gateway.FlowGateway;
 import com.makeid.makeflow.template.flow.model.sequence.SequenceFlow;
 import com.makeid.makeflow.workflow.behavior.ActivityBehavior;
 import com.makeid.makeflow.workflow.constants.ActivityStatusEnum;
 import com.makeid.makeflow.workflow.constants.ActivityTypeBehaviorProvider;
 import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.entity.ActivityEntity;
-import com.makeid.makeflow.workflow.entity.ExecuteEntity;
 import com.makeid.makeflow.workflow.exception.EngineException;
 import com.makeid.makeflow.workflow.process.*;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
@@ -25,11 +25,11 @@ import java.util.stream.Collectors;
 import static com.makeid.makeflow.workflow.process.TransitionImpl.transferFrom;
 
 /**
-*@program makeflow-service
-*@description 
-*@author feng_wf
-*@create 2023-05-31
-*/
+ * @author feng_wf
+ * @program makeflow-service
+ * @description
+ * @create 2023-05-31
+ */
 @Setter
 @Getter
 public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProData {
@@ -39,6 +39,8 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
     protected String preActivityId;
 
     protected FlowNode flowNode;
+
+    protected ProcessInstanceExecution processInstanceExecution;
 
     /**
      * 构造的时候会设置对应行为 一定不会为空
@@ -59,15 +61,23 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
 
     @Override
     public TransitionImpl findDefaultOutgoingTransition() {
-        throw new EngineException("暂时没支持默认路线");
+        //如果是网关节点会有默认出线
+        if (flowNode instanceof FlowGateway) {
+            FlowGateway flowGateway = (FlowGateway) flowNode;
+            String defaultFlow = flowGateway.getDefaultFlow();
+            List<TransitionImpl> outgoingTransitions = findOutgoingTransitions();
+            for (TransitionImpl outgoingTransition : outgoingTransitions) {
+                if(outgoingTransition.getCodeId().equals(defaultFlow)) {
+                    return outgoingTransition;
+                }
+            }
+        }
+        throw new EngineException("未找到默认出线");
     }
 
     @Override
     public List<TransitionImpl> findOutgoingTransitions() {
-        if(CollectionUtils.isEmpty(outGoingTransitions)) {
-            //通过定义寻找出线
-            String activityCodeId = getCodeId();
-            FlowNode flowNode = processDefinition.findFlowNode(activityCodeId);
+        if (CollectionUtils.isEmpty(outGoingTransitions)) {
             List<SequenceFlow> outgoingFlows = flowNode.getOutgoingFlows();
             List<TransitionImpl> outGoingTransitions = outgoingFlows.stream().map(seq -> transferFrom(seq, processDefinition))
                     .collect(Collectors.toList());
@@ -103,7 +113,6 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
     }
 
 
-
     @Override
     public boolean isActivity() {
         return true;
@@ -119,19 +128,19 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
         Context.getActivityService().save(activity);
     }
 
-    public ActivityEntity create(ProcessInstancePvmExecution execution) {
-         ActivityEntity activityEntity = Context.getGlobalProcessEngineConfiguration().getActivityService()
+    public ActivityEntity create(ProcessInstanceExecution execution) {
+        ActivityEntity activityEntity = Context.getGlobalProcessEngineConfiguration().getActivityService()
                 .create();
-         activityEntity.setActivityCodeId(this.getCodeId());
-         activityEntity.setActivityType(this.activityType);
-         activityEntity.setDefinitionId(getProcessDefinition().getDefinitionId());
-         activityEntity.setPreActivityId(getPreActivityId());
-         activityEntity.setName(flowNode.getName());
-         activityEntity.setStatus(ActivityStatusEnum.NOT_INIT.status);
-         activityEntity.setFlowInstId(execution.getFLowInstId());
-         activityEntity.setExecutionId(execution.getId());
-         this.activity = activityEntity;
-         return activityEntity;
+        activityEntity.setActivityCodeId(this.getCodeId());
+        activityEntity.setActivityType(this.activityType);
+        activityEntity.setDefinitionId(getProcessDefinition().getDefinitionId());
+        activityEntity.setPreActivityId(getPreActivityId());
+        activityEntity.setName(flowNode.getName());
+        activityEntity.setStatus(ActivityStatusEnum.NOT_INIT.status);
+        activityEntity.setFlowInstId(execution.getFlowInstId());
+        activityEntity.setExecutionId(execution.getId());
+        this.activity = activityEntity;
+        return activityEntity;
     }
 
     public void start() {
@@ -145,13 +154,16 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
     }
 
 
-    @Override
-    public TransitionImpl findTransition(String codeId) {
-        return null;
-    }
-
-
     public boolean isEndActivity() {
         return this.activityType.equals(ElementTypeEnum.ACTIVITYTYPE_END.getContext());
+    }
+
+    public String getFlowInstId() {
+        return activity.getFlowInstId();
+    }
+
+    @Override
+    public String getName() {
+        return flowNode.getName();
     }
 }

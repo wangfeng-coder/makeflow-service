@@ -1,10 +1,7 @@
 package com.makeid.makeflow.workflow.operation;
 
-import com.makeid.makeflow.workflow.constants.ActivityStatusEnum;
-import com.makeid.makeflow.workflow.process.ProcessInstancePvmExecution;
+import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
-
-import java.util.Date;
 
 /**
  * @author feng_wf
@@ -12,9 +9,9 @@ import java.util.Date;
  * @description
  * @create 2023-06-06
  */
-public class AtomicActivityEndOperation extends AbstractEventAtomicOperation<ProcessInstancePvmExecution> {
+public class AtomicActivityEndOperation extends AbstractEventAtomicOperation<ProcessInstanceExecution> {
     @Override
-    public void doExecute(ProcessInstancePvmExecution execution) {
+    public void doExecute(ProcessInstanceExecution execution) {
         ActivityImpl currentActivityInst = execution.findActivityInst();
         currentActivityInst.end();
         currentActivityInst.save();

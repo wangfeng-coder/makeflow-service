@@ -7,15 +7,17 @@ package com.makeid.makeflow.workflow.constants;
  * @create 2023-05-31
  */
 public enum FlowStatusEnum {
-    UNSUBMIT(0),
+    UNSUBMIT("not_submit"),
 
-    RUNNING(1),
+    RUNNING("running"),
 
-    END(99);;
+    REJECT("reject"),
 
-    public final int status;
+    END("end");;
 
-    FlowStatusEnum(int status) {
+    public final String status;
+
+    FlowStatusEnum(String status) {
         this.status = status;
     }
 }

@@ -17,12 +17,14 @@ import com.makeid.makeflow.template.flow.model.base.FlowNode;
 import com.makeid.makeflow.template.flow.model.definition.FlowProcessTemplate;
 import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
 
+import java.util.Map;
+
 /**
  * @author
  */
-public interface PvmProcessDefinition extends PvmScope {
+public interface PvmProcessDefinition  {
 
-	PvmProcessInstance createProcessInstanceExecution();
+	PvmProcessInstance createProcessInstanceExecution(Map<String,Object> variables);
 
 	PvmActivity findInitial();
 

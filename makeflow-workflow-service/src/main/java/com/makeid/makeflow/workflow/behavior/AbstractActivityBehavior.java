@@ -1,6 +1,10 @@
 package com.makeid.makeflow.workflow.behavior;
 
+import com.makeid.makeflow.workflow.constants.TaskStatusEnum;
+import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
+
+import java.util.List;
 
 /**
  * @author feng_wf
@@ -26,4 +30,18 @@ public class AbstractActivityBehavior implements ActivityBehavior{
         jumpActivityBehavior.performOutgoingBehavior(execution);
     }
 
+
+   protected boolean isComplete(List<TaskEntity> taskInstList) {
+        return taskInstList.stream().allMatch(taskInst -> TaskStatusEnum.DONE.status == taskInst.getStatus());
+   }
+
+    /**
+     * 任务为运行
+     * @param taskEntities
+     */
+    protected void runningAllTask(List<TaskEntity> taskEntities) {
+        for (TaskEntity taskEntity : taskEntities) {
+            taskEntity.setStatus(TaskStatusEnum.DOING.status);
+        }
+    }
 }

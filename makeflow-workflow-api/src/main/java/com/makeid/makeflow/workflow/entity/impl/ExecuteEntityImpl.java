@@ -17,7 +17,6 @@ import java.util.Map;
 */
 @Getter
 @Setter
-@Document(collection = "makeflow_execute")
 public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
 
     protected String flowInstId;
@@ -28,7 +27,7 @@ public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
 
     protected String parentId;
 
-    protected int status;
+    protected String status;
 
     protected Date startTime;
 

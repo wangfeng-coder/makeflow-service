@@ -2,7 +2,7 @@ package com.makeid.makeflow.workflow.cmd;
 
 
 import com.makeid.makeflow.workflow.interceptor.CommandContext;
-import com.makeid.makeflow.workflow.process.ProcessInstancePvmExecution;
+import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionBuilder;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-abstract class StartProcessInstanceCmd extends AbstractCommand<ProcessInstancePvmExecution> {
+abstract class StartProcessInstanceCmd extends AbstractCommand<ProcessInstanceExecution> {
 
 	private static Logger log = LoggerFactory
 			.getLogger(StartProcessInstanceCmd.class);
@@ -36,7 +36,7 @@ abstract class StartProcessInstanceCmd extends AbstractCommand<ProcessInstancePv
 	}
 
 	@Override
-	public ProcessInstancePvmExecution execute(CommandContext commandContext) {
+	public ProcessInstanceExecution execute(CommandContext commandContext) {
 		log.info(
 				"StartProcessInstanceCmd--processDefinitionId:{},processInstanceId:{}",
 				processDefinitionId, processInstanceId);
@@ -45,9 +45,8 @@ abstract class StartProcessInstanceCmd extends AbstractCommand<ProcessInstancePv
 		//传入流程参数
 		ProcessDefinitionImpl processDefinition = ProcessDefinitionBuilder.builder()
 				.createProcessDefinition(processDefinitionId)
-				.setVariables(this.getVariables())
 				.build();
-		final ProcessInstancePvmExecution processInstanceExecution = (ProcessInstancePvmExecution)processDefinition.createProcessInstanceExecution();
+		final ProcessInstanceExecution processInstanceExecution = (ProcessInstanceExecution)processDefinition.createProcessInstanceExecution(this.getVariables());
 		processInstanceExecution.persist();
 		processInstanceExecution.start();
 		return processInstanceExecution;

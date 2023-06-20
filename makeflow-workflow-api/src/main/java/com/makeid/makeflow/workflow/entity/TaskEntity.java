@@ -1,6 +1,7 @@
 package com.makeid.makeflow.workflow.entity;
 
 import com.makeid.makeflow.basic.entity.Entity;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
@@ -10,6 +11,8 @@ import java.util.Date;
  * @description
  * @create 2023-06-07
  */
+
+@Document(collection = "makeflow_task")
 public interface TaskEntity extends Entity {
 
     String getName();
@@ -28,9 +31,9 @@ public interface TaskEntity extends Entity {
      * 任务类型
      * @return
      */
-    int getTaskType();
+    String getTaskType();
 
-    void setTaskType(int taskType);
+    void setTaskType(String taskType);
 
     /**
      * 完成时间
@@ -41,12 +44,12 @@ public interface TaskEntity extends Entity {
     void setCompleteTime(Date time);
 
 
-    int getStatus();
+    String getStatus();
 
     /**
      * 任务状态
      */
-    void setStatus(int status);
+    void setStatus(String status);
 
     void setFlowInstId(String flowInstId);
 

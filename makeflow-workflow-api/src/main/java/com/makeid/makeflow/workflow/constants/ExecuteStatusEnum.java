@@ -8,16 +8,16 @@ package com.makeid.makeflow.workflow.constants;
  */
 public enum ExecuteStatusEnum {
 
-    IN_ACTIVEE(0),
+    NOT_ACTIVE("not_active"),
 
-    ACTIVE(1),
+    ACTIVE("active"),
 
-    END(99);
+    END("end");
 
 
-    public final int status;
+    public final String status;
 
-    ExecuteStatusEnum(int status) {
+    ExecuteStatusEnum(String status) {
         this.status = status;
     }
 }

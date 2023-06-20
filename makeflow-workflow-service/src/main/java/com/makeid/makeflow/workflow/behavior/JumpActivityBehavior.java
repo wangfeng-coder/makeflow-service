@@ -37,7 +37,7 @@ public class JumpActivityBehavior implements Serializable {
     protected void performOutgoingBehavior(ActivityPvmExecution execution) {
         PvmActivity activity = execution.findActivityInst();
         List<TransitionImpl> transitionsToTake = new ArrayList<>();
-        List<TransitionImpl> outgoingTransitions = (List) activity.findOutgoingTransitions();
+        List<TransitionImpl> outgoingTransitions = activity.findOutgoingTransitions();
         for (TransitionImpl outgoingTransition : outgoingTransitions) {
             Condition condition = outgoingTransition.findCondition();
             if (Objects.isNull(condition)) {

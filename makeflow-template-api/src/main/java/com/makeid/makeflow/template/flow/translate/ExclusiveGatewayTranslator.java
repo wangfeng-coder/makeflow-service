@@ -13,6 +13,8 @@ public class ExclusiveGatewayTranslator implements Translator<ExclusiveGateway, 
     public com.makeid.makeflow.template.flow.model.gateway.ExclusiveGateway translate(ExclusiveGateway exclusiveGateway) {
         com.makeid.makeflow.template.flow.model.gateway.ExclusiveGateway target
                 = new com.makeid.makeflow.template.flow.model.gateway.ExclusiveGateway();
+        String defaultFlow = exclusiveGateway.getDefaultFlow();
+        target.setDefaultFlow(defaultFlow);
         FlowNodePropertyHandler.fillFlowNodeProperty(exclusiveGateway,target);
         return target;
     }

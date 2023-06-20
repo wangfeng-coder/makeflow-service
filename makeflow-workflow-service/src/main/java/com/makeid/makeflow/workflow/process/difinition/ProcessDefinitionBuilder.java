@@ -18,8 +18,6 @@ public class ProcessDefinitionBuilder {
 
     private ProcessDefinitionImpl processDefinition;
 
-    private Map<String,Object> variables;
-
     public static ProcessDefinitionBuilder builder() {
         return new ProcessDefinitionBuilder();
     }
@@ -39,13 +37,7 @@ public class ProcessDefinitionBuilder {
         return createProcessDefinition(flowProcessTemplate);
     }
 
-    public ProcessDefinitionBuilder setVariables( Map<String,Object> variables) {
-        this.variables = variables;
-        return this;
-    }
-
     public ProcessDefinitionImpl build() {
-        processDefinition.addVariables(this.variables);
         return processDefinition;
     }
 }
