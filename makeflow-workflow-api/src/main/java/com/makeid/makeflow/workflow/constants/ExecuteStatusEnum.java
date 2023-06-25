@@ -12,7 +12,11 @@ public enum ExecuteStatusEnum {
 
     ACTIVE("active"),
 
+    STAY("stay"),
+
     END("end");
+
+
 
 
     public final String status;

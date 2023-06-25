@@ -22,6 +22,11 @@ public class AbstractActivityBehavior implements ActivityBehavior{
         doExecute(execution);
     }
 
+    @Override
+    public void completeTask(ActivityPvmExecution execution,List<TaskEntity> taskEntityList) {
+        leave(execution);
+    }
+
     protected void doExecute(ActivityPvmExecution execution) {
         leave(execution);
     }

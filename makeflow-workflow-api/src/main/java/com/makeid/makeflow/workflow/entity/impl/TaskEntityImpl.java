@@ -36,5 +36,7 @@ public class TaskEntityImpl extends BaseEntity implements TaskEntity {
 
     protected String taskType;
 
+    protected String opinion;
+
 
 }

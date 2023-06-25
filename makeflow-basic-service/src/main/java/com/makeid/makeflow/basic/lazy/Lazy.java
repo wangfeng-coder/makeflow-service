@@ -1,4 +1,4 @@
-package com.makeid.makeflow.basic.cache;
+package com.makeid.makeflow.basic.lazy;
 
 import java.util.Objects;
 import java.util.function.Function;

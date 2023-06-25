@@ -16,7 +16,7 @@ public abstract class AbstractCommand<T> implements Command<T>, CheckCommand,
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Map<String, Object> variables;
+	protected Map<String, Object> variables;
 
 
 	

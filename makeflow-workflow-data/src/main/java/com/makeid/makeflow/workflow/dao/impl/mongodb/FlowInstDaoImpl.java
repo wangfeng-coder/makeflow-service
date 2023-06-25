@@ -21,8 +21,7 @@ public class FlowInstDaoImpl extends BaseDaoImpl<FlowInstEntity> implements Flow
     @Override
     public FlowInstEntity create() {
         FlowInstEntityImpl flowInstEntity = new FlowInstEntityImpl();
-        flowInstEntity.setCreateTime(new Date());
-        flowInstEntity.setUpdateTime(new Date());
+        fillBasicProperty(flowInstEntity);
         return flowInstEntity;
     }
 }

@@ -13,10 +13,15 @@
 package com.makeid.makeflow.workflow.behavior;
 
 
+import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
+
+import java.util.List;
 
 public interface ActivityBehavior {
 
 	void execute(ActivityPvmExecution execution);
+
+	void completeTask(ActivityPvmExecution execution, List<TaskEntity> taskEntityList);
 	
 }

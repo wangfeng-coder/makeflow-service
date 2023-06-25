@@ -94,4 +94,10 @@ public class FlowProcessTemplateServiceImpl implements FlowProcessTemplateServic
             }
         }
     }
+
+    public List<FlowProcessTemplate> findFlowProcessTemplate(List<String> definitionIds) {
+        // todo
+        return  Arrays.asList(getFlowProcessDefinition(definitionIds.get(0)));
+
+    }
 }

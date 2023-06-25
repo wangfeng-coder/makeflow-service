@@ -17,4 +17,8 @@ public interface RuntimeService {
 	PvmProcessInstance startDefiniteProcessInstanceById(
 			String processDefinitionId, String processInstanceId,
 			Map<String, Object> variables);
+
+	void agreeTask(String taskId,String opinion,Map<String,Object>variables);
+
+	void disAgreeTask(String taskId,String opinion,Map<String,Object> variables);
 }

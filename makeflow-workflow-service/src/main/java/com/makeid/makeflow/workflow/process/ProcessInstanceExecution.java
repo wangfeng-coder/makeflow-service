@@ -29,13 +29,13 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
 
     ///////////////////////////////
     //当前codeId
-    protected String activityCodeId;
+    protected String startCodeId;
 
-    private FlowInstEntity flowInstEntity;
+    protected FlowInstEntity flowInstEntity;
 
-    private ExecuteEntity executeEntity;
+    protected ExecuteEntity executeEntity;
 
-    private List<ProcessInstanceExecution> children;
+    protected List<ProcessInstanceExecution> children;
 
     /**
      * 当前正在流转的线，没有流转就为空
@@ -46,8 +46,8 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
 
     public ProcessInstanceExecution(ProcessDefinitionImpl processDefinition) {
         super(processDefinition);
+        initData();
     }
-
 
 
     @Override
@@ -57,7 +57,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
     @Override
     public void start() {
         validateProviderNecessaryData();
-        initialize();
+        this.executeEntity.setStartTime(new Date());
         activate();
         super.start();
     }
@@ -68,9 +68,13 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
         ActivityImpl preActivity = this.findActivityInst();
         String id = preActivity.getId();
         ActivityImpl destination = transitionImpl.findDestination();
-        this.activityCodeId = destination.getCodeId();
+        setActivityCodeId(destination.getCodeId());
         this.currentActivity = destination;
         currentActivity.setPreActivityId(id);
+    }
+
+    protected void setActivityCodeId(String activityCodeId) {
+        this.executeEntity.setActivityCodeId(activityCodeId);
     }
 
     @Override
@@ -89,7 +93,9 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
      * TODO
      */
     public void initialize() {
-        this.executeEntity.setStartTime(new Date());
+        createFlowInstEntity();
+        createExecuteEntity();
+        this.executeEntity.setActivityCodeId(startCodeId);
     }
 
 
@@ -107,17 +113,16 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
 
 
     private void createExecuteEntity() {
-        ExecuteEntity executeEntity = Context.getExecutionService().create();
+        ExecuteEntity executeEntity = Context.getExecutionService().create(Context.getUserId());
         executeEntity.setStatus(ExecuteStatusEnum.NOT_ACTIVE.status);
         executeEntity.setFlowInstId(this.getFlowInstEntity().getId());
         executeEntity.setVariables(variables);
-        executeEntity.setActivityCodeId(this.activityCodeId);
         executeEntity.setDefinitionId(getProcessDefinitionId());
         this.executeEntity = executeEntity;
     }
 
 
-    private void saveFlowInstEntity() {
+    public void saveFlowInstEntity() {
         Context.getFlowInstService().save(flowInstEntity);
     }
 
@@ -131,9 +136,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
      * @create 2023-05-31
      */
     public void saveExecuteEntity() {
-        //暂时没有父子关系
         executeEntity.setVariables(variables);
-        executeEntity.setActivityCodeId(activityCodeId);
         executeEntity.setFlowInstId(this.flowInstEntity.getId());
         Context.getExecutionService().save(executeEntity);
     }
@@ -159,7 +162,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
         if (Objects.nonNull(currentActivity)) {
             return currentActivity;
         }
-        ActivityImpl activity = new ActivityImpl(activityCodeId, processDefinition);
+        ActivityImpl activity = new ActivityImpl(executeEntity.getActivityCodeId(), processDefinition);
         this.currentActivity = activity;
         return activity;
     }
@@ -216,6 +219,23 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
     }
 
     @Override
+    public void end(String flowInstStatus) {
+        //更新流程状态 并保存
+        this.executeEntity.setStatus(ExecuteStatusEnum.END.status);
+        this.executeEntity.setEndTime(new Date());
+        Context.getExecutionService().save(executeEntity);
+        flowInstEntity.setStatus(flowInstStatus);
+        //保存流程实列
+        Context.getFlowInstService().save(flowInstEntity);
+    }
+
+    @Override
+    public void stay() {
+        this.executeEntity.setStatus(ExecuteStatusEnum.STAY.status);
+        Context.getExecutionService().save(executeEntity);
+    }
+
+    @Override
     public void suspend(String message) {
         super.suspend(message);
     }
@@ -237,22 +257,39 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
     }
 
 
-    public void persist() {
-        createFlowInstEntity();
+    public void save() {
         saveFlowInstEntity();
-        //保存执行实列
-        createExecuteEntity();
         saveExecuteEntity();
     }
 
     public void runFlowInst() {
         this.flowInstEntity.setStatus(FlowStatusEnum.RUNNING.status);
         this.flowInstEntity.setStartTime(new Date());
-        saveFlowInstEntity();
     }
 
     public String getFlowInstId() {
         return this.flowInstEntity.getId();
     }
 
+    public void restore(ExecuteEntity executeEntity) {
+        this.executeEntity = executeEntity;
+        this.currentActivity = findActivityInst();
+        this.flowInstEntity = findFlowInst();
+        this.addVariables(executeEntity.getVariables());
+        this.currentActivity.restore(executeEntity.getActivityId());
+
+    }
+
+    private FlowInstEntity findFlowInst() {
+        return Context.getFlowInstService().findById(this.executeEntity.getFlowInstId());
+    }
+
+    public void setActivityId(String activityId) {
+        this.executeEntity.setActivityId(activityId);
+    }
+
+    public void fillRunParam() {
+        //暂时没有父子关系
+
+    }
 }

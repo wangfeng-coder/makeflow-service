@@ -41,6 +41,8 @@ public interface ExecuteEntity extends Entity {
 
     String getActivityId();
 
+    void setActivityId(String activityId);
+
     Map<String,Object> getVariables();
 
     void setVariables(Map<String,Object> variable);

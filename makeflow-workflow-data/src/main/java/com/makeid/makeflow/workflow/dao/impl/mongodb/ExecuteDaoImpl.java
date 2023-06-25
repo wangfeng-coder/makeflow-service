@@ -6,6 +6,8 @@ import com.makeid.makeflow.workflow.dao.impl.BaseDaoImpl;
 import com.makeid.makeflow.workflow.entity.ActivityEntity;
 import com.makeid.makeflow.workflow.entity.ExecuteEntity;
 import com.makeid.makeflow.workflow.entity.impl.ExecuteEntityImpl;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -26,10 +28,15 @@ public class ExecuteDaoImpl extends BaseDaoImpl<ExecuteEntity> implements Execut
     }
 
     @Override
+    public List<ExecuteEntity> findByIds(List<String> executionIds) {
+        Query query = Query.query(Criteria.where("_id").in(executionIds));
+        return mongoTemplate.find(query,ExecuteEntity.class);
+    }
+
+    @Override
     public ExecuteEntity create() {
         ExecuteEntityImpl executeEntity = new ExecuteEntityImpl();
-        executeEntity.setCreateTime(new Date());
-        executeEntity.setUpdateTime(new Date());
+        fillBasicProperty(executeEntity);
         return executeEntity;
     }
 }

@@ -13,7 +13,7 @@ public enum ActivityStatusEnum {
 
     COMPLETE("complete"),
 
-    REJECT("reject"),
+    DISAGREE("disagree"),
 
     CANCEL("cancel");
 

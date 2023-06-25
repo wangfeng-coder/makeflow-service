@@ -7,7 +7,6 @@ import com.makeid.makeflow.template.flow.model.definition.FlowProcessTemplate;
 import com.makeid.makeflow.workflow.exception.EngineException;
 import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 import com.makeid.makeflow.workflow.process.PvmProcessDefinition;
-import com.makeid.makeflow.workflow.process.ScopeImpl;
 import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
 import org.springframework.util.Assert;
@@ -36,7 +35,7 @@ public class ProcessDefinitionImpl  implements PvmProcessDefinition {
     public PvmProcessInstance createProcessInstanceExecution(Map<String,Object> variables) {
         ProcessInstanceExecution processInstance = new ProcessInstanceExecution(this);
         StartActivity startActivity = flowProcessTemplate.findInitial();
-        processInstance.setActivityCodeId(startActivity.getCodeId());
+        processInstance.setStartCodeId(startActivity.getCodeId());
         processInstance.addVariables(variables);
         return processInstance;
     }

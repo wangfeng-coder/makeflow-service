@@ -101,8 +101,9 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
 
     @Override
     public String getId() {
-        return this.activity.getId();
+        return activity.getId();
     }
+
 
     @Override
     public void initData() {
@@ -130,7 +131,7 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
 
     public ActivityEntity create(ProcessInstanceExecution execution) {
         ActivityEntity activityEntity = Context.getGlobalProcessEngineConfiguration().getActivityService()
-                .create();
+                .create(Context.getUserId());
         activityEntity.setActivityCodeId(this.getCodeId());
         activityEntity.setActivityType(this.activityType);
         activityEntity.setDefinitionId(getProcessDefinition().getDefinitionId());
@@ -165,5 +166,11 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
     @Override
     public String getName() {
         return flowNode.getName();
+    }
+
+
+    public void restore(String activityEntityId) {
+        ActivityEntity activity = Context.getActivityService().findById(activityEntityId);
+        this.activity = activity;
     }
 }

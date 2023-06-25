@@ -3,6 +3,7 @@ package com.makeid.makeflow.workflow.behavior;
 import com.makeid.makeflow.template.flow.model.activity.ApprovalTaskActivity;
 import com.makeid.makeflow.template.flow.model.activity.OperationGroup;
 import com.makeid.makeflow.template.flow.model.activity.PeopleHolder;
+import com.makeid.makeflow.workflow.constants.FlowStatusEnum;
 import com.makeid.makeflow.workflow.constants.TaskStatusEnum;
 import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.entity.TaskEntity;
@@ -45,9 +46,32 @@ public class ApprovalTaskActivityBehavior extends AbstractActivityBehavior {
         } else {
             //存在任务没有完成 当前执行等待
             //TODO 不操作什么 后续可加事件
+            execution.stay();
         }
 
 
     }
 
+    @Override
+    public void completeTask(ActivityPvmExecution execution,List<TaskEntity> taskEntities) {
+        //判断任务是否都完成了
+        PvmActivity activityInst = execution.findActivityInst();
+        String activityInstId = activityInst.getId();
+        if (isDisagree(taskEntities)) {
+            execution.end(FlowStatusEnum.DISAGREE.status);
+        }
+        //如果当前任务是
+        if (Context.getTaskService().isCompleteSkipTask(activityInstId)) {
+            //都完成了 可以继续流转
+            leave(execution);
+        }
+    }
+
+    private boolean isDisagree(List<TaskEntity> taskEntities) {
+        if(CollectionUtils.isEmpty(taskEntities)) {
+            return false;
+        }
+        TaskEntity taskEntity = taskEntities.get(0);
+        return  TaskStatusEnum.DISAGREE.status.equals(taskEntity.getStatus());
+    }
 }

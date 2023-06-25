@@ -22,7 +22,7 @@ public class CommandInvoker extends AbstractCommandInterceptor {
 
 	@Override
 	public <T> T execute(CommandConfig config, Command<T> command) {
-		return command.execute(Context.getCommandContext());
+		return command.execute();
 	}
 
 	@Override

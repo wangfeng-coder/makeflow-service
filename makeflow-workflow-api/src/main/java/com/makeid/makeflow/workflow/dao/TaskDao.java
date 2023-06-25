@@ -11,4 +11,12 @@ import java.util.List;
  * @create 2023-06-13
  */
 public interface TaskDao extends BaseDao<TaskEntity> {
+    List<TaskEntity> findByIds(List<String> taskIds);
+
+    List<TaskEntity> findByActivityInstId(String activityInstId);
+
+    void cancelOtherTask(List<TaskEntity> taskEntities);
+
+    List<TaskEntity> findTaskByHandler(String handler);
+
 }

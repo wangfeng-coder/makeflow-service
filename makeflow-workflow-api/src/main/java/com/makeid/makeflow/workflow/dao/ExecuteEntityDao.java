@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface ExecuteEntityDao extends BaseDao<ExecuteEntity>{
     List<ExecuteEntity> findByParentId(String parentId);
+
+    List<ExecuteEntity> findByIds(List<String> executionIds);
 }

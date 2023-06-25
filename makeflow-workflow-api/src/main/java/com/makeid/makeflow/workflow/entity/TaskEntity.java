@@ -63,5 +63,7 @@ public interface TaskEntity extends Entity {
 
     String getActivityId();
 
-    
+    String getOpinion();
+
+    void setOpinion(String opinion);
 }

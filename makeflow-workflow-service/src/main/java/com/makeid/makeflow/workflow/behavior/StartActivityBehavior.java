@@ -30,7 +30,7 @@ public class StartActivityBehavior extends TaskActivityBehavior {
 				.createTask(Arrays.asList(Context.getUserId()), activityInst);
 		Context.getGlobalProcessEngineConfiguration()
 				.getTaskService()
-						.completeTasks(tasks);
+						.completeTasks(tasks,TaskStatusEnum.DONE.status);
 		//保存入库;
 		Context.getGlobalProcessEngineConfiguration()
 						.getTaskService()

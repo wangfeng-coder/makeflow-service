@@ -17,10 +17,7 @@ package com.makeid.makeflow.workflow.context;
 
 import com.makeid.makeflow.workflow.config.ProcessEngineConfigurationImpl;
 import com.makeid.makeflow.workflow.interceptor.CommandContext;
-import com.makeid.makeflow.workflow.service.ActivityService;
-import com.makeid.makeflow.workflow.service.ExecutionService;
-import com.makeid.makeflow.workflow.service.FlowInstService;
-import com.makeid.makeflow.workflow.service.RuntimeService;
+import com.makeid.makeflow.workflow.service.*;
 import org.springframework.util.Assert;
 
 import java.util.Objects;
@@ -96,5 +93,9 @@ public class Context {
 	
 	public static ActivityService getActivityService(){
 		return getGlobalProcessEngineConfiguration().getActivityService();
+	}
+
+	public static TaskService getTaskService() {
+		return getGlobalProcessEngineConfiguration().getTaskService();
 	}
 }

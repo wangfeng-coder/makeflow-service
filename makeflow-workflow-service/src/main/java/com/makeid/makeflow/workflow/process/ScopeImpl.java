@@ -43,6 +43,9 @@ public abstract class ScopeImpl extends CoreActivity implements PvmScope{
 
     @Override
     public void addVariables(Map<String,Object> variables) {
+        if (Objects.isNull(variables)) {
+            return;
+        }
         if (Objects.isNull(this.variables)) {
             this.variables = new HashMap<>();
         }

@@ -6,6 +6,8 @@ import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author feng_wf
@@ -25,11 +27,19 @@ public class ActivityService {
         return activityEntity;
     }
 
-    public ActivityEntity create() {
-        return activityDao.create();
+    public ActivityEntity create(String creator) {
+        return activityDao.create(creator);
     }
 
     public void save(ActivityEntity activity) {
         activityDao.save(activity);
+    }
+
+    public void save(List<ActivityEntity> activityEntities) {
+        activityDao.save(activityEntities);
+    }
+
+    public List<ActivityEntity> findByIds(List<String> activityIds) {
+        return activityDao.findByIds(activityIds);
     }
 }

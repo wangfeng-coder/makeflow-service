@@ -14,7 +14,7 @@ public enum TaskStatusEnum {
     //正在进行待处理
     DOING("doing"),
 
-    REJECT("reject"),
+    DISAGREE("disAgree"),
 
     //已完成
     DONE("done");

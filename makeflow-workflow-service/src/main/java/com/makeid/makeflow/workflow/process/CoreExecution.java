@@ -1,6 +1,7 @@
 package com.makeid.makeflow.workflow.process;
 
 import com.makeid.makeflow.workflow.behavior.ActivityBehavior;
+import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.exception.EngineException;
 import com.makeid.makeflow.workflow.operation.AtomicOperation;
 import com.makeid.makeflow.workflow.operation.AtomicOperations;
@@ -67,10 +68,17 @@ public abstract class CoreExecution extends ScopeImpl implements ActivityPvmExec
         activityBehavior.execute(this);
     }
 
+    public void completeTask(List<TaskEntity> taskEntities) {
+        this.findActivityInst().findActivityBehavior().completeTask(this,taskEntities);
+    }
 
     @Override
     public void end() {
         //更新流程状态 并保存
+
+    }
+
+    public void end(String flowInstStatus){
 
     }
 
@@ -95,6 +103,7 @@ public abstract class CoreExecution extends ScopeImpl implements ActivityPvmExec
     }
 
     public abstract String getId();
+
 
 
 }

@@ -36,7 +36,7 @@ abstract class StartProcessInstanceCmd extends AbstractCommand<ProcessInstanceEx
 	}
 
 	@Override
-	public ProcessInstanceExecution execute(CommandContext commandContext) {
+	public ProcessInstanceExecution execute() {
 		log.info(
 				"StartProcessInstanceCmd--processDefinitionId:{},processInstanceId:{}",
 				processDefinitionId, processInstanceId);
@@ -47,7 +47,8 @@ abstract class StartProcessInstanceCmd extends AbstractCommand<ProcessInstanceEx
 				.createProcessDefinition(processDefinitionId)
 				.build();
 		final ProcessInstanceExecution processInstanceExecution = (ProcessInstanceExecution)processDefinition.createProcessInstanceExecution(this.getVariables());
-		processInstanceExecution.persist();
+		processInstanceExecution.initialize();
+		processInstanceExecution.save();
 		processInstanceExecution.start();
 		return processInstanceExecution;
 	}

@@ -8,6 +8,6 @@ package com.makeid.makeflow.workflow.interceptor;
  */
 public interface Command<T> {
 
-    T execute(CommandContext commandContext);
+    T execute();
 
 }

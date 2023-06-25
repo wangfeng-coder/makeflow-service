@@ -11,7 +11,7 @@ public enum FlowStatusEnum {
 
     RUNNING("running"),
 
-    REJECT("reject"),
+    DISAGREE("disagree"),
 
     END("end");;
 

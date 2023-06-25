@@ -16,7 +16,7 @@ import java.util.Date;
  */
 @Setter
 @Getter
-public class ActivityEntityImpl extends BaseEntity implements ActivityEntity {
+public class    ActivityEntityImpl extends BaseEntity implements ActivityEntity {
 
     protected String name;
 
