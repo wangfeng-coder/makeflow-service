@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.runtime;
 
+import com.makeid.makeflow.workflow.constants.FlowStatusEnum;
 import com.makeid.makeflow.workflow.process.PvmExecution;
 
 /**
@@ -16,5 +17,7 @@ public interface PvmProcessInstance extends PvmExecution {
     String rootProcessInstanceId();
 
     boolean suspended();
+
+    void endProcessInstance(FlowStatusEnum flowStatusEnum);
 
 }

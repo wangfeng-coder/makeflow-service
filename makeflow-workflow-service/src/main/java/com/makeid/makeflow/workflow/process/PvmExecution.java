@@ -23,7 +23,6 @@ public interface PvmExecution extends PvmScope {
 	
 	void end();
 
-	void end(String flowInstStatus);
 	
 	/**节点停留,即节点待审批人审批（未自动审批、自动跳过、挂起）**/
 	void stay();

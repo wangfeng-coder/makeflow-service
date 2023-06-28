@@ -14,7 +14,6 @@ public class AtomicActivityEndOperation extends AbstractEventAtomicOperation<Pro
     public void doExecute(ProcessInstanceExecution execution) {
         ActivityImpl currentActivityInst = execution.findActivityInst();
         currentActivityInst.end();
-        currentActivityInst.save();
         if (currentActivityInst.isEndActivity()) {
             //结束 流程
             execution.performOperation(AtomicOperations.process_end);

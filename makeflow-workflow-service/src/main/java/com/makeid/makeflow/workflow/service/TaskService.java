@@ -64,6 +64,10 @@ public class TaskService {
         taskDao.save(tasks);
     }
 
+    public void save(TaskEntity taskEntity) {
+        taskDao.save(taskEntity);
+    }
+
     public List<TaskEntity> findTaskByIds(List<String> taskIds) {
         return taskDao.findByIds(taskIds);
     }
@@ -89,5 +93,9 @@ public class TaskService {
 
     public List<TaskEntity> findTaskByHandler(String handler) {
        return taskDao.findTaskByHandler(handler);
+    }
+
+    public TaskEntity findTaskById(String taskId) {
+        return taskDao.findById(taskId);
     }
 }

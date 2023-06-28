@@ -1,14 +1,16 @@
 package com.makeid.makeflow.workflow.cmd;
 
 import com.makeid.makeflow.workflow.constants.ActivityStatusEnum;
+import com.makeid.makeflow.workflow.constants.FlowStatusEnum;
 import com.makeid.makeflow.workflow.constants.TaskStatusEnum;
 import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.entity.ActivityEntity;
 import com.makeid.makeflow.workflow.entity.TaskEntity;
+import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
+import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,34 +19,39 @@ import java.util.Map;
  * @description
  * @create 2023-06-25
  */
-public class DisAgreeCmd extends CompleteTasksCmd{
+public class DisAgreeCmd extends CompleteTaskCmd {
 
 
     protected String opinion;
 
     public DisAgreeCmd(Map<String, Object> variables, String taskId, String opinion) {
-        super(Arrays.asList(taskId),variables);
+        super(taskId,variables);
         this.opinion = opinion;
     }
 
-    @Override
-    protected void batchDoTask(List<TaskEntity> taskEntities) {
-        for (TaskEntity taskEntity : taskEntities) {
-            taskEntity.setOpinion(opinion);
-            taskEntity.setStatus(TaskStatusEnum.DISAGREE.status);
-            taskEntity.setCompleteTime(new Date());
-        }
-        save(taskEntities);
-        //处理其它运行任务为cancel
-        Context.getTaskService().cancelOtherTask(taskEntities);
+    private void disAgree(TaskEntity taskEntity) {
+        taskEntity.setOpinion(opinion);
+        taskEntity.setStatus(TaskStatusEnum.DISAGREE.status);
+        taskEntity.setCompleteTime(new Date());
+        save(taskEntity);
     }
 
     @Override
-    protected void batchDealActivity(List<ActivityEntity> activities) {
-        for (ActivityEntity activity : activities) {
-            activity.setStatus(ActivityStatusEnum.DISAGREE.status);
-            activity.setEndTime(new Date());
-        }
-        Context.getActivityService().save(activities);
+    protected void completeTask(TaskEntity taskEntity, ProcessInstanceExecution processInstanceExecution) {
+        disAgree(taskEntity);
+        cancelOtherTaskEntity(taskEntity);
+        //更新当前节点
+        ActivityImpl currentActivity = processInstanceExecution.getCurrentActivity();
+        currentActivity.disAgree();
+        processInstanceExecution.end();
+        processInstanceExecution.endProcessInstance(FlowStatusEnum.DISAGREE);
+    }
+
+
+
+    private void disAgreeActivity(ActivityEntity activity) {
+        activity.setStatus(ActivityStatusEnum.DISAGREE.status);
+        activity.setEndTime(new Date());
+        Context.getActivityService().save(activity);
     }
 }

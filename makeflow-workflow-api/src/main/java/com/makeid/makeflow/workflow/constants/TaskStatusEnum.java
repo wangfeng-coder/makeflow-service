@@ -16,6 +16,10 @@ public enum TaskStatusEnum {
 
     DISAGREE("disAgree"),
 
+    CANCEL("cancel"),
+
+    RETURN("return"),
+
     //已完成
     DONE("done");
 

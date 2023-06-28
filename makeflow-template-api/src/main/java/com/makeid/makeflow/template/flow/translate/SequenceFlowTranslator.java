@@ -17,7 +17,7 @@ public class SequenceFlowTranslator implements Translator<SequenceFlow, com.make
         target.setSourceCodeId(sequenceFlow.getSourceRef());
         target.setCodeId(sequenceFlow.getId());
         target.setConditionExpression(sequenceFlow.getConditionExpression());
-        target.setElementType(ElementTypeEnum.ACTIVITYTYPE_LINE.getContext());
+        target.setElementType(ElementTypeEnum.ACTIVITYTYPE_LINE.getType());
         return target;
     }
 }

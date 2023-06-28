@@ -18,19 +18,21 @@ import java.util.Map;
  */
 public abstract class ActivityTypeBehaviorProvider {
 
- public final static Map<Class<? extends FlowNode>, ActivityBehavior> activityBehaviorMap = new HashMap<>();
+ public final static Map<String, ActivityBehavior> activityBehaviorMap = new HashMap<>();
 
  static {
-     activityBehaviorMap.put(StartActivity.class
+     activityBehaviorMap.put(ActivityTypeBehaviorEnum.START.activityType
              , ActivityTypeBehaviorEnum.START.activityBehavior);
-     activityBehaviorMap.put(EndActivity.class
+     activityBehaviorMap.put(ActivityTypeBehaviorEnum.RESTART.activityType
+             , ActivityTypeBehaviorEnum.RESTART.activityBehavior);
+     activityBehaviorMap.put(ActivityTypeBehaviorEnum.END.activityType
              , ActivityTypeBehaviorEnum.END.activityBehavior);
-     activityBehaviorMap.put(ExclusiveGateway.class
+     activityBehaviorMap.put(ActivityTypeBehaviorEnum.EXCLUSIVE_GATEWAY.activityType
              ,ActivityTypeBehaviorEnum.EXCLUSIVE_GATEWAY.activityBehavior);
-     activityBehaviorMap.put(ApprovalTaskActivity.class
+     activityBehaviorMap.put(ActivityTypeBehaviorEnum.APPROVAL_USERTASK.activityType
              ,ActivityTypeBehaviorEnum.APPROVAL_USERTASK.activityBehavior);
  }
- public static ActivityBehavior get(Class<? extends FlowNode> type){
+ public static ActivityBehavior get(String type){
      return activityBehaviorMap.get(type);
  }
 }

@@ -24,7 +24,7 @@ public abstract class FlowNodePropertyHandler {
         Arrays.stream(ElementTypeEnum.values())
                 .forEach(elementTypeEnum -> {
                     if (target.getClass().equals(elementTypeEnum.getClazz())) {
-                        target.setElementType(elementTypeEnum.getContext());
+                        target.setElementType(elementTypeEnum.getType());
                     }
                 });
         Assert.notNull(target.getElementType());

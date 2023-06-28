@@ -21,7 +21,7 @@ public class StartActivity extends BaseActivity{
 	private static final long serialVersionUID = 1L;
 
 	public StartActivity() {
-		setElementType(ElementTypeEnum.ACTIVITYTYPE_START.getContext());
+		setElementType(ElementTypeEnum.ACTIVITYTYPE_START.getType());
 	}
 
 	public static StartActivity transferFrom(StartEvent startEvent) {

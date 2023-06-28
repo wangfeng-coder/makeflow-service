@@ -2,6 +2,7 @@ package com.makeid.makeflow.workflow.behavior;
 
 
 
+import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.operation.AtomicOperations;
 import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
 
@@ -20,7 +21,8 @@ public class EndActivityBehavior extends TaskActivityBehavior {
         execution.performOperation(AtomicOperations.ACTIVITY_END);
 	}
 	@Override
-	public void completeTask(ActivityPvmExecution execution) {
-		return;
+	public void completedTask(ActivityPvmExecution execution) {
+
 	}
+
 }

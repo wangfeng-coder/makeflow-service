@@ -25,7 +25,7 @@ public class OperationGroup extends FlowElement {
 
 
 	public OperationGroup(){
-		setElementType(ElementTypeEnum.ACTIVITYTYPE_OPERATIONGROUP.getContext());
+		setElementType(ElementTypeEnum.ACTIVITYTYPE_OPERATIONGROUP.getType());
 	}
 
 	public String getCheckType() {

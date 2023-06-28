@@ -96,7 +96,7 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
 
     @Override
     public boolean isStartActivity() {
-        return this.activityType.equals(ElementTypeEnum.ACTIVITYTYPE_START.getContext());
+        return this.activityType.equals(ElementTypeEnum.ACTIVITYTYPE_START.getType());
     }
 
     @Override
@@ -110,7 +110,7 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
         this.flowNode = findFlowNode(this.codeId);
         this.outGoingTransitions = new ArrayList<>();
         this.activityType = flowNode.getElementType();
-        this.activityBehavior = ActivityTypeBehaviorProvider.get(flowNode.getClass());
+        this.activityBehavior = ActivityTypeBehaviorProvider.get(activityType);
     }
 
 
@@ -147,16 +147,32 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
     public void start() {
         activity.setStartTime(new Date());
         activity.setStatus(ActivityStatusEnum.RUNNING.status);
+        save();
     }
 
+    public String getStatus() {
+        return this.getActivity().getStatus();
+    }
+
+
     public void end() {
+        //处于运行时才更新状态
+        if(ActivityStatusEnum.RUNNING.status.equals(getStatus())) {
+            activity.setEndTime(new Date());
+            activity.setStatus(ActivityStatusEnum.COMPLETE.status);
+            save();
+        }
+    }
+
+    public void disAgree() {
+        activity.setStatus(ActivityStatusEnum.DISAGREE.status);
         activity.setEndTime(new Date());
-        activity.setStatus(ActivityStatusEnum.COMPLETE.status);
+        save();
     }
 
 
     public boolean isEndActivity() {
-        return this.activityType.equals(ElementTypeEnum.ACTIVITYTYPE_END.getContext());
+        return this.activityType.equals(ElementTypeEnum.ACTIVITYTYPE_END.getType());
     }
 
     public String getFlowInstId() {
@@ -169,8 +185,24 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
     }
 
 
+    /**
+     * 从数据对象恢复相关信息
+     *  我们可能加了一个新的activityType 对应新的behavior 不是来自于模板
+     * 比如restart，当我们测回时 这个时候不是在是 start  我们已经改成了Restart
+     *
+     * @param activityEntityId
+     */
     public void restore(String activityEntityId) {
         ActivityEntity activity = Context.getActivityService().findById(activityEntityId);
+        this.activityType = activity.getActivityType();
+        this.activityBehavior = ActivityTypeBehaviorProvider.get(activityType);
         this.activity = activity;
+    }
+
+    public void returnBack() {
+
+        this.activity.setEndTime(new Date());
+        this.activity.setStatus(ActivityStatusEnum.RETURN.status);
+        save();
     }
 }

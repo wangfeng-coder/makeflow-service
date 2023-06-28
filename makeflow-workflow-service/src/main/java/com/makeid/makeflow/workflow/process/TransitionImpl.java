@@ -100,4 +100,12 @@ public class TransitionImpl extends ProcessElementImpl implements PvmTransition{
     public void setSequenceFlow(SequenceFlow sequenceFlow) {
         this.sequenceFlow = sequenceFlow;
     }
+
+    /**
+     * 调整目标 activity
+     * @param targetActivity
+     */
+    public void changeTargetActivity(ActivityImpl targetActivity) {
+        this.targetActivity = targetActivity;
+    }
 }

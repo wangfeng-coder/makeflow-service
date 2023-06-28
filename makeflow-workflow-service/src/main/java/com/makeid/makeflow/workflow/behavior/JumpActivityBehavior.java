@@ -65,5 +65,4 @@ public class JumpActivityBehavior implements Serializable {
             }
         }
     }
-
 }

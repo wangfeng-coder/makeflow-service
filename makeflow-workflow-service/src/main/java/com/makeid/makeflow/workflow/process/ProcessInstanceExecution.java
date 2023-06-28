@@ -57,7 +57,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
     @Override
     public void start() {
         validateProviderNecessaryData();
-        this.executeEntity.setStartTime(new Date());
+        setStartTimeNow();
         activate();
         super.start();
     }
@@ -71,6 +71,12 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
         setActivityCodeId(destination.getCodeId());
         this.currentActivity = destination;
         currentActivity.setPreActivityId(id);
+    }
+
+    private void setStartTimeNow() {
+        if(Objects.isNull(this.executeEntity.getStartTime())){
+            this.executeEntity.setStartTime(new Date());
+        }
     }
 
     protected void setActivityCodeId(String activityCodeId) {
@@ -213,20 +219,6 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
         this.executeEntity.setStatus(ExecuteStatusEnum.END.status);
         this.executeEntity.setEndTime(new Date());
         Context.getExecutionService().save(executeEntity);
-        flowInstEntity.setStatus(FlowStatusEnum.END.status);
-        //保存流程实列
-        Context.getFlowInstService().save(flowInstEntity);
-    }
-
-    @Override
-    public void end(String flowInstStatus) {
-        //更新流程状态 并保存
-        this.executeEntity.setStatus(ExecuteStatusEnum.END.status);
-        this.executeEntity.setEndTime(new Date());
-        Context.getExecutionService().save(executeEntity);
-        flowInstEntity.setStatus(flowInstStatus);
-        //保存流程实列
-        Context.getFlowInstService().save(flowInstEntity);
     }
 
     @Override
@@ -238,6 +230,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
     @Override
     public void suspend(String message) {
         super.suspend(message);
+
     }
 
     @Override
@@ -284,12 +277,17 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
         return Context.getFlowInstService().findById(this.executeEntity.getFlowInstId());
     }
 
-    public void setActivityId(String activityId) {
+    public void setCurrentActivityId(String activityId) {
         this.executeEntity.setActivityId(activityId);
     }
 
     public void fillRunParam() {
         //暂时没有父子关系
 
+    }
+
+    public void endProcessInstance(FlowStatusEnum flowStatusEnum) {
+        flowInstEntity.setStatus(flowStatusEnum.status);
+        saveFlowInstEntity();
     }
 }

@@ -12,6 +12,7 @@ import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author feng_wf
@@ -19,9 +20,9 @@ import java.util.List;
  * @description
  * @create 2023-06-14
  */
-public class ApprovalTaskActivityBehavior extends AbstractActivityBehavior {
-    @Override
-    protected void doExecute(ActivityPvmExecution execution) {
+public class ApprovalTaskActivityBehavior extends TaskActivityBehavior {
+
+    void doInternalExecute(ActivityPvmExecution execution, Map<String, Object> params) {
         PvmActivity activityInst = execution.findActivityInst();
         String codeId = activityInst.getCodeId();
         ApprovalTaskActivity approvalTaskActivity = (ApprovalTaskActivity) execution.findFlowNode(codeId);
@@ -52,26 +53,13 @@ public class ApprovalTaskActivityBehavior extends AbstractActivityBehavior {
 
     }
 
-    @Override
-    public void completeTask(ActivityPvmExecution execution,List<TaskEntity> taskEntities) {
-        //判断任务是否都完成了
-        PvmActivity activityInst = execution.findActivityInst();
-        String activityInstId = activityInst.getId();
-        if (isDisagree(taskEntities)) {
-            execution.end(FlowStatusEnum.DISAGREE.status);
-        }
-        //如果当前任务是
-        if (Context.getTaskService().isCompleteSkipTask(activityInstId)) {
-            //都完成了 可以继续流转
-            leave(execution);
-        }
+
+
+    private boolean isReturn(TaskEntity taskEntity) {
+        return TaskStatusEnum.RETURN.status.equals(taskEntity.getStatus());
     }
 
-    private boolean isDisagree(List<TaskEntity> taskEntities) {
-        if(CollectionUtils.isEmpty(taskEntities)) {
-            return false;
-        }
-        TaskEntity taskEntity = taskEntities.get(0);
+    private boolean isDisagree(TaskEntity taskEntity) {
         return  TaskStatusEnum.DISAGREE.status.equals(taskEntity.getStatus());
     }
 }

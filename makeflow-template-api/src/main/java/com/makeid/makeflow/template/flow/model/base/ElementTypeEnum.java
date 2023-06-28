@@ -26,7 +26,6 @@ public enum ElementTypeEnum {
 	 */
 	ACTIVITYTYPE_START("start", StartActivity.class),
 
-
 	ACTIVITYTYPE_MULTIAPPROVAL("multiApproval", ApprovalTaskActivity.class),
 
 	ACTIVITYTYPE_OPERATIONGROUP("operationGroup", OperationGroup.class),
@@ -42,26 +41,22 @@ public enum ElementTypeEnum {
 	;
 
 
-	private String context;
+	private String type;
 
 	private Class clazz;
 
-	public String getContext() {
-		return context;
-	}
 
-	public void setContext(String context) {
-		this.context = context;
-	}
-
-	private ElementTypeEnum(String context){
-		this.context=context;
-	}
-
-
-	private ElementTypeEnum(String context, Class clazz) {
-		this.context = context;
+	private ElementTypeEnum(String type, Class clazz) {
+		this.type = type;
 		this.clazz = clazz;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Class getClazz() {
@@ -71,7 +66,4 @@ public enum ElementTypeEnum {
 	public void setClazz(Class clazz) {
 		this.clazz = clazz;
 	}
-
-	
-
 }

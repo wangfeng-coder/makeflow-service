@@ -17,11 +17,9 @@ public class AtomicActivityStartOperation extends AbstractEventAtomicOperation<P
         activityInst.create(execution);
         //更新活动状态
         activityInst.start();
-        //保存到数据库
-        activityInst.save();
 
-        //设置activity id到实列
-        execution.setActivityId(activityInst.getId());
+        //设置当前执行id activity id到实列
+        execution.setCurrentActivityId(activityInst.getId());
         //执行活动
         execution.performOperation(AtomicOperations.activity_execute);
     }

@@ -18,7 +18,7 @@ public class ApprovalTaskActivity extends BaseActivity {
 	private ApprovalSettings approvalSettings;//审批设置
 
 	public ApprovalTaskActivity(){
-		setElementType(ElementTypeEnum.ACTIVITYTYPE_MULTIAPPROVAL.getContext());;
+		setElementType(ElementTypeEnum.ACTIVITYTYPE_MULTIAPPROVAL.getType());;
 	}
 
 	public OperationGroup getOperationGroup() {

@@ -36,11 +36,11 @@ public class StartActivityBehavior extends TaskActivityBehavior {
 						.getTaskService()
 								.save(tasks);
 		//任务已完成 往下个地方
-		completeTask(execution);
+		completedTask(execution);
 	}
 
 	@Override
-	public void completeTask(ActivityPvmExecution execution) {
+	public void completedTask(ActivityPvmExecution execution) {
 		//当前任务都完成了，可以Leave
 		leave(execution);
 	}

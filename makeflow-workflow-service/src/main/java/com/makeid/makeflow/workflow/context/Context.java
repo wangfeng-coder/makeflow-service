@@ -30,7 +30,6 @@ import java.util.Stack;
 public class Context {
 	
 	protected static ThreadLocal<Stack<CommandContext>> commandContextThreadLocal = new ThreadLocal<>();
-	protected static ThreadLocal<Stack<ProcessEngineConfigurationImpl>> processEngineConfigurationStackThreadLocal = new ThreadLocal<>();
 
 	protected static ThreadLocal<UserContext> currentUserContextThreadLocal =  new ThreadLocal<>();
 

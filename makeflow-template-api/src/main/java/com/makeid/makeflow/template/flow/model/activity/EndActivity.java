@@ -15,7 +15,7 @@ public class EndActivity  extends BaseActivity{
 
 	
 	public EndActivity(){
-		setElementType(ElementTypeEnum.ACTIVITYTYPE_END.getContext());
+		setElementType(ElementTypeEnum.ACTIVITYTYPE_END.getType());
 	}
 
 	@Override

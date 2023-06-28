@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.operation;
 
+import com.makeid.makeflow.workflow.constants.FlowStatusEnum;
 import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 
 /**
@@ -11,6 +12,7 @@ import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 public class AtomicProcessEndOperation extends AbstractEventAtomicOperation<ProcessInstanceExecution> {
     @Override
     public void doExecute(ProcessInstanceExecution execution) {
+        execution.endProcessInstance(FlowStatusEnum.END);
         execution.end();
     }
 }

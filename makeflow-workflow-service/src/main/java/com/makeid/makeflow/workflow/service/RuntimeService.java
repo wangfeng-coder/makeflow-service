@@ -21,4 +21,7 @@ public interface RuntimeService {
 	void agreeTask(String taskId,String opinion,Map<String,Object>variables);
 
 	void disAgreeTask(String taskId,String opinion,Map<String,Object> variables);
+
+
+	void returnTask(String taskId,String opinion,String targetCodeId,Map<String,Object> variables);
 }

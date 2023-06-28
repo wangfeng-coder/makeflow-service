@@ -51,7 +51,7 @@ public class TaskDaoImpl extends BaseDaoImpl<TaskEntity> implements TaskDao {
                 .addCriteria(Criteria.where("_id").nin(ids))
                 .addCriteria(Criteria.where("delete").is(false));
         Update update = new Update();
-        update.set("status",TaskStatusEnum.DISAGREE.status);
+        update.set("status",TaskStatusEnum.CANCEL.status);
         mongoTemplate.updateMulti(query,update,TaskEntity.class);
     }
 

@@ -17,8 +17,9 @@ public class TaskTypeMap {
     private static final Map<String,String> taskTypeMaps = new HashMap<>();
 
     static {
-        taskTypeMaps.put(ElementTypeEnum.ACTIVITYTYPE_START.getContext(),"start");
-        taskTypeMaps.put(ElementTypeEnum.ACTIVITYTYPE_MULTIAPPROVAL.getContext(), "approval");
+        taskTypeMaps.put(ElementTypeEnum.ACTIVITYTYPE_START.getType(),"start");
+        taskTypeMaps.put("restart", "restart");
+        taskTypeMaps.put(ElementTypeEnum.ACTIVITYTYPE_MULTIAPPROVAL.getType(), "approval");
     }
 
     public static String map(String elementType) {

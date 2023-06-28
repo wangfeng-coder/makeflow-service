@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author feng_wf
@@ -25,13 +27,13 @@ public class PersonHolderCollectors {
     }
 
     public  List<String> collect(List<PeopleHolder> peopleHolders, PvmScope pvmScope) {
-        List<String> userIds = new ArrayList<>();
+        Set<String> userIds = new LinkedHashSet<>();
         for (PeopleHolder peopleHolder : peopleHolders) {
             for (PersonHolderCollector personHolderCollector : personHolderCollectorList) {
                 List<String> collect = personHolderCollector.collect(peopleHolder, pvmScope);
                 userIds.addAll(collect);
             }
         }
-        return userIds;
+        return new ArrayList<>(userIds);
     }
 }

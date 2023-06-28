@@ -4,6 +4,7 @@ import com.makeid.makeflow.template.flow.model.activity.StartActivity;
 import com.makeid.makeflow.template.flow.model.base.Element;
 import com.makeid.makeflow.template.flow.model.base.FlowNode;
 import com.makeid.makeflow.template.flow.model.definition.FlowProcessTemplate;
+import com.makeid.makeflow.workflow.event.DelegateProcessDefinition;
 import com.makeid.makeflow.workflow.exception.EngineException;
 import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 import com.makeid.makeflow.workflow.process.PvmProcessDefinition;
@@ -21,7 +22,7 @@ import java.util.Objects;
  * @description
  * @create 2023-06-12
  */
-public class ProcessDefinitionImpl  implements PvmProcessDefinition {
+public class ProcessDefinitionImpl  implements PvmProcessDefinition, DelegateProcessDefinition {
 
     protected FlowProcessTemplate flowProcessTemplate;
 

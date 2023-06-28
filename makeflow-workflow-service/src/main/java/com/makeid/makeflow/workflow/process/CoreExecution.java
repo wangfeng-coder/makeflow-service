@@ -68,19 +68,15 @@ public abstract class CoreExecution extends ScopeImpl implements ActivityPvmExec
         activityBehavior.execute(this);
     }
 
-    public void completeTask(List<TaskEntity> taskEntities) {
-        this.findActivityInst().findActivityBehavior().completeTask(this,taskEntities);
+    public void completedTask() {
+        this.findActivityInst().findActivityBehavior().completedTask(this);
     }
 
     @Override
     public void end() {
         //更新流程状态 并保存
-
     }
 
-    public void end(String flowInstStatus){
-
-    }
 
     @Override
     public void stay() {

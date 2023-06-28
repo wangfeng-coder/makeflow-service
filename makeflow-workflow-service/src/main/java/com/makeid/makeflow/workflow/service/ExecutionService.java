@@ -65,4 +65,12 @@ public class ExecutionService {
         }
         return processInstanceExecutions;
     }
+
+    public ProcessInstanceExecution transferExecution(ExecuteEntity executeEntity) {
+        String definitionId = executeEntity.getDefinitionId();
+        FlowProcessTemplate flowProcessDefinition = flowProcessTemplateService.getFlowProcessDefinition(definitionId);
+        ProcessInstanceExecution processInstanceExecution = new ProcessInstanceExecution(new ProcessDefinitionImpl(flowProcessDefinition));
+        processInstanceExecution.restore(executeEntity);
+        return processInstanceExecution;
+    }
 }

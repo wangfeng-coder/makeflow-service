@@ -22,6 +22,9 @@ public interface ActivityBehavior {
 
 	void execute(ActivityPvmExecution execution);
 
-	void completeTask(ActivityPvmExecution execution, List<TaskEntity> taskEntityList);
+	void completedTask(ActivityPvmExecution execution);
+
+//	void completedTask(ActivityPvmExecution execution,TaskEntity taskEntity);
+
 	
 }

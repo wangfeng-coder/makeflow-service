@@ -2,6 +2,7 @@ package com.makeid.makeflow.workflow.service.impl;
 
 import com.makeid.makeflow.workflow.cmd.AgreeTaskCmd;
 import com.makeid.makeflow.workflow.cmd.DisAgreeCmd;
+import com.makeid.makeflow.workflow.cmd.ReturnCmd;
 import com.makeid.makeflow.workflow.cmd.StartDefiniteProcessInstanceCmd;
 import com.makeid.makeflow.workflow.config.ProcessEngineConfigurationImpl;
 import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
@@ -39,5 +40,10 @@ public class RuntimeServiceImpl extends ServiceImpl implements RuntimeService {
     @Override
     public void disAgreeTask(String taskId, String opinion, Map<String, Object> variables) {
         commandExecutor.execute(new DisAgreeCmd(variables,taskId,opinion));
+    }
+
+    @Override
+    public void returnTask(String taskId, String opinion, String targetCodeId, Map<String, Object> variables) {
+        commandExecutor.execute(new ReturnCmd(taskId,variables,targetCodeId,opinion));
     }
 }

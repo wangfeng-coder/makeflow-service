@@ -15,6 +15,8 @@ public enum ActivityStatusEnum {
 
     DISAGREE("disagree"),
 
+    RETURN("return"),
+
     CANCEL("cancel");
 
 

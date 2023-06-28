@@ -11,7 +11,7 @@
     <exclusiveGateway id="sid-de921fd4-e129-4aab-a58f-35e2338b723e" name="第一个排他网关" default="sid-6c1b0366-8387-430c-be1c-179eba356e31"/>
     <sequenceFlow id="sid-71dccab9-6c90-44f7-840e-01a63865d45d" sourceRef="sid-52296e87-5753-4de4-959a-a59466c7aa8f" targetRef="sid-de921fd4-e129-4aab-a58f-35e2338b723e"/>
     <sequenceFlow id="sid-6c1b0366-8387-430c-be1c-179eba356e31" sourceRef="sid-de921fd4-e129-4aab-a58f-35e2338b723e" targetRef="sid-708b9176-a621-4880-9082-ea28ee7807ad">
-      <conditionExpression xsi:type="tFormalExpression"/>
+      <conditionExpression xsi:type="tFormalExpression">${type!=2}</conditionExpression>
     </sequenceFlow>
     <exclusiveGateway id="sid-a9227503-3047-4331-9b00-1ffa7473701b" name="第二个排他"/>
     <sequenceFlow id="sid-4ac7ef04-40ff-4ff4-b851-2bae79dc1255" sourceRef="sid-708b9176-a621-4880-9082-ea28ee7807ad" targetRef="sid-a9227503-3047-4331-9b00-1ffa7473701b"/>
@@ -46,6 +46,8 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge-da579892-4a81-47be-b111-1e6f677a5927" bpmnElement="sid-6c1b0366-8387-430c-be1c-179eba356e31">
         <omgdi:waypoint x="-65.0" y="-110.0"/>
+        <omgdi:waypoint x="-53.75" y="-119.999985"/>
+        <omgdi:waypoint x="-48.125" y="-119.999985"/>
         <omgdi:waypoint x="-42.5" y="-119.99999"/>
         <omgdi:waypoint x="-20.0" y="-120.0"/>
       </bpmndi:BPMNEdge>

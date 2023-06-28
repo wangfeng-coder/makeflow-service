@@ -5,6 +5,7 @@ import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
 /**
  * @author feng_wf
@@ -12,7 +13,7 @@ import java.util.List;
  * @description
  * @create 2023-06-06
  */
-public class AbstractActivityBehavior implements ActivityBehavior{
+public abstract class AbstractActivityBehavior implements ActivityBehavior{
 
     protected final JumpActivityBehavior jumpActivityBehavior = new JumpActivityBehavior();
 
@@ -23,7 +24,7 @@ public class AbstractActivityBehavior implements ActivityBehavior{
     }
 
     @Override
-    public void completeTask(ActivityPvmExecution execution,List<TaskEntity> taskEntityList) {
+    public void completedTask(ActivityPvmExecution execution) {
         leave(execution);
     }
 
@@ -35,18 +36,4 @@ public class AbstractActivityBehavior implements ActivityBehavior{
         jumpActivityBehavior.performOutgoingBehavior(execution);
     }
 
-
-   protected boolean isComplete(List<TaskEntity> taskInstList) {
-        return taskInstList.stream().allMatch(taskInst -> TaskStatusEnum.DONE.status == taskInst.getStatus());
-   }
-
-    /**
-     * 任务为运行
-     * @param taskEntities
-     */
-    protected void runningAllTask(List<TaskEntity> taskEntities) {
-        for (TaskEntity taskEntity : taskEntities) {
-            taskEntity.setStatus(TaskStatusEnum.DOING.status);
-        }
-    }
 }
