@@ -22,7 +22,6 @@ public class SpringProcessEngineConfiguration extends
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        ApplicationContext applicationContext = event.getApplicationContext();;
         this.buildProcessEngine();
         Context.setGlobalProcessEngineConfiguration(this);
     }

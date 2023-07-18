@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.exception;
 
+import com.makeid.makeflow.basic.exception.MakeFlowException;
 import com.makeid.makeflow.workflow.constants.ErrCodeEnum;
 
 /**
@@ -8,7 +9,7 @@ import com.makeid.makeflow.workflow.constants.ErrCodeEnum;
 *@author feng_wf
 *@create 2023-05-30
 */
-public class EngineException extends RuntimeException{
+public class EngineException extends MakeFlowException {
 
     private ErrCodeEnum errCodeEnum;
 

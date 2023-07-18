@@ -14,6 +14,11 @@ import java.util.List;
  */
 public class StringPeopleResolver implements PeopleResolver{
     @Override
+    public boolean match(String express) {
+        return true;
+    }
+
+    @Override
     public List<PeopleHolder> resolve(String express) {
         PeopleHolder peopleHolder = new PeopleHolder();
         peopleHolder.setType(PeopleTypeEnum.PERSON.type);

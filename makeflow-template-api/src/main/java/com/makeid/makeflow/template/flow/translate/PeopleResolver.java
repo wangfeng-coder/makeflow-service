@@ -13,5 +13,7 @@ import java.util.List;
  */
 public interface PeopleResolver extends Ordered {
 
+     boolean match(String express);
+
     List<PeopleHolder> resolve(String express);
 }

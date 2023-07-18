@@ -1,6 +1,7 @@
 package com.makeid.makeflow.workflow.entity;
 
 import com.makeid.makeflow.basic.entity.Entity;
+import com.makeid.makeflow.workflow.delegate.DelegateExecuteReader;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @create 2023-06-01
  */
 @Document(collection = "makeflow_execute")
-public interface ExecuteEntity extends Entity {
+public interface ExecuteEntity extends Entity, DelegateExecuteReader {
 
     String getFlowInstId();
 

@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.dao;
 
+import com.makeid.makeflow.basic.dao.BaseDao;
 import com.makeid.makeflow.workflow.entity.ExecuteEntity;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import java.util.List;
  * @description
  * @create 2023-05-31
  */
-public interface ExecuteEntityDao extends BaseDao<ExecuteEntity>{
-    List<ExecuteEntity> findByParentId(String parentId);
+public interface ExecuteEntityDao<T extends ExecuteEntity> extends BaseDao<T> {
+    List<? extends ExecuteEntity> findByParentId(String parentId);
 
-    List<ExecuteEntity> findByIds(List<String> executionIds);
+    List<? extends ExecuteEntity> findByIds(List<String> executionIds);
 }

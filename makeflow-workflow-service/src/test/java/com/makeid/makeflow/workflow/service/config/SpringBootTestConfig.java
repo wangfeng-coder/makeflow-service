@@ -1,7 +1,5 @@
 package com.makeid.makeflow.workflow.service.config;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
  * @create 2023-06-13
  */
 @Configuration
-@EnableAutoConfiguration
 @ComponentScan(value = {"com.makeid.makeflow"})
 public class SpringBootTestConfig {
-
 }

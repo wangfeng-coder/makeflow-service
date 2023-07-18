@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.dao;
 
+import com.makeid.makeflow.basic.dao.BaseDao;
 import com.makeid.makeflow.workflow.entity.TaskEntity;
 
 import java.util.List;
@@ -10,13 +11,16 @@ import java.util.List;
  * @description
  * @create 2023-06-13
  */
-public interface TaskDao extends BaseDao<TaskEntity> {
-    List<TaskEntity> findByIds(List<String> taskIds);
+public interface TaskDao<T extends TaskEntity> extends BaseDao<T> {
+    List<? extends TaskEntity> findByIds(List<String> taskIds);
 
-    List<TaskEntity> findByActivityInstId(String activityInstId);
+    List<? extends TaskEntity> findByActivityInstId(String activityInstId);
 
-    void cancelOtherTask(List<TaskEntity> taskEntities);
+    void cancelOtherTask(String activityId,String id);
 
-    List<TaskEntity> findTaskByHandler(String handler);
+    List<? extends  TaskEntity> findTaskByHandler(String handler);
 
+    List<? extends TaskEntity> findByFlowInstId(String flowInstId);
+
+    List<? extends TaskEntity> findFlowInstIdHandlerStatus(String flowInstId, String handler, String status);
 }

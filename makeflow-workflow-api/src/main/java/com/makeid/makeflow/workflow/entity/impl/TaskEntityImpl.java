@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.entity.impl;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.makeid.makeflow.basic.entity.BaseEntity;
 import com.makeid.makeflow.workflow.entity.TaskEntity;
 import lombok.Getter;
@@ -17,6 +18,7 @@ import java.util.Date;
  */
 @Getter
 @Setter
+@TableName("makeflow_task")
 @Document(collection = "makeflow_task")
 public class TaskEntityImpl extends BaseEntity implements TaskEntity {
     

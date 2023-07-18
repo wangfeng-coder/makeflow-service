@@ -1,6 +1,7 @@
 package com.makeid.makeflow.workflow.process;
 
 import com.makeid.makeflow.template.flow.model.base.FlowNode;
+import com.makeid.makeflow.workflow.delegate.DelegateScopeWriter;
 
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import java.util.Map;
  * @description 数据获取
  * @create 2023-06-09
  */
-public interface PvmScope extends PvmProcessElement {
+public interface PvmScope extends PvmProcessElement, DelegateScopeWriter {
 
     Map<String, Object> getVariables();
 

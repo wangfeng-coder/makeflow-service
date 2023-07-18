@@ -64,6 +64,7 @@ public abstract class CoreExecution extends ScopeImpl implements ActivityPvmExec
      */
     @Override
     public void execute() {
+
         ActivityBehavior activityBehavior = findActivityInst().findActivityBehavior();
         activityBehavior.execute(this);
     }

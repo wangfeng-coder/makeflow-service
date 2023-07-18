@@ -13,6 +13,7 @@
 
 package com.makeid.makeflow.workflow.config;
 
+import com.makeid.makeflow.basic.utils.SpringContextUtils;
 import com.makeid.makeflow.template.service.FlowProcessTemplateService;
 import com.makeid.makeflow.workflow.exception.EngineException;
 import com.makeid.makeflow.workflow.interceptor.*;
@@ -21,7 +22,8 @@ import com.makeid.makeflow.workflow.service.*;
 import com.makeid.makeflow.workflow.service.impl.ServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -38,24 +40,26 @@ public abstract class ProcessEngineConfigurationImpl extends
 
 	// SERVICES
 	// /////////////////////////////////////////////////////////////////
-
 	@Resource
 	protected FlowInstService flowInstService;
 	
-	@Autowired
+	@Resource
 	protected RuntimeService runtimeService;
 
-	@Autowired
+	@Resource
 	protected ExecutionService executionService;
 
-	@Autowired
+	@Resource
 	protected ActivityService activityService;
 
-	@Autowired
+	@Resource
 	protected TaskService taskService;
 
-	@Autowired
+	@Resource
 	protected FlowProcessTemplateService flowProcessDefinitionService;
+
+	@Resource
+	protected FlowTransactionInterceptor flowTransactionInterceptor;
 
 
 	// COMMAND EXECUTORS
@@ -136,6 +140,8 @@ public abstract class ProcessEngineConfigurationImpl extends
 		interceptors.add(new LogInterceptor());
 		//增加流程级锁拦截器
 		interceptors.add(new LockInterceptor());
+		//借助spring aop完成事务控制
+		interceptors.add(this.flowTransactionInterceptor);
 //		interceptors.add(new CheckInterceptor());
 	/*	interceptors.add(new CommandContextInterceptor(commandContextFactory,
 				this));*/

@@ -44,6 +44,9 @@ public final class ElUtil {
         ExpressionFactory factory = ExpressionFactory.newInstance();
         ELContext context = new SimpleContext(); // 自定义EL上下文
         try {
+            if (!expression.startsWith("${")) {
+                return false;
+            }
             factory.createValueExpression(context, expression, Object.class);
             return true;
         } catch (ELException e) {

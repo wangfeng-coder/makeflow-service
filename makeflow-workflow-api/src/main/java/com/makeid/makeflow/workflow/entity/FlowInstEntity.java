@@ -25,6 +25,10 @@ public interface FlowInstEntity extends Entity {
 
     void setStatus(String status);
 
+    void setApplyTime(Date supplyTime);
+
+    Date getApplyTime();
+
     void setStartTime(Date startTime);
 
     Date getStartTime();
@@ -34,4 +38,7 @@ public interface FlowInstEntity extends Entity {
     Date getEndTime();
 
 
+    void setApply(String userId);
+
+    String getApply();
 }

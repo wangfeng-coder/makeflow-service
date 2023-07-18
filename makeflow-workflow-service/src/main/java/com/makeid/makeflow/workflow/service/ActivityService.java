@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author feng_wf
@@ -22,13 +23,13 @@ public class ActivityService {
     private ActivityDao activityDao;
 
     public ActivityEntity findById(String id) {
-        ActivityEntity activityEntity = activityDao.findById(id);
+        ActivityEntity activityEntity = (ActivityEntity) activityDao.findById(id);
         //转换成具体类型的活动节点实列
         return activityEntity;
     }
 
     public ActivityEntity create(String creator) {
-        return activityDao.create(creator);
+        return (ActivityEntity) activityDao.create(creator);
     }
 
     public void save(ActivityEntity activity) {
@@ -41,5 +42,9 @@ public class ActivityService {
 
     public List<ActivityEntity> findByIds(List<String> activityIds) {
         return activityDao.findByIds(activityIds);
+    }
+
+    public List<ActivityEntity> findByFlowInstId(String flowInstId) {
+        return activityDao.findByFlowInstId(flowInstId);
     }
 }

@@ -14,6 +14,6 @@ public interface RedissonStrategy {
      * @param redissonProperties
      * @return 获取客户端
      */
-    public RedissonClient getRedissonClient(RedissonProperties redissonProperties);
+    public RedissonClient getRedissonClient(RedisProperties redissonProperties);
 
 }

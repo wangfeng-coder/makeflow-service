@@ -29,8 +29,8 @@ public class PeopleResolvers {
      */
    public static List<PeopleHolder> resolve(String express) {
        for (PeopleResolver resolver : resolvers) {
-           List<PeopleHolder> result = resolver.resolve(express);
-           if(Objects.nonNull(result)) {
+           if(resolver.match(express)) {
+               List<PeopleHolder> result = resolver.resolve(express);
                return result;
            }
        }

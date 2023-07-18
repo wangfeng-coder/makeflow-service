@@ -1,6 +1,8 @@
 package com.makeid.makeflow.workflow.context;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -11,9 +13,10 @@ import lombok.Setter;
 */
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserContext {
 
     private String userId;
 
-    private String userName;
 }

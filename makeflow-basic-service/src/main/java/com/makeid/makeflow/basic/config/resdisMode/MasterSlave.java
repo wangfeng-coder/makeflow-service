@@ -22,7 +22,7 @@ public class MasterSlave implements RedissonStrategy {
     public static volatile RedissonClient masterSlaveClient = null;
 
     @Override
-    public RedissonClient getRedissonClient(RedissonProperties redissonProperties) {
+    public RedissonClient getRedissonClient(RedisProperties redissonProperties) {
 
         if (masterSlaveClient != null) {
             return masterSlaveClient;

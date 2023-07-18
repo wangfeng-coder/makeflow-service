@@ -4,6 +4,8 @@ import com.makeid.makeflow.template.flow.constants.PeopleTypeEnum;
 import com.makeid.makeflow.template.flow.model.activity.PeopleHolder;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -14,16 +16,17 @@ import java.util.List;
  */
 public class DepartmentPeopleResolver implements PeopleResolver{
     @Override
+    public boolean match(String express) {
+        return express.startsWith("D_");
+    }
+
+    @Override
     public List<PeopleHolder> resolve(String express) {
-        boolean isDepartment = express.startsWith("D_");
-        if(isDepartment) {
-            String[] split = express.split(",");
-            PeopleHolder peopleHolder = new PeopleHolder();
-            peopleHolder.setFids(Arrays.asList(split));
-            peopleHolder.setType(PeopleTypeEnum.DEPARTMENT.type);
-            return Arrays.asList(peopleHolder);
-        }
-        return null;
+        String[] split = express.split(",");
+        PeopleHolder peopleHolder = new PeopleHolder();
+        peopleHolder.setFids(Arrays.asList(split));
+        peopleHolder.setType(PeopleTypeEnum.DEPARTMENT.type);
+        return Arrays.asList(peopleHolder);
     }
 
     @Override

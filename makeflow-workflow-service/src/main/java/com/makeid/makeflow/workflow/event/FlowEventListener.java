@@ -20,12 +20,5 @@ public interface FlowEventListener extends Ordered {
         return 0;
     }
 
-    /**
-     * 注册类型：0-同时注册到同步，异步总线，1-只注册到同步总线，2-只注册到异步总线
-     * @return
-     */
-   default int registerType(){
-       return 0;
-   }
 
 }

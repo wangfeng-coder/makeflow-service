@@ -19,7 +19,7 @@ public class Sentinel implements RedissonStrategy {
     public static volatile RedissonClient sentinelClient = null;
 
     @Override
-    public RedissonClient getRedissonClient(RedissonProperties redissonProperties) {
+    public RedissonClient getRedissonClient(RedisProperties redissonProperties) {
 
         if (sentinelClient != null) {
             return sentinelClient;

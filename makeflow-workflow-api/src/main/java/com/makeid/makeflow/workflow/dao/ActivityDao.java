@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.dao;
 
+import com.makeid.makeflow.basic.dao.BaseDao;
 import com.makeid.makeflow.workflow.entity.ActivityEntity;
 
 import java.util.List;
@@ -10,8 +11,10 @@ import java.util.List;
  * @description
  * @create 2023-06-08
  */
-public interface ActivityDao extends BaseDao<ActivityEntity>{
-    List<ActivityEntity> findByIds(List<String> activityIds);
+public interface ActivityDao<T extends ActivityEntity> extends BaseDao<T> {
+    List<T> findByIds(List<String> activityIds);
+
+    List<T> findByFlowInstId(String flowInstId);
 
 
 }

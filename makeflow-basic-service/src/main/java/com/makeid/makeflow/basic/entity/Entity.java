@@ -31,9 +31,9 @@ public interface Entity {
 
     void setUpdator(String updator);
 
-    boolean isDelete();
+    public boolean isDelFlag();
 
-    void setDelete(boolean delete);
+    public void setDelFlag(boolean delFlag);
 
 
 

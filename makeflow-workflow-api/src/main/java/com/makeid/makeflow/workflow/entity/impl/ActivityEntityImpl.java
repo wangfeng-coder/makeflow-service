@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.entity.impl;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.makeid.makeflow.basic.entity.BaseEntity;
 import com.makeid.makeflow.workflow.entity.ActivityEntity;
 import lombok.Getter;
@@ -16,7 +17,8 @@ import java.util.Date;
  */
 @Setter
 @Getter
-public class    ActivityEntityImpl extends BaseEntity implements ActivityEntity {
+@TableName("makeflow_activity")
+public class  ActivityEntityImpl extends BaseEntity implements ActivityEntity {
 
     protected String name;
 

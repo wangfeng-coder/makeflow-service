@@ -75,6 +75,15 @@ public class BpmnModel {
     return null;
   }
 
+  public Process getOneProcess() {
+    for (Process process : processes) {
+      if (Objects.nonNull(process)) {
+        return process;
+      }
+    }
+    return null;
+  }
+
   public List<Process> getProcesses() {
     return processes;
   }

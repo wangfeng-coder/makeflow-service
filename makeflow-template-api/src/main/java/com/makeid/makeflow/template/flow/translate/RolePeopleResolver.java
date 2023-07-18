@@ -14,6 +14,11 @@ import java.util.List;
  */
 public class RolePeopleResolver implements PeopleResolver {
     @Override
+    public boolean match(String express) {
+        return express.startsWith("R_");
+    }
+
+    @Override
     public List<PeopleHolder> resolve(String express) {
         boolean isRole = express.startsWith("R_");
         if(isRole) {

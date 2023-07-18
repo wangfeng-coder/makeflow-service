@@ -20,7 +20,7 @@ public class StandAlone implements RedissonStrategy {
     public static volatile RedissonClient standAloneClient = null;
 
     @Override
-    public RedissonClient getRedissonClient(RedissonProperties redissonProperties) {
+    public RedissonClient getRedissonClient(RedisProperties redissonProperties) {
         if (standAloneClient != null) {
             return standAloneClient;
         }

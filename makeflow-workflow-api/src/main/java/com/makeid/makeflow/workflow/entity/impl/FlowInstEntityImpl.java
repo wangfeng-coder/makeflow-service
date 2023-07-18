@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.entity.impl;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.makeid.makeflow.basic.entity.BaseEntity;
 import com.makeid.makeflow.workflow.entity.FlowInstEntity;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import java.util.Date;
 */
 @Getter
 @Setter
+@TableName("makeflow_flow_inst")
 public class FlowInstEntityImpl extends BaseEntity implements FlowInstEntity {
 
     private String definitionId;
@@ -28,4 +30,8 @@ public class FlowInstEntityImpl extends BaseEntity implements FlowInstEntity {
 
     private Date endTime;
 
+    private Date applyTime;
+
+    private String apply;
 }
+

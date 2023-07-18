@@ -1,6 +1,7 @@
 package com.makeid.makeflow.workflow.entity;
 
 import com.makeid.makeflow.basic.entity.Entity;
+import com.makeid.makeflow.workflow.delegate.DelegateActivityReader;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -12,50 +13,67 @@ import java.util.Date;
  * @create 2023-06-05
  */
 @Document(collection = "makeflow_activity")
-public interface ActivityEntity extends Entity {
+public interface ActivityEntity extends Entity, DelegateActivityReader {
 
     String getName();
 
-    void setName(String name);
 
     String getActivityType();
 
-    void setActivityType(String type);
 
-    void setActivityCodeId(String activityCodeId);
 
     Date getStartTime();
 
-    void setStartTime(Date date);
 
     Date getEndTime();
 
-    void setEndTime(Date date);
 
     String getStatus();
 
-    void setStatus(String status);
 
     String getFlowInstId();
 
-    void setFlowInstId(String flowInstId);
 
-    void setExecutionId(String executionId);
 
     String getExecutionId();
 
-    void setParentId(String parentId);
 
     String getParentId();
 
-    void setDefinitionId(String definitionId);
 
     String getDefinitionId();
 
     String getPreActivityId();
 
+
+    void setName(String name);
+
+
+    void setActivityType(String type);
+
+    void setActivityCodeId(String activityCodeId);
+
+
+    void setStartTime(Date date);
+
+
+    void setEndTime(Date date);
+
+
+    void setStatus(String status);
+
+
+    void setFlowInstId(String flowInstId);
+
+    void setExecutionId(String executionId);
+
+
+    void setParentId(String parentId);
+
+
+    void setDefinitionId(String definitionId);
+
+
     void setPreActivityId(String preActivityId);
-
-
 
 }

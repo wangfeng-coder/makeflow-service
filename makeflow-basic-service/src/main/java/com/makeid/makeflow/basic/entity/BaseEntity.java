@@ -1,9 +1,12 @@
 package com.makeid.makeflow.basic.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,6 +21,7 @@ import java.util.Date;
 public class BaseEntity implements Entity, Serializable {
 
     @Id
+    @TableId
     protected String id;
     /**
      * 创建时间
@@ -36,7 +40,9 @@ public class BaseEntity implements Entity, Serializable {
      */
     protected String updator;
 
-    protected boolean delete;
+
+
+    protected boolean delFlag;
 
 
     public String getId() {
@@ -79,11 +85,12 @@ public class BaseEntity implements Entity, Serializable {
         this.updator = updator;
     }
 
-    public boolean isDelete() {
-        return delete;
+    public boolean isDelFlag() {
+        return delFlag;
     }
 
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public void setDelFlag(boolean delFlag) {
+        this.delFlag = delFlag;
     }
+
 }

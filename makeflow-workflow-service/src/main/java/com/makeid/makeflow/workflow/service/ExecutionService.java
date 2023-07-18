@@ -32,7 +32,7 @@ public class ExecutionService {
     private FlowProcessTemplateServiceImpl flowProcessTemplateService;
 
     public ExecuteEntity create(String userId){
-        return executeEntityDao.create(userId);
+        return (ExecuteEntity) executeEntityDao.create(userId);
     }
 
     public void save(ExecuteEntity executeEntity) {
@@ -40,7 +40,7 @@ public class ExecutionService {
     }
 
     public ExecuteEntity findById(String s) {
-        return executeEntityDao.findById(s);
+        return (ExecuteEntity) executeEntityDao.findById(s);
     }
 
     public List<ExecuteEntity> findByParentId(String parentId) {

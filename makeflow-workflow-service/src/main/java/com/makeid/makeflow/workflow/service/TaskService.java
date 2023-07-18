@@ -11,6 +11,7 @@ import com.makeid.makeflow.workflow.process.PvmActivity;
 import com.makeid.makeflow.workflow.task.PersonHolderCollector;
 import com.makeid.makeflow.workflow.task.PersonHolderCollectors;
 import com.makeid.makeflow.workflow.task.TaskTypeMap;
+import com.makeid.makeflow.workflow.vo.TaskVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,7 @@ public class TaskService {
     public List<TaskEntity> createTask(List<String> handlers, PvmActivity activity) {
         String activityType = activity.getActivityType();
         return handlers.stream().map(handler -> {
-            TaskEntity taskEntity = taskDao.create(Context.getUserId());
+            TaskEntity taskEntity = (TaskEntity) taskDao.create(Context.getUserId());
             taskEntity.setHandler(handler);
             taskEntity.setTaskType(TaskTypeMap.map(activityType));
             taskEntity.setActivityCodeId(activity.getCodeId());
@@ -87,8 +88,8 @@ public class TaskService {
         return !notPass;
     }
 
-    public void cancelOtherTask(List<TaskEntity> taskEntities) {
-        taskDao.cancelOtherTask(taskEntities);
+    public void cancelOtherTask(String activityId,String id) {
+        taskDao.cancelOtherTask(activityId,id);
     }
 
     public List<TaskEntity> findTaskByHandler(String handler) {
@@ -96,6 +97,14 @@ public class TaskService {
     }
 
     public TaskEntity findTaskById(String taskId) {
-        return taskDao.findById(taskId);
+        return (TaskEntity) taskDao.findById(taskId);
+    }
+
+    public List<TaskEntity> findByFlowInstId(String flowInstId) {
+        return taskDao.findByFlowInstId(flowInstId);
+    }
+
+    public List<TaskEntity> findFlowInstIdHandlerStatus(String flowInstId, String handler, String status) {
+        return taskDao.findFlowInstIdHandlerStatus(flowInstId,handler,status);
     }
 }

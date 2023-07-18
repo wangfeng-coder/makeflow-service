@@ -69,10 +69,10 @@
     </appender>
 
     <!--dao层包下的类的日志输出-->
-    <logger name="com.makeid" additivity="true" level="info">
-        <!--打印控制台-->
-        <appender-ref ref="async_console"/>
-    </logger>
+<!--    <logger name="com.makeid" additivity="true" level="info">-->
+<!--        &lt;!&ndash;打印控制台&ndash;&gt;-->
+<!--        <appender-ref ref="async_console"/>-->
+<!--    </logger>-->
 
     <!--    <root level="debug">-->
     <!--        <appender-ref ref="async_console"/>-->

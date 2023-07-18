@@ -15,7 +15,7 @@
     <module>makeflow-workflow-service</module>
     <module>makeflow-form-api</module>
     <module>makeflow-form-service</module>
-    <module>makeflow-service-application</module>
+    <module>makeflow-service-Application</module>
     <module>makeflow-form-data</module>
     <module>makeflow-template-data</module>
     <module>makeflow-workflow-data</module>
@@ -23,6 +23,7 @@
     <module>makeflow-document-service</module>
     <module>makeflow-push-service</module>
     <module>makeflow-basic-service</module>
+      <module>demo</module>
   </modules>
 
   <properties>
@@ -30,6 +31,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
+    <testable.version>0.7.9</testable.version>
   </properties>
 
   <dependencyManagement>
@@ -61,6 +63,11 @@
           <target>1.8</target>
           <encoding>UTF-8</encoding>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version>
       </plugin>
     </plugins>
   </build>

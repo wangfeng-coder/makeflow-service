@@ -19,7 +19,7 @@ public class Cluster implements RedissonStrategy {
     public static volatile RedissonClient clusterClient = null;
 
     @Override
-    public RedissonClient getRedissonClient(RedissonProperties redissonProperties) {
+    public RedissonClient getRedissonClient(RedisProperties redissonProperties) {
 
         if (clusterClient != null) {
             return clusterClient;

@@ -7,6 +7,8 @@ import com.makeid.makeflow.workflow.constants.FlowStatusEnum;
 import com.makeid.makeflow.workflow.constants.TaskStatusEnum;
 import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.entity.TaskEntity;
+import com.makeid.makeflow.workflow.event.EventRegister;
+import com.makeid.makeflow.workflow.event.TaskRunningAfterEvent;
 import com.makeid.makeflow.workflow.process.PvmActivity;
 import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
 import org.springframework.util.CollectionUtils;
@@ -35,7 +37,8 @@ public class ApprovalTaskActivityBehavior extends TaskActivityBehavior {
         //任务状态处理
         runningAllTask(taskList);
         //任务自动完成 TODO
-
+        //待完成任务发送代办
+        EventRegister.post(new TaskRunningAfterEvent(taskList));
         //保存任务
         Context.getGlobalProcessEngineConfiguration()
                 .getTaskService()

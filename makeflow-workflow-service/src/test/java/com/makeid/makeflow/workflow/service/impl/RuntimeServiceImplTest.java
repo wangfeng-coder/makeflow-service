@@ -50,7 +50,6 @@ public class RuntimeServiceImplTest {
     public void userContextSet() {
         UserContext userContext = new UserContext();
         userContext.setUserId("王峰");
-        userContext.setUserName("王f");
         Context.setCurrentUser(userContext);
     }
 
@@ -126,9 +125,8 @@ public class RuntimeServiceImplTest {
     }
 
     @Test
-    public void eventBus() {
+    public void publish() {
         EventRegister bean = SpringContextUtils.getBean(EventRegister.class);
-        bean.test();
     }
 
 

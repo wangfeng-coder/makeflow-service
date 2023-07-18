@@ -43,6 +43,6 @@ public abstract class CompleteTaskCmd extends AbstractCommand<Void> implements L
 
     protected void cancelOtherTaskEntity(TaskEntity taskEntity) {
         //处理其它运行任务为cancel
-        Context.getTaskService().cancelOtherTask(Arrays.asList(taskEntity));
+        Context.getTaskService().cancelOtherTask(taskEntity.getActivityId(),taskEntity.getId());
     }
 }

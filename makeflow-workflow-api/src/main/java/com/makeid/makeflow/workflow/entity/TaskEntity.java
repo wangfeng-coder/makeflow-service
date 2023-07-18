@@ -1,6 +1,7 @@
 package com.makeid.makeflow.workflow.entity;
 
 import com.makeid.makeflow.basic.entity.Entity;
+import com.makeid.makeflow.workflow.delegate.DelegateTaskReader;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Date;
  */
 
 @Document(collection = "makeflow_task")
-public interface TaskEntity extends Entity {
+public interface TaskEntity extends Entity, DelegateTaskReader {
 
     String getName();
 

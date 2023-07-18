@@ -6,6 +6,7 @@ import com.makeid.makeflow.template.util.ElUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,6 +16,11 @@ import java.util.List;
  * @create 2023-06-19
  */
 public class ElPeopleResolver implements PeopleResolver {
+    @Override
+    public boolean match(String express) {
+        return ElUtil.isELExpression(express);
+    }
+
     @Override
     public List<PeopleHolder> resolve(String express) {
         if (ElUtil.isELExpression(express)) {
@@ -26,7 +32,7 @@ public class ElPeopleResolver implements PeopleResolver {
             peopleHolders.add(peopleHolder);
             return peopleHolders;
         }
-        return null;
+        return Collections.emptyList();
     }
 
     @Override

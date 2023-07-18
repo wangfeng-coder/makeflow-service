@@ -99,8 +99,6 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
      * TODO
      */
     public void initialize() {
-        createFlowInstEntity();
-        createExecuteEntity();
         this.executeEntity.setActivityCodeId(startCodeId);
     }
 
@@ -118,13 +116,14 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
 
 
 
-    private void createExecuteEntity() {
+    public ExecuteEntity createExecuteEntity() {
         ExecuteEntity executeEntity = Context.getExecutionService().create(Context.getUserId());
         executeEntity.setStatus(ExecuteStatusEnum.NOT_ACTIVE.status);
         executeEntity.setFlowInstId(this.getFlowInstEntity().getId());
         executeEntity.setVariables(variables);
         executeEntity.setDefinitionId(getProcessDefinitionId());
         this.executeEntity = executeEntity;
+        return executeEntity;
     }
 
 
@@ -155,13 +154,16 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
      * @author feng_wf
      * @create 2023-05-31
      */
-    private void createFlowInstEntity() {
-        FlowInstEntity flowInstEntity = Context.getFlowInstService().create();
+    public FlowInstEntity createFlowInstEntity() {
+        FlowInstEntity flowInstEntity = Context.getFlowInstService().create(Context.getUserId());
         FlowProcessTemplate flowProcessTemplate = processDefinition.findFlowProcessTemplate();
         flowInstEntity.setDefinitionId(flowProcessTemplate.getFlowTemplateId());
         flowInstEntity.setDefinitionCodeId(flowProcessTemplate.getFlowTemplateCodeId());
         flowInstEntity.setStatus(FlowStatusEnum.UNSUBMIT.status);
+        flowInstEntity.setApplyTime(new Date());
+        flowInstEntity.setApply(Context.getUserId());
         this.flowInstEntity = flowInstEntity;
+        return flowInstEntity;
     }
 
     public ActivityImpl findActivityInst() {

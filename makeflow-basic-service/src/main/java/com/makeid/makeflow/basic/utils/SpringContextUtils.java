@@ -41,6 +41,7 @@ public class SpringContextUtils implements ApplicationContextAware {
 		return applicationContext.getBean(c);
 	}
 
+
 	/**
 	 * 获取bean
 	 * @param c c

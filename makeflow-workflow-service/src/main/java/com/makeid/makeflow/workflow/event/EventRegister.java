@@ -1,20 +1,15 @@
 package com.makeid.makeflow.workflow.event;
 
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.eventbus.AsyncEventBus;
-import com.google.common.eventbus.EventBus;
+import com.makeid.makeflow.workflow.eventbus.AsyncEventBus;
+import com.makeid.makeflow.workflow.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ReflectionUtils;
 
 import javax.annotation.PostConstruct;
-import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.Executor;
 
 @Component
@@ -51,10 +46,11 @@ public class EventRegister{
     public void register(Object subscriber) {
         asyncEventBus.register(subscriber);
         syncEventBus.register(subscriber);
+        log.info("注册监听器对象【{}】",subscriber.getClass());
     }
 
     public static void post(Object event) {
-        post(event, true); // 异步
+        post(event, false); // 同步
     }
 
     public static void post(Object event, boolean async) {
@@ -68,26 +64,6 @@ public class EventRegister{
     @PostConstruct
     public void registerListeners() {
         eventListenerList.forEach(this::register);
-    }
-
-    public void test(){
-
-        Class<? extends EventBus> aClass = syncEventBus.getClass();
-        try {
-            Field subscribers = aClass.getDeclaredField("subscribers");
-            subscribers.setAccessible(true);
-            Object o = subscribers.get(syncEventBus);
-            Class<?> aClass1 = o.getClass();
-            Field subscribers1 = aClass1.getDeclaredField("subscribers");
-            subscribers1.setAccessible(true);
-            Map map = (ConcurrentMap<Class<?>, CopyOnWriteArraySet<?>>)subscribers1.get(o);
-
-            System.out.println();
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

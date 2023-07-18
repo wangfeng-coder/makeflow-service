@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.entity.impl;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.makeid.makeflow.basic.entity.BaseEntity;
 import com.makeid.makeflow.workflow.entity.ExecuteEntity;
 import lombok.Getter;
@@ -17,6 +18,7 @@ import java.util.Map;
 */
 @Getter
 @Setter
+@TableName("makeflow_execute")
 public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
 
     protected String flowInstId;
