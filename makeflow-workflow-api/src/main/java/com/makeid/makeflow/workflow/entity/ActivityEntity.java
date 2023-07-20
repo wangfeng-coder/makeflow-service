@@ -4,6 +4,7 @@ import com.makeid.makeflow.basic.entity.Entity;
 import com.makeid.makeflow.workflow.delegate.DelegateActivityReader;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 import java.util.Date;
 
 /**
@@ -31,19 +32,19 @@ public interface ActivityEntity extends Entity, DelegateActivityReader {
     String getStatus();
 
 
-    String getFlowInstId();
+    Long getFlowInstId();
 
 
 
-    String getExecutionId();
+    Long getExecutionId();
 
 
-    String getParentId();
+    Long getParentId();
 
 
-    String getDefinitionId();
+    Long getDefinitionId();
 
-    String getPreActivityId();
+    Long getPreActivityId();
 
 
     void setName(String name);
@@ -63,17 +64,17 @@ public interface ActivityEntity extends Entity, DelegateActivityReader {
     void setStatus(String status);
 
 
-    void setFlowInstId(String flowInstId);
+    void setFlowInstId(Long flowInstId);
 
-    void setExecutionId(String executionId);
-
-
-    void setParentId(String parentId);
+    void setExecutionId(Long executionId);
 
 
-    void setDefinitionId(String definitionId);
+    void setParentId(Long parentId);
 
 
-    void setPreActivityId(String preActivityId);
+    void setDefinitionId(Long definitionId);
+
+
+    void setPreActivityId(Long preActivityId);
 
 }

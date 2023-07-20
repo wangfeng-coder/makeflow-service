@@ -25,7 +25,7 @@ public class CheckInterceptor extends AbstractCommandInterceptor {
 			if (command instanceof CheckCommand) {
 				log.info("command instanceof CheckCommand");
 				CheckCommand checkCommand = (CheckCommand) command;
-				String processInstanceId = checkCommand.getProcessInstanceId();
+				Long processInstanceId = checkCommand.getProcessInstanceId();
 				FlowInstEntity flowInst = Context.getFlowInstService()
 						.findById(processInstanceId);
 				if (flowInst == null) {

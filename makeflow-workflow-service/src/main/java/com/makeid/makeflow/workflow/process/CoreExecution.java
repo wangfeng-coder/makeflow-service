@@ -8,6 +8,7 @@ import com.makeid.makeflow.workflow.operation.AtomicOperations;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
 import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
 
+
 import java.util.List;
 
 /**
@@ -99,7 +100,7 @@ public abstract class CoreExecution extends ScopeImpl implements ActivityPvmExec
 
     }
 
-    public abstract String getId();
+    public abstract Long getId();
 
 
 

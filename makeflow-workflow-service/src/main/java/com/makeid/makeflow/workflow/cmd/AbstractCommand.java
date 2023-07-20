@@ -19,6 +19,7 @@ import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
 import org.apache.commons.lang3.StringUtils;
 
+
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -52,8 +53,8 @@ public abstract class AbstractCommand<T> implements Command<T>, CheckCommand,
 	}
 
 	@Override
-	public String getProcessInstanceId() {
-		return (String) this.getVariables().get(FlowMapParamKeys.FLOW_INST_ID_KEY);
+	public Long getProcessInstanceId() {
+		return (Long) this.getVariables().get(FlowMapParamKeys.FLOW_INST_ID_KEY);
 	}
 	
 	@Override
@@ -81,7 +82,7 @@ public abstract class AbstractCommand<T> implements Command<T>, CheckCommand,
 	}
 
 	protected List<ActivityEntity> findActivities(List<TaskEntity> taskEntities) {
-		List<String> activityIds = taskEntities.stream()
+		List<Long> activityIds = taskEntities.stream()
 				.map(TaskEntity::getActivityId)
 				.distinct()
 				.collect(Collectors.toList());
@@ -89,23 +90,23 @@ public abstract class AbstractCommand<T> implements Command<T>, CheckCommand,
 		return activityEntities;
 	}
 
-	protected ActivityEntity findActivity(String activityId) {
+	protected ActivityEntity findActivity(Long activityId) {
 		return Context.getActivityService().findById(activityId);
 	}
 
-	protected TaskEntity findTaskEntity(String taskId) {
+	protected TaskEntity findTaskEntity(Long taskId) {
 		return Context.getTaskService().findTaskById(taskId);
 	}
 
 	protected List<ExecuteEntity> findExecution(List<ActivityEntity> activityEntities) {
-		List<String> executionIds = activityEntities.stream().map(ActivityEntity::getExecutionId)
+		List<Long> executionIds = activityEntities.stream().map(ActivityEntity::getExecutionId)
 				.distinct()
 				.collect(Collectors.toList());
 		List<ExecuteEntity> executions = Context.getExecutionService().findByIds(executionIds);
 		return executions;
 	}
 
-	protected ExecuteEntity findExecution(String executionId) {
+	protected ExecuteEntity findExecution(Long executionId) {
 		return  Context.getExecutionService().findById(executionId);
 	}
 
@@ -113,7 +114,7 @@ public abstract class AbstractCommand<T> implements Command<T>, CheckCommand,
 		return  Context.getExecutionService().transferExecution(executeEntity);
 	}
 
-	protected ProcessInstanceExecution findProcessInstanceExecution(String executionId) {
+	protected ProcessInstanceExecution findProcessInstanceExecution(Long executionId) {
 		ExecuteEntity execution = findExecution(executionId);
 		return transferProcessInstanceExecution(execution);
 	}

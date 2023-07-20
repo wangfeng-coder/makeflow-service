@@ -12,15 +12,15 @@ import java.util.List;
  * @create 2023-06-13
  */
 public interface TaskDao<T extends TaskEntity> extends BaseDao<T> {
-    List<? extends TaskEntity> findByIds(List<String> taskIds);
+    List<? extends TaskEntity> findByIds(List<Long> taskIds);
 
-    List<? extends TaskEntity> findByActivityInstId(String activityInstId);
+    List<? extends TaskEntity> findByActivityInstId(Long activityInstId);
 
-    void cancelOtherTask(String activityId,String id);
+    void cancelOtherTask(Long activityId,Long id);
 
     List<? extends  TaskEntity> findTaskByHandler(String handler);
 
-    List<? extends TaskEntity> findByFlowInstId(String flowInstId);
+    List<? extends TaskEntity> findByFlowInstId(Long flowInstId);
 
-    List<? extends TaskEntity> findFlowInstIdHandlerStatus(String flowInstId, String handler, String status);
+    List<? extends TaskEntity> findFlowInstIdHandlerStatus(Long flowInstId, String handler, String status);
 }

@@ -19,7 +19,7 @@ import java.util.Objects;
 public abstract class ScopeImpl extends CoreActivity implements PvmScope{
 
 
-    protected HashMap<String,Object> variables;
+    protected Map<String,Object> variables = new HashMap<>();
 
 
     public ScopeImpl(String codeId, ProcessDefinitionImpl processDefinition) {

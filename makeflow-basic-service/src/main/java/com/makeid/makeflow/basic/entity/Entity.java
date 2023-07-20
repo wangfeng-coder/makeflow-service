@@ -10,9 +10,9 @@ import java.util.Date;
  */
 public interface Entity {
 
-    String getId();
+    Long getId();
 
-    void setId(String id);
+    void setId(Long id);
 
     Date getCreateTime();
 

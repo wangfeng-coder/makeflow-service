@@ -37,6 +37,6 @@ public class ElPeopleResolver implements PeopleResolver {
 
     @Override
     public int getOrder() {
-        return 0;
+        return HIGHEST_PRECEDENCE;
     }
 }

@@ -12,7 +12,7 @@ public class FlowUtils {
 	 * 标记流程发生改变
 	 * @param flowInstId
 	 */
-	public static void markFLowChangeToCache(String flowInstId) {
-		RedisUtils.setEx(RedisKeyUtils.genKey(MakeflowRedisConstants.REDIS_LOCK_MAKEFLOW_ENGINE_KEY_TAG, flowInstId), flowInstId, 12, TimeUnit.SECONDS);
+	public static void markFLowChangeToCache(Long flowInstId) {
+		RedisUtils.setEx(RedisKeyUtils.genKey(MakeflowRedisConstants.REDIS_LOCK_MAKEFLOW_ENGINE_KEY_TAG, flowInstId.toString()), flowInstId.toString(), 12, TimeUnit.SECONDS);
 	}
 }

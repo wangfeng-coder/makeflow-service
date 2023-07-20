@@ -3,6 +3,8 @@ package com.makeid.makeflow.template.service;
 import com.makeid.makeflow.template.entity.FlowProcessTemplateEntity;
 import com.makeid.makeflow.template.flow.model.definition.FlowProcessTemplate;
 
+import java.io.Serializable;
+
 /**
  * @author feng_wf
  * @program makeflow-service
@@ -12,7 +14,7 @@ import com.makeid.makeflow.template.flow.model.definition.FlowProcessTemplate;
 public interface FlowProcessTemplateService {
 
 
-    FlowProcessTemplate getFlowProcessDefinition(String processId);
+    FlowProcessTemplate getFlowProcessDefinition(Long processId);
 
     /**
      * 获取当前最新模板版本

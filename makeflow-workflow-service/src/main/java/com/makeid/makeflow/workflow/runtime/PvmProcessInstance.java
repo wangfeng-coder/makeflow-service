@@ -3,6 +3,8 @@ package com.makeid.makeflow.workflow.runtime;
 import com.makeid.makeflow.workflow.constants.FlowStatusEnum;
 import com.makeid.makeflow.workflow.process.PvmExecution;
 
+
+
 /**
  * @author feng_wf
  * @program makeflow-service
@@ -11,10 +13,10 @@ import com.makeid.makeflow.workflow.process.PvmExecution;
  */
 public interface PvmProcessInstance extends PvmExecution {
 
-    String getProcessDefinitionId();
+    Long getProcessDefinitionId();
 
 
-    String rootProcessInstanceId();
+    Long rootProcessInstanceId();
 
     boolean suspended();
 

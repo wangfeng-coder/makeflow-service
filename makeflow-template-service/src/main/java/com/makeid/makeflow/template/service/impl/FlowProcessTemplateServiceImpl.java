@@ -22,6 +22,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
+
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Function;
@@ -41,7 +42,7 @@ public class FlowProcessTemplateServiceImpl implements FlowProcessTemplateServic
     private FlowProcessTemplateDao flowProcessTemplateDao;
 
     @Override
-    public FlowProcessTemplate getFlowProcessDefinition(String processId) {
+    public FlowProcessTemplate getFlowProcessDefinition(Long processId) {
         FlowProcessTemplateEntity flowProcessTemplateDO= (FlowProcessTemplateEntity) flowProcessTemplateDao.findById(processId);
         return from(flowProcessTemplateDO);
     }
@@ -112,7 +113,7 @@ public class FlowProcessTemplateServiceImpl implements FlowProcessTemplateServic
         }
     }
 
-    public List<FlowProcessTemplate> findFlowProcessTemplate(List<String> definitionIds) {
+    public List<FlowProcessTemplate> findFlowProcessTemplate(List<Long> definitionIds) {
         return  Arrays.asList(getFlowProcessDefinition(definitionIds.get(0)));
     }
 
@@ -137,7 +138,7 @@ public class FlowProcessTemplateServiceImpl implements FlowProcessTemplateServic
         processFlowElement(flowElements);
         List<Element> targetList = TranslatorHelper.toList(flowElements, Translators::translate);
         FlowProcessTemplate flowProcessTemplate = new FlowProcessTemplate();
-        flowProcessTemplate.setFlowTemplateCodeId(flowProcessTemplateDO.getId());
+        flowProcessTemplate.setFlowTemplateCodeId(flowProcessTemplateDO.getFlowProcessCodeId());
         flowProcessTemplate.setFlowTemplateId(flowProcessTemplateDO.getId());
         flowProcessTemplate.setVersion(flowProcessTemplateDO.getVersion());
         flowProcessTemplate.setState(flowProcessTemplateDO.getState());

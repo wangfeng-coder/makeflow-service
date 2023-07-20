@@ -20,19 +20,19 @@ public class DemoServive {
 
     String codeId = "质差333";
 
-    public String publish() {
+    public Long publish() {
         String codeId = "质差333";
         String xml = xml();
         String name = "模板名字";
         String userId = "当前用户";
         FlowTemplateServiceThird flowProcessTemplateService = MakeFlowApplication.getFlowProcessTemplateService();
-        String publish = flowProcessTemplateService.publish(xml, codeId, name, userId);
+        Long publish = flowProcessTemplateService.publish(xml, codeId, name, userId);
         return publish;
     }
 
-    public String apply(){
+    public Long apply(){
         WorkflowService workFlowService = MakeFlowApplication.getWorkFlowService();
-        String s = workFlowService.submitFlow(codeId, "wangfeng", new HashMap<>());
+        Long s = workFlowService.submitFlow(codeId, "wangfeng", new HashMap<>());
         return s;
     }
 

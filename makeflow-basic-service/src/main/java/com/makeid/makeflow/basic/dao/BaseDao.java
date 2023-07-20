@@ -1,6 +1,5 @@
 package com.makeid.makeflow.basic.dao;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,7 +22,7 @@ public interface BaseDao<T> {
 
     T create(String creator);
 
-    T findById(String id);
+    T findById(Long id);
 
 
 }

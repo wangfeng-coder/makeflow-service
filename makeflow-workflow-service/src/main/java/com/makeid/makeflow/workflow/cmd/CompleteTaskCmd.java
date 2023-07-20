@@ -6,6 +6,7 @@ import com.makeid.makeflow.workflow.entity.ActivityEntity;
 import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 
+
 import java.util.Arrays;
 import java.util.Map;
 
@@ -17,9 +18,9 @@ import java.util.Map;
  */
 public abstract class CompleteTaskCmd extends AbstractCommand<Void> implements LockCommand{
 
-    protected final String taskId;
+    protected final Long taskId;
 
-    public CompleteTaskCmd(String taskId, Map<String, Object> variables) {
+    public CompleteTaskCmd(Long taskId, Map<String, Object> variables) {
         this.taskId = taskId;
         this.variables = variables;
     }

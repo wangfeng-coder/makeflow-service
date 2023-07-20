@@ -5,6 +5,7 @@ import com.makeid.makeflow.workflow.constants.ErrCodeEnum;
 import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.exception.EngineException;
 
+
 import java.util.Map;
 import java.util.Objects;
 
@@ -30,7 +31,7 @@ public class ProcessDefinitionBuilder {
         return this;
     }
 
-    public  ProcessDefinitionBuilder createProcessDefinition(String flowProcessTemplateId) {
+    public  ProcessDefinitionBuilder createProcessDefinition(Long flowProcessTemplateId) {
         FlowProcessTemplate flowProcessTemplate = Context
                 .getGlobalProcessEngineConfiguration().getFlowProcessDefinitionService().getFlowProcessDefinition(
                         flowProcessTemplateId);

@@ -4,6 +4,8 @@ import com.makeid.makeflow.workflow.entity.TaskEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+
+
 /**
  * @author feng_wf
  * @program makeflow-service
@@ -15,7 +17,7 @@ import lombok.Setter;
 @Setter
 public class TaskVO {
 
-    private String activitId;
+    private Long activityId;
 
     private String handler;
 
@@ -28,7 +30,7 @@ public class TaskVO {
         taskVO.setStatus(taskEntity.getStatus());
         taskVO.setHandler(taskEntity.getHandler());
         taskVO.setHandTime(taskEntity.getHandler());
-        taskVO.setActivitId(taskEntity.getActivityId());
+        taskVO.setActivityId(taskEntity.getActivityId());
         return taskVO;
     }
 }

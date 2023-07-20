@@ -12,7 +12,7 @@ import java.util.List;
  * @create 2023-05-31
  */
 public interface ExecuteEntityDao<T extends ExecuteEntity> extends BaseDao<T> {
-    List<? extends ExecuteEntity> findByParentId(String parentId);
+    List<? extends ExecuteEntity> findByParentId(Long parentId);
 
-    List<? extends ExecuteEntity> findByIds(List<String> executionIds);
+    List<? extends ExecuteEntity> findByIds(List<Long> executionIds);
 }

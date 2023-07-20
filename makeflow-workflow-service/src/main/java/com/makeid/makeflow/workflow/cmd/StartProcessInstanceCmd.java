@@ -9,7 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import java.util.Map;
+import java.util.Objects;
 
 abstract class StartProcessInstanceCmd extends AbstractCommand<ProcessInstanceExecution> {
 
@@ -17,18 +19,18 @@ abstract class StartProcessInstanceCmd extends AbstractCommand<ProcessInstanceEx
 			.getLogger(StartProcessInstanceCmd.class);
 
 	private static final long serialVersionUID = 1L;
-	protected String processDefinitionId;
-	protected String processInstanceId;
+	protected Long processDefinitionId;
+	protected Long processInstanceId;
 
 	public StartProcessInstanceCmd() {
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public StartProcessInstanceCmd(String processDefinitionId,
-                                   String processInstanceId, Map<String, Object> variables) {
+	public StartProcessInstanceCmd(Long processDefinitionId,
+								   Long processInstanceId, Map<String, Object> variables) {
 		super(variables);
-		if (StringUtils.isBlank(processDefinitionId)) {
+		if (Objects.isNull(processDefinitionId)) {
 			throw new IllegalArgumentException("processDefinitionId is blank");
 		}
 		this.processDefinitionId = processDefinitionId;

@@ -9,6 +9,7 @@ import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class DisAgreeCmd extends CompleteTaskCmd {
 
     protected String opinion;
 
-    public DisAgreeCmd(Map<String, Object> variables, String taskId, String opinion) {
+    public DisAgreeCmd(Map<String, Object> variables, Long taskId, String opinion) {
         super(taskId,variables);
         this.opinion = opinion;
     }

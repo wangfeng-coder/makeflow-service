@@ -3,6 +3,7 @@ package com.makeid.makeflow.workflow.service;
 
 import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
 
+
 import java.util.Map;
 
 /**
@@ -15,15 +16,15 @@ public interface RuntimeService {
 
 
 	PvmProcessInstance startDefiniteProcessInstanceById(
-			String processDefinitionId, String processInstanceId,
+			Long processDefinitionId, Long processInstanceId,
 			Map<String, Object> variables);
 
-	void agreeTask(String taskId,String opinion,Map<String,Object>variables);
+	void agreeTask(Long taskId,String opinion,Map<String,Object>variables);
 
-	void disAgreeTask(String taskId,String opinion,Map<String,Object> variables);
+	void disAgreeTask(Long taskId, String opinion, Map<String,Object> variables);
 
 
-	void returnTask(String taskId,String opinion,String targetCodeId,Map<String,Object> variables);
+	void returnTask(Long taskId,String opinion,String targetCodeId,Map<String,Object> variables);
 
 
 }

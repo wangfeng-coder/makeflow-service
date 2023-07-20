@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,21 +29,21 @@ public class TaskDaoImpl extends BaseDaoImpl<TaskEntity> implements TaskDao<Task
         return taskEntity;
     }
     @Override
-    public List<TaskEntity> findByIds(List<String> taskIds) {
+    public List<TaskEntity> findByIds(List<Long> taskIds) {
         Query query = Query.query(Criteria.where("_id").in(taskIds));
         List<TaskEntity> taskEntities = mongoTemplate.find(query, TaskEntity.class);
         return taskEntities;
     }
 
     @Override
-    public List<TaskEntity> findByActivityInstId(String activityInstId) {
+    public List<TaskEntity> findByActivityInstId(Long activityInstId) {
         Query activityId = Query.query(Criteria.where("activityId").is(activityInstId))
                 .addCriteria(Criteria.where("delFlag").is(false));
         return mongoTemplate.find(activityId,TaskEntity.class);
     }
 
     @Override
-    public void cancelOtherTask(String activityId, String id) {
+    public void cancelOtherTask(Long activityId, Long id) {
         Query query = Query.query(Criteria.where("activityId").is(activityId))
                 .addCriteria(Criteria.where("_id").is(id))
                 .addCriteria(Criteria.where("delFlag").is(false));
@@ -60,7 +61,7 @@ public class TaskDaoImpl extends BaseDaoImpl<TaskEntity> implements TaskDao<Task
     }
 
     @Override
-    public List<TaskEntity> findByFlowInstId(String flowInstId) {
+    public List<TaskEntity> findByFlowInstId(Long flowInstId) {
         Query query = Query.query(Criteria.where("flowInstId").is(flowInstId))
                 .addCriteria(Criteria.where("delFlag").is(false));
         List<TaskEntity> taskEntities = mongoTemplate.find(query, getEntityClass());
@@ -68,7 +69,7 @@ public class TaskDaoImpl extends BaseDaoImpl<TaskEntity> implements TaskDao<Task
     }
 
     @Override
-    public List<TaskEntity> findFlowInstIdHandlerStatus(String flowInstId, String handler, String status) {
+    public List<TaskEntity> findFlowInstIdHandlerStatus(Long flowInstId, String handler, String status) {
         Query query = Query.query(Criteria.where("flowInstId").is(flowInstId))
                 .addCriteria(Criteria.where("handler").is(handler))
                 .addCriteria(Criteria.where("status").is(status))

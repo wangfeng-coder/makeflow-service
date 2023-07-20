@@ -12,6 +12,7 @@ import com.makeid.makeflow.workflow.task.TaskTypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -79,7 +80,7 @@ public class TaskService {
      * @param activityInstId
      * @return
      */
-    public boolean isCompleteSkipTask(String activityInstId) {
+    public boolean isCompleteSkipTask(Long activityInstId) {
         List<TaskEntity> taskEntities = taskDao.findByActivityInstId(activityInstId);
         //存在doing状态 就不能过
         boolean notPass = Optional.ofNullable(taskEntities).orElse(Collections.emptyList())
@@ -88,7 +89,7 @@ public class TaskService {
         return !notPass;
     }
 
-    public void cancelOtherTask(String activityId,String id) {
+    public void cancelOtherTask(Long activityId,Long id) {
         taskDao.cancelOtherTask(activityId,id);
     }
 
@@ -96,15 +97,15 @@ public class TaskService {
        return taskDao.findTaskByHandler(handler);
     }
 
-    public TaskEntity findTaskById(String taskId) {
+    public TaskEntity findTaskById(Long taskId) {
         return (TaskEntity) taskDao.findById(taskId);
     }
 
-    public List<TaskEntity> findByFlowInstId(String flowInstId) {
+    public List<TaskEntity> findByFlowInstId(Long flowInstId) {
         return taskDao.findByFlowInstId(flowInstId);
     }
 
-    public List<TaskEntity> findFlowInstIdHandlerStatus(String flowInstId, String handler, String status) {
+    public List<TaskEntity> findFlowInstIdHandlerStatus(Long flowInstId, String handler, String status) {
         return taskDao.findFlowInstIdHandlerStatus(flowInstId,handler,status);
     }
 }

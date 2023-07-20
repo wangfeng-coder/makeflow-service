@@ -19,6 +19,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +49,7 @@ public class WorkflowService {
      * @param flowInstId
      * @return
      */
-    public FlowDetailVO findFlowDetail(String flowInstId,String userId){
+    public FlowDetailVO findFlowDetail(Long flowInstId,String userId){
         Context.setCurrentUser(new UserContext(userId));
         FlowInstEntity flowInst = flowInstService.findById(flowInstId);
         List<ActivityEntity> activityEntities = activityService.findByFlowInstId(flowInstId);
@@ -66,7 +67,7 @@ public class WorkflowService {
      * @param variables
      * @return 流程id
      */
-    public String submitFlow(String templateCodeId,String userId, Map<String,Object> variables) {
+    public Long submitFlow(String templateCodeId, String userId, Map<String,Object> variables) {
         Context.setCurrentUser(new UserContext(userId));
         FlowProcessTemplate flowProcessTemplate = flowProcessTemplateService.findFlowProcessTemplateLastly(templateCodeId);
         Assert.notNull(flowProcessTemplate,"未发布这个流程");
@@ -81,7 +82,7 @@ public class WorkflowService {
      * @param opionin
      * @return
      */
-    public void agreeFlow(String flowInstId,String handler,String opionin,String currentUserId) {
+    public void agreeFlow(Long flowInstId,String handler,String opionin,String currentUserId) {
         Context.setCurrentUser(new UserContext(currentUserId));
         List<TaskEntity> taskEntities = taskService.findFlowInstIdHandlerStatus(flowInstId, handler, TaskStatusEnum.DOING.status);
         taskEntities.forEach(task->runtimeService.agreeTask(task.getId(),opionin, Collections.EMPTY_MAP));
@@ -93,7 +94,7 @@ public class WorkflowService {
      * @param handler
      * @param opionin
      */
-    public void disAgreeFlow(String flowInstId,String handler,String opionin,String currentUserId) {
+    public void disAgreeFlow(Long flowInstId,String handler,String opionin,String currentUserId) {
         Context.setCurrentUser(new UserContext(currentUserId));
         List<TaskEntity> taskEntities = taskService.findFlowInstIdHandlerStatus(flowInstId, handler, TaskStatusEnum.DOING.status);
         taskEntities.forEach(task->runtimeService.disAgreeTask(task.getId(),opionin, Collections.EMPTY_MAP));

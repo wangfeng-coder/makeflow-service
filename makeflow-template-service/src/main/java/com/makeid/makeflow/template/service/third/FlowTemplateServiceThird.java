@@ -4,6 +4,8 @@ import com.makeid.makeflow.template.entity.FlowProcessTemplateEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
+
 /**
  * @author feng_wf
  * @program makeflow-service
@@ -24,7 +26,7 @@ public class FlowTemplateServiceThird {
      * @param userId
      * @return 数据库id
      */
-    public String publish(String xml, String templateCodeId, String templateName,String userId) {
+    public Long publish(String xml, String templateCodeId, String templateName, String userId) {
         FlowProcessTemplateEntity publish = flowProcessTemplateService.publish(xml, templateCodeId, templateName, userId);
         return publish.getId();
     }

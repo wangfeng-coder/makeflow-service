@@ -10,6 +10,7 @@ import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,24 +40,24 @@ public class ExecutionService {
         executeEntityDao.save(executeEntity);
     }
 
-    public ExecuteEntity findById(String s) {
+    public ExecuteEntity findById(Long s) {
         return (ExecuteEntity) executeEntityDao.findById(s);
     }
 
-    public List<ExecuteEntity> findByParentId(String parentId) {
+    public List<ExecuteEntity> findByParentId(Long parentId) {
         return executeEntityDao.findByParentId(parentId);
     }
 
-    public List<ExecuteEntity> findByIds(List<String> executionIds) {
+    public List<ExecuteEntity> findByIds(List<Long> executionIds) {
         return executeEntityDao.findByIds(executionIds);
     }
 
     public List<ProcessInstanceExecution> transferExecution(List<ExecuteEntity> executeEntities) {
         //搜集模板
-        List<String> definitionIds = executeEntities.stream().map(ExecuteEntity::getDefinitionId)
+        List<Long> definitionIds = executeEntities.stream().map(ExecuteEntity::getDefinitionId)
                 .collect(Collectors.toList());
         List<FlowProcessTemplate> flowProcessTemplates = flowProcessTemplateService.findFlowProcessTemplate(definitionIds);
-        Map<String, FlowProcessTemplate> flowProcessTemplateMap = flowProcessTemplates.stream().collect(Collectors.toMap(FlowProcessTemplate::getFlowTemplateId, Function.identity(), (k1, k2) -> k2));
+        Map<Long, FlowProcessTemplate> flowProcessTemplateMap = flowProcessTemplates.stream().collect(Collectors.toMap(FlowProcessTemplate::getFlowTemplateId, Function.identity(), (k1, k2) -> k2));
         List<ProcessInstanceExecution> processInstanceExecutions = new ArrayList<>();
         for (ExecuteEntity executeEntity : executeEntities) {
             ProcessInstanceExecution processInstanceExecution = new ProcessInstanceExecution(new ProcessDefinitionImpl(flowProcessTemplateMap.get(executeEntity.getDefinitionId())));
@@ -67,7 +68,7 @@ public class ExecutionService {
     }
 
     public ProcessInstanceExecution transferExecution(ExecuteEntity executeEntity) {
-        String definitionId = executeEntity.getDefinitionId();
+        Long definitionId = executeEntity.getDefinitionId();
         FlowProcessTemplate flowProcessDefinition = flowProcessTemplateService.getFlowProcessDefinition(definitionId);
         ProcessInstanceExecution processInstanceExecution = new ProcessInstanceExecution(new ProcessDefinitionImpl(flowProcessDefinition));
         processInstanceExecution.restore(executeEntity);

@@ -10,6 +10,7 @@ import com.makeid.makeflow.workflow.entity.ActivityEntity;
 import com.makeid.makeflow.workflow.entity.impl.ActivityEntityImpl;
 
 import javax.annotation.Resource;
+
 import java.util.List;
 
 /**
@@ -32,12 +33,12 @@ public class ActivityDaoImpl extends BaseDaoImpl<ActivityEntityImpl,ActivityMapp
 
 
     @Override
-    public List<ActivityEntityImpl> findByIds(List<String> activityIds) {
+    public List<ActivityEntityImpl> findByIds(List<Long> activityIds) {
         return mapper.selectBatchIds(activityIds);
     }
 
     @Override
-    public List<ActivityEntityImpl> findByFlowInstId(String flowInstId) {
+    public List<ActivityEntityImpl> findByFlowInstId(Long flowInstId) {
         List<ActivityEntityImpl> activityEntities = mapper.selectList(Wrappers.lambdaQuery(ActivityEntityImpl.class)
                 .eq(ActivityEntity::getFlowInstId, flowInstId));
         return activityEntities;

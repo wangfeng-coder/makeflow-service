@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Date;
 @TableName("makeflow_flow_inst")
 public class FlowInstEntityImpl extends BaseEntity implements FlowInstEntity {
 
-    private String definitionId;
+    private Long definitionId;
 
     private String definitionCodeId;
 

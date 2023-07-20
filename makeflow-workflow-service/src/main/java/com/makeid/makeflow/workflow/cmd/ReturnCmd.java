@@ -5,6 +5,7 @@ import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 
+
 import java.util.Date;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class ReturnCmd extends CompleteTaskCmd {
 
     private String opinion;
 
-    public ReturnCmd(String taskId, Map<String, Object> variables, String targetActivityCodeId, String opinion) {
+    public ReturnCmd(Long taskId, Map<String, Object> variables, String targetActivityCodeId, String opinion) {
         super(taskId, variables);
         this.targetActivityCodeId = targetActivityCodeId;
         this.opinion = opinion;

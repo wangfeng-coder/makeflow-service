@@ -16,6 +16,7 @@ package com.makeid.makeflow.workflow.process;
 
 import com.makeid.makeflow.workflow.behavior.ActivityBehavior;
 
+
 import java.util.List;
 
 
@@ -30,13 +31,13 @@ public interface PvmActivity extends PvmScope {
 	boolean isStartActivity();
 
 
-	String getId();
+	Long getId();
 
 
 	String getActivityType();
 
 
-	String getFlowInstId();
+	Long getFlowInstId();
 
 
 }

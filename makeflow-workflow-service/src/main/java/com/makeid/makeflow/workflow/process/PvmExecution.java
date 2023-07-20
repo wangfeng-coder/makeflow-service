@@ -14,6 +14,8 @@
 package com.makeid.makeflow.workflow.process;
 
 
+
+
 public interface PvmExecution extends PvmScope {
 
 	/** 三个动作 **/
@@ -40,6 +42,6 @@ public interface PvmExecution extends PvmScope {
 
 	boolean isEnded();
 
-	String getProcessInstanceId();
+	Long getProcessInstanceId();
 
 }

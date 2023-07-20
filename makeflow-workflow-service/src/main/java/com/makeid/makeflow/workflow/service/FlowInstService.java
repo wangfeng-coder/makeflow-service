@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
+
 /**
 *@program makeflow-service
 *@description 
@@ -27,7 +28,7 @@ public class FlowInstService {
         return (FlowInstEntity) flowInstEntityDao.create(userId);
     }
 
-    public FlowInstEntity findById(String id) {
+    public FlowInstEntity findById(Long id) {
         return (FlowInstEntity) flowInstEntityDao.findById(id);
     }
 }

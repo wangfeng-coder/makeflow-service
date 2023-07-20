@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.util.Assert;
 
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,9 +34,9 @@ public class FlowDetailBuilder {
         Assert.notNull(flowInst);
         Assert.notNull(activityEntityList);
         Assert.notNull(taskEntityList);
-        Map<String, List<TaskVO>> taskMap = taskEntityList.stream()
+        Map<Long, List<TaskVO>> taskMap = taskEntityList.stream()
                 .map(TaskVO::from)
-                .collect(Collectors.groupingBy(TaskVO::getActivitId));
+                .collect(Collectors.groupingBy(TaskVO::getActivityId));
         List<ActivityVO> activityVOList = activityEntityList.stream()
                 .map(activity -> ActivityVO.from(activity, taskMap.get(activity.getId())))
                 .collect(Collectors.toList());

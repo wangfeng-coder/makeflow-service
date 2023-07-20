@@ -11,6 +11,7 @@ import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.entity.impl.TaskEntityImpl;
 
 import javax.annotation.Resource;
+
 import java.util.List;
 
 /**
@@ -31,18 +32,18 @@ public class TaskDaoImpl extends BaseDaoImpl<TaskEntityImpl, TaskMapper> impleme
     }
 
     @Override
-    public List<? extends TaskEntity> findByIds(List<String> taskIds) {
+    public List<? extends TaskEntity> findByIds(List<Long> taskIds) {
         return mapper.selectBatchIds(taskIds);
     }
 
     @Override
-    public List<? extends TaskEntity> findByActivityInstId(String activityInstId) {
+    public List<? extends TaskEntity> findByActivityInstId(Long activityInstId) {
         return mapper.selectList(Wrappers.lambdaQuery(TaskEntityImpl.class)
                 .eq(TaskEntityImpl::getActivityId,activityInstId));
     }
 
     @Override
-    public void cancelOtherTask(String activityId,String id) {
+    public void cancelOtherTask(Long activityId,Long id) {
         mapper.update(null, Wrappers.lambdaUpdate(TaskEntityImpl.class)
                 .eq(TaskEntityImpl::getActivityId,activityId)
                 .ne(Entity::getId,id)
@@ -56,13 +57,13 @@ public class TaskDaoImpl extends BaseDaoImpl<TaskEntityImpl, TaskMapper> impleme
     }
 
     @Override
-    public List<? extends TaskEntity> findByFlowInstId(String flowInstId) {
+    public List<? extends TaskEntity> findByFlowInstId(Long flowInstId) {
         return mapper.selectList(Wrappers.lambdaQuery(TaskEntityImpl.class)
                 .eq(TaskEntityImpl::getFlowInstId,flowInstId));
     }
 
     @Override
-    public List<? extends TaskEntity> findFlowInstIdHandlerStatus(String flowInstId, String handler, String status) {
+    public List<? extends TaskEntity> findFlowInstIdHandlerStatus(Long flowInstId, String handler, String status) {
         return mapper.selectList(Wrappers.lambdaQuery(TaskEntityImpl.class).eq(TaskEntityImpl::getFlowInstId,flowInstId)
                 .eq(TaskEntityImpl::getHandler,handler)
                 .eq(TaskEntityImpl::getStatus,status));

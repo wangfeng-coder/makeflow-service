@@ -6,6 +6,7 @@ import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ public class ActivityService {
     @Resource
     private ActivityDao activityDao;
 
-    public ActivityEntity findById(String id) {
+    public ActivityEntity findById(Long id) {
         ActivityEntity activityEntity = (ActivityEntity) activityDao.findById(id);
         //转换成具体类型的活动节点实列
         return activityEntity;
@@ -40,11 +41,11 @@ public class ActivityService {
         activityDao.save(activityEntities);
     }
 
-    public List<ActivityEntity> findByIds(List<String> activityIds) {
+    public List<ActivityEntity> findByIds(List<Long> activityIds) {
         return activityDao.findByIds(activityIds);
     }
 
-    public List<ActivityEntity> findByFlowInstId(String flowInstId) {
+    public List<ActivityEntity> findByFlowInstId(Long flowInstId) {
         return activityDao.findByFlowInstId(flowInstId);
     }
 }

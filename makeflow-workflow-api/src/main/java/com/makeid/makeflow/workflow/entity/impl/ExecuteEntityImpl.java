@@ -8,6 +8,7 @@ import com.makeid.makeflow.workflow.entity.ExecuteEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+
 import java.util.Date;
 import java.util.Map;
 
@@ -22,13 +23,13 @@ import java.util.Map;
 @TableName(value = "makeflow_execute",autoResultMap = true)
 public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
 
-    protected String flowInstId;
+    protected Long flowInstId;
 
-    protected String definitionId;
+    protected Long definitionId;
 
-    protected String rootFlowInstId;
+    protected Long rootFlowInstId;
 
-    protected String parentId;
+    protected Long parentId;
 
     protected String status;
 
@@ -39,7 +40,7 @@ public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
     /**
      * 当前活动id
      */
-    protected String activityId;
+    protected Long activityId;
 
     /**
      * 设计时的id

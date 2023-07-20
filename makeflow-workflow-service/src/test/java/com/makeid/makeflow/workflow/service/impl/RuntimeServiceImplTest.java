@@ -26,6 +26,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,8 +59,8 @@ public class RuntimeServiceImplTest {
         HashMap<String, Object> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("type",2);
 
-        PvmProcessInstance hiddenDangerOrderCommunity = runtimeService.startDefiniteProcessInstanceById("hiddenDangerOrderCommunity", "", objectObjectHashMap);
-        String processInstanceId = hiddenDangerOrderCommunity.getProcessInstanceId();
+        PvmProcessInstance hiddenDangerOrderCommunity = runtimeService.startDefiniteProcessInstanceById(1L, 0L, objectObjectHashMap);
+        Long processInstanceId = hiddenDangerOrderCommunity.getProcessInstanceId();
         Assert.notNull(processInstanceId);
     }
 
@@ -67,8 +68,8 @@ public class RuntimeServiceImplTest {
     public void testAgreeCmd() {
         //查询我的任务
         List<TaskEntity> taskEntities = Context.getTaskService().findTaskByHandler(Context.getUserId());
-        List<String> collect = taskEntities.stream().map(TaskEntity::getId).collect(Collectors.toList());
-        log.info("待处理的任务 数量【{}】任务【{}】",taskEntities.size(),collect.stream().collect(Collectors.joining(",")));
+        List<Long> collect = taskEntities.stream().map(TaskEntity::getId).collect(Collectors.toList());
+        log.info("待处理的任务 数量【{}】任务【{}】",taskEntities.size(),collect);
         for (TaskEntity taskEntity : taskEntities) {
             runtimeService.agreeTask(taskEntity.getId(),"我；也同意了",new HashMap<>());
         }
@@ -84,8 +85,8 @@ public class RuntimeServiceImplTest {
     public void testDisAgreeCmd() {
         //查询我的任务
         List<TaskEntity> taskEntities = Context.getTaskService().findTaskByHandler(Context.getUserId());
-        List<String> collect = taskEntities.stream().map(TaskEntity::getId).collect(Collectors.toList());
-        log.info("待处理的任务 数量【{}】任务【{}】",taskEntities.size(),collect.stream().collect(Collectors.joining(",")));
+        List<Long> collect = taskEntities.stream().map(TaskEntity::getId).collect(Collectors.toList());
+        log.info("待处理的任务 数量【{}】任务【{}】",taskEntities.size(),collect);
         for (TaskEntity taskEntity : taskEntities) {
             runtimeService.disAgreeTask(taskEntity.getId(),"我；我拒绝",new HashMap<>());
         }
@@ -96,7 +97,7 @@ public class RuntimeServiceImplTest {
 
     @Test
     public void testLazyProvider(){
-        ProcessDefinitionImpl provide = LazyProvider.provide("", new Class[]{FlowProcessTemplate.class},
+        ProcessDefinitionImpl provide = LazyProvider.provide(0L, new Class[]{FlowProcessTemplate.class},
                 new Object[]{null}, id ->
            new ProcessDefinitionImpl(flowProcessTemplateService.getFlowProcessDefinition(id)), ProcessDefinitionImpl.class);
         String codeId = provide.getCodeId();
@@ -108,9 +109,9 @@ public class RuntimeServiceImplTest {
         List<TaskEntity> myTodo = findMyTodo();
         for (TaskEntity taskEntity : myTodo) {
             //查询节点codeId
-            String flowInstId = taskEntity.getFlowInstId();
+            Long flowInstId = taskEntity.getFlowInstId();
             FlowInstEntity byId = flowInstService.findById(flowInstId);
-            String definitionId = byId.getDefinitionId();
+            Long definitionId = byId.getDefinitionId();
             FlowProcessTemplate flowProcessDefinition = flowProcessTemplateService.getFlowProcessDefinition(definitionId);
             StartActivity initial = flowProcessDefinition.findInitial();
             String codeId = initial.getCodeId();

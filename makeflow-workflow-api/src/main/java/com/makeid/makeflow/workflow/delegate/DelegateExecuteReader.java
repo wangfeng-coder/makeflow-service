@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.delegate;
 
+
 import java.util.Date;
 import java.util.Map;
 
@@ -11,9 +12,9 @@ import java.util.Map;
  */
 public interface DelegateExecuteReader extends BasicDataReader{
 
-    String getFlowInstId();
+    Long getFlowInstId();
 
-    String getParentId();
+    Long getParentId();
 
     String getStatus();
 
@@ -23,10 +24,10 @@ public interface DelegateExecuteReader extends BasicDataReader{
 
     String getActivityCodeId();
 
-    String getActivityId();
+    Long getActivityId();
 
     Map<String,Object> getVariables();
 
 
-    String getDefinitionId();
+    Long getDefinitionId();
 }

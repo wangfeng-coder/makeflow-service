@@ -16,7 +16,7 @@ import java.util.function.Function;
  */
 public class LazyProvider {
 
-    public static  <T> T provide(String id,Class[] argumentTypes, Object[] arguments, Function<String,T> supplier, Class<T> clazz) {
+    public static  <T> T provide(Long id,Class[] argumentTypes, Object[] arguments, Function<Long,T> supplier, Class<T> clazz) {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(clazz);
         enhancer.setCallback(new MethodInterceptor() {
@@ -43,7 +43,7 @@ public class LazyProvider {
      * @return
      * @param <T>
      */
-    public static  <T> T provide(String id, Function<String,T> supplier, Class<T> clazz) {
+    public static  <T> T provide(Long id, Function<Long,T> supplier, Class<T> clazz) {
         return provide(id,null,null,supplier,clazz);
     }
 

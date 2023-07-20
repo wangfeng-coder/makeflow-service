@@ -9,6 +9,7 @@ import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
 import com.makeid.makeflow.workflow.service.RuntimeService;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Map;
 
 /**
@@ -27,23 +28,23 @@ public class RuntimeServiceImpl extends ServiceImpl implements RuntimeService {
     }
 
     @Override
-    public PvmProcessInstance startDefiniteProcessInstanceById(String processDefinitionId, String processInstanceId, Map<String, Object> variables) {
+    public PvmProcessInstance startDefiniteProcessInstanceById(Long processDefinitionId, Long processInstanceId, Map<String, Object> variables) {
         return commandExecutor.execute(new StartDefiniteProcessInstanceCmd(
                 processDefinitionId, processInstanceId, variables));
     }
 
     @Override
-    public void agreeTask(String taskId,String opinion ,Map<String, Object> variables) {
+    public void agreeTask(Long taskId,String opinion ,Map<String, Object> variables) {
         commandExecutor.execute(new AgreeTaskCmd(taskId,opinion,variables));
     }
 
     @Override
-    public void disAgreeTask(String taskId, String opinion, Map<String, Object> variables) {
+    public void disAgreeTask(Long taskId, String opinion, Map<String, Object> variables) {
         commandExecutor.execute(new DisAgreeCmd(variables,taskId,opinion));
     }
 
     @Override
-    public void returnTask(String taskId, String opinion, String targetCodeId, Map<String, Object> variables) {
+    public void returnTask(Long taskId, String opinion, String targetCodeId, Map<String, Object> variables) {
         commandExecutor.execute(new ReturnCmd(taskId,variables,targetCodeId,opinion));
     }
 }

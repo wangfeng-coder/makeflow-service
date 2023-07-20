@@ -4,6 +4,7 @@ import com.makeid.makeflow.basic.entity.Entity;
 import com.makeid.makeflow.workflow.delegate.DelegateTaskReader;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 import java.util.Date;
 
 /**
@@ -52,17 +53,17 @@ public interface TaskEntity extends Entity, DelegateTaskReader {
      */
     void setStatus(String status);
 
-    void setFlowInstId(String flowInstId);
+    void setFlowInstId(Long flowInstId);
 
-    String getFlowInstId();
+    Long getFlowInstId();
 
     void setActivityCodeId(String activityCodeId);
 
     String getActivityCodeId();
 
-    void setActivityId(String activityId);
+    void setActivityId(Long activityId);
 
-    String getActivityId();
+    Long getActivityId();
 
     String getOpinion();
 

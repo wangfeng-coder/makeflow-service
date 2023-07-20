@@ -12,9 +12,9 @@ import java.util.List;
  * @create 2023-06-08
  */
 public interface ActivityDao<T extends ActivityEntity> extends BaseDao<T> {
-    List<T> findByIds(List<String> activityIds);
+    List<T> findByIds(List<Long> activityIds);
 
-    List<T> findByFlowInstId(String flowInstId);
+    List<T> findByFlowInstId(Long flowInstId);
 
 
 }

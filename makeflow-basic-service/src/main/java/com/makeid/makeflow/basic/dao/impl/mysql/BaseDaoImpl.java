@@ -1,10 +1,10 @@
 package com.makeid.makeflow.basic.dao.impl.mysql;
 
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.makeid.makeflow.basic.dao.BaseDao;
 import com.makeid.makeflow.basic.entity.Entity;
 import com.makeid.makeflow.basic.utils.SnowflakeIdGenerator;
 
-import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +29,9 @@ public abstract class BaseDaoImpl<T extends Entity,M extends BatchMapper<T>> imp
 
     @Override
     public void save(List<T> collections) {
+        if(CollectionUtils.isEmpty(collections)) {
+            return;
+        }
         getMapper().insertOrUpdateBath(collections);
     }
 
@@ -50,7 +53,7 @@ public abstract class BaseDaoImpl<T extends Entity,M extends BatchMapper<T>> imp
 
 
     @Override
-    public T findById(String id) {
+    public T findById(Long id) {
         return getMapper().selectById(id);
     }
 
@@ -62,9 +65,9 @@ public abstract class BaseDaoImpl<T extends Entity,M extends BatchMapper<T>> imp
         t.setCreateTime(new Date());
     }
 
-    private String generateId() {
+    private long generateId() {
         long l = snowflakeIdGenerator.nextId();
-        return Long.toString(l);
+        return l;
     }
 
 }

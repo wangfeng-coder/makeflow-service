@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.delegate;
 
+
 import java.util.Date;
 
 /**
@@ -27,19 +28,19 @@ public interface DelegateActivityReader extends BasicDataReader {
     String getStatus();
 
 
-    String getFlowInstId();
+    Long getFlowInstId();
 
 
 
-    String getExecutionId();
+    Long getExecutionId();
 
 
-    String getParentId();
+    Long getParentId();
 
 
-    String getDefinitionId();
+    Long getDefinitionId();
 
-    String getPreActivityId();
+    Long getPreActivityId();
 
 
 }

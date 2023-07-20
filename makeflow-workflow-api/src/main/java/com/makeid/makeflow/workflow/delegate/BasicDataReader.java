@@ -1,5 +1,6 @@
 package com.makeid.makeflow.workflow.delegate;
 
+
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  */
 public interface BasicDataReader {
 
-    String getId();
+    Long getId();
 
     Date getCreateTime();
 

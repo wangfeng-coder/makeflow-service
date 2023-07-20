@@ -14,6 +14,7 @@ import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
 import org.springframework.util.Assert;
 
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -86,7 +87,7 @@ public class ProcessDefinitionImpl  implements PvmProcessDefinition, DelegatePro
         return flowProcessTemplate.getName();
     }
 
-    public String getDefinitionId() {
+    public Long getDefinitionId() {
         return flowProcessTemplate.getFlowTemplateId();
     }
 

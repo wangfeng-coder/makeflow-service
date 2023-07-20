@@ -4,6 +4,7 @@ import com.makeid.makeflow.basic.entity.Entity;
 import com.makeid.makeflow.workflow.delegate.DelegateExecuteReader;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 import java.util.Date;
 import java.util.Map;
 
@@ -16,17 +17,17 @@ import java.util.Map;
 @Document(collection = "makeflow_execute")
 public interface ExecuteEntity extends Entity, DelegateExecuteReader {
 
-    String getFlowInstId();
+    Long getFlowInstId();
 
-    void setFlowInstId(String flowInstId);
+    void setFlowInstId(Long flowInstId);
 
-    String getRootFlowInstId();
+    Long getRootFlowInstId();
 
-    void setRootFlowInstId(String flowInstId);
+    void setRootFlowInstId(Long flowInstId);
 
-    String getParentId();
+    Long getParentId();
 
-    void setParentId(String parentId);
+    void setParentId(Long parentId);
 
     String getStatus();
 
@@ -44,17 +45,17 @@ public interface ExecuteEntity extends Entity, DelegateExecuteReader {
 
     String getActivityCodeId();
 
-    String getActivityId();
+    Long getActivityId();
 
-    void setActivityId(String activityId);
+    void setActivityId(Long activityId);
 
     Map<String,Object> getVariables();
 
     void setVariables(Map<String,Object> variable);
 
-    String getDefinitionId();
+    Long getDefinitionId();
 
-    void setDefinitionId(String definitionId);
+    void setDefinitionId(Long definitionId);
 
 
 

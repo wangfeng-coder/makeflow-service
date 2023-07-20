@@ -2,7 +2,6 @@ package com.makeid.makeflow.template.flow.translate;
 
 import com.makeid.makeflow.template.bpmn.model.StartEvent;
 import com.makeid.makeflow.template.flow.model.activity.StartActivity;
-import com.makeid.makeflow.template.flow.model.base.ElementTypeEnum;
 
 /**
  * @author feng_wf

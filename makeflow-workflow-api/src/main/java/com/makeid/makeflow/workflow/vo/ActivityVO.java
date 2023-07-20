@@ -4,6 +4,7 @@ import com.makeid.makeflow.workflow.entity.ActivityEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class ActivityVO {
 
     private String status;
 
-    private String preActivityId;
+    private Long preActivityId;
 
     private List<TaskVO> taskVOList;
 

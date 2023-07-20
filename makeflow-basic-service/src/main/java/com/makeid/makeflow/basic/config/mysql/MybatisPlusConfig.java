@@ -75,6 +75,7 @@ public class MybatisPlusConfig {
         TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
         //Cause: java.lang.IllegalStateException: Type handler was null on parameter mapping for property '__frch_item_0.variables'. It was either not specified and/or could not be found for the javaType (java.util.Map) : jdbcType (null) combination.
         typeHandlerRegistry.register(Map.class, JacksonTypeHandler.class);
+
         sqlSessionFactory.setGlobalConfig(globalConfig);
         sqlSessionFactory.setConfiguration(configuration);
         return sqlSessionFactory.getObject();

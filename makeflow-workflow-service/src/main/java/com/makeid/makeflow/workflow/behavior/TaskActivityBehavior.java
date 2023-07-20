@@ -7,6 +7,7 @@ import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.process.PvmActivity;
 import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,7 @@ public abstract class TaskActivityBehavior extends AbstractActivityBehavior{
 	protected void taskCompleteCanLeave(ActivityPvmExecution execution) {
 		//判断任务是否都完成了
 		PvmActivity activityInst = execution.findActivityInst();
-		String activityInstId = activityInst.getId();
+		Long activityInstId = activityInst.getId();
 		//如果当前任务是
 		if (Context.getTaskService().isCompleteSkipTask(activityInstId)) {
 			//都完成了 可以继续流转

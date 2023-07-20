@@ -3,6 +3,7 @@ package com.makeid.makeflow.workflow.entity;
 import com.makeid.makeflow.basic.entity.Entity;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 import java.util.Date;
 
 /**
@@ -17,9 +18,9 @@ public interface FlowInstEntity extends Entity {
 
     void setDefinitionCodeId(String templateCodeId);
 
-    String getDefinitionId();
+    Long getDefinitionId();
 
-    void setDefinitionId(String definitionId);
+    void setDefinitionId(Long definitionId);
 
     String getStatus();
 

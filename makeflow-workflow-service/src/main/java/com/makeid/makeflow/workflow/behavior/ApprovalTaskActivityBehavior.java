@@ -30,6 +30,7 @@ public class ApprovalTaskActivityBehavior extends TaskActivityBehavior {
         ApprovalTaskActivity approvalTaskActivity = (ApprovalTaskActivity) execution.findFlowNode(codeId);
         OperationGroup operationGroup = approvalTaskActivity.getOperationGroup();
         List<PeopleHolder> participants = operationGroup.getParticipants();
+
         //根据参与人创建任务,
         List<TaskEntity> taskList = Context.getGlobalProcessEngineConfiguration()
                 .getTaskService()
@@ -45,7 +46,7 @@ public class ApprovalTaskActivityBehavior extends TaskActivityBehavior {
                 .save(taskList);
         //所有任务都完成
         if (CollectionUtils.isEmpty(taskList) || isComplete(taskList)) {
-            // 去下个节点 TODO 后需要改成异步前往下个节点,但注意上下文信息线程传递
+            // 去下个节点 TODO 后需要改成异步[但事务处理比较复杂]前往下个节点,但注意上下文信息线程传递
             leave(execution);
         } else {
             //存在任务没有完成 当前执行等待

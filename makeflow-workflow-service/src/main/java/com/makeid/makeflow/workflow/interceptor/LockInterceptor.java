@@ -38,10 +38,10 @@ public class LockInterceptor extends AbstractCommandInterceptor {
         try {
             if (command instanceof LockCommand) {
                 LockCommand lockCommand = (LockCommand) command;
-                String processInstanceId = lockCommand.getProcessInstanceId();    //流程id
+                Long processInstanceId = lockCommand.getProcessInstanceId();    //流程id
                 String opLock = lockCommand.getOpLockKey();        //其他锁key
 
-                String lockKeyContent = StringUtils.isNotBlank(processInstanceId) ? processInstanceId : opLock;    //优先取流程级别锁
+                String lockKeyContent = Objects.nonNull(processInstanceId) ? processInstanceId.toString() : opLock;    //优先取流程级别锁
                 if (StringUtils.isNotBlank(lockKeyContent)) {
 
                     String lockKey = MakeflowRedisConstants.REDIS_LOCK_MAKEFLOW_ENGINE_KEY_TAG.concat(lockKeyContent);
@@ -49,7 +49,7 @@ public class LockInterceptor extends AbstractCommandInterceptor {
                     if (lock.tryLock(0,TimeUnit.MILLISECONDS)) {
                         // 获取锁成功
                         this.lockThreadLocal.set(lock);
-                        if (StringUtils.isNotBlank(processInstanceId))
+                        if (Objects.nonNull(processInstanceId))
                             FlowUtils.markFLowChangeToCache(processInstanceId);    //标记流程发生变化，add by hqg
                     } else {
                         throw new EngineException(ErrCodeEnum.FLOW_OPERATEINT);

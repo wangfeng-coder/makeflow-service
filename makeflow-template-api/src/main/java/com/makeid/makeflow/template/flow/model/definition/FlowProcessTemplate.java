@@ -23,7 +23,7 @@ public class FlowProcessTemplate implements Serializable {
     /**
      * 表单模板的id
      */
-    private String flowTemplateId;// 模板Id
+    private Long flowTemplateId;// 模板Id
 
     private String flowTemplateCodeId;
 

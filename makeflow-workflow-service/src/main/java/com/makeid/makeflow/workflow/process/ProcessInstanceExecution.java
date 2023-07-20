@@ -12,6 +12,7 @@ import com.makeid.makeflow.workflow.process.difinition.ProcessDefinitionImpl;
 import lombok.Getter;
 import lombok.Setter;
 
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
     public void take() {
         //获取当前节点
         ActivityImpl preActivity = this.findActivityInst();
-        String id = preActivity.getId();
+        Long id = preActivity.getId();
         ActivityImpl destination = transitionImpl.findDestination();
         setActivityCodeId(destination.getCodeId());
         this.currentActivity = destination;
@@ -192,7 +193,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
     }
 
     @Override
-    public String getProcessInstanceId() {
+    public Long getProcessInstanceId() {
         return this.flowInstEntity.getId();
     }
 
@@ -203,13 +204,14 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
 
 
     @Override
-    public String getProcessDefinitionId() {
+    public Long getProcessDefinitionId() {
         return this.getProcessDefinition().getDefinitionId();
     }
 
     @Override
-    public String rootProcessInstanceId() {
-        return "";
+    public Long rootProcessInstanceId() {
+
+        return null;
     }
 
     @Override
@@ -242,7 +244,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
     }
 
     @Override
-    public String getId() {
+    public Long getId() {
         return this.executeEntity.getId();
     }
 
@@ -263,7 +265,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
         this.flowInstEntity.setStartTime(new Date());
     }
 
-    public String getFlowInstId() {
+    public Long getFlowInstId() {
         return this.flowInstEntity.getId();
     }
 
@@ -280,7 +282,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
         return Context.getFlowInstService().findById(this.executeEntity.getFlowInstId());
     }
 
-    public void setCurrentActivityId(String activityId) {
+    public void setCurrentActivityId(Long activityId) {
         this.executeEntity.setActivityId(activityId);
     }
 

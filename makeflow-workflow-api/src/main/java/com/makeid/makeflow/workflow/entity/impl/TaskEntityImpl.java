@@ -26,9 +26,9 @@ public class TaskEntityImpl extends BaseEntity implements TaskEntity {
     
     protected String handler;
 
-    protected String flowInstId;
+    protected Long flowInstId;
 
-    protected String activityId;
+    protected Long activityId;
 
     protected String activityCodeId;
 

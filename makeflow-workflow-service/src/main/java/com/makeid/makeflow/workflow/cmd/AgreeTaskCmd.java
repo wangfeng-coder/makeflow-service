@@ -5,6 +5,7 @@ import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +24,7 @@ public class AgreeTaskCmd extends CompleteTaskCmd{
      */
     private  String opinion;
 
-    public AgreeTaskCmd(String taskId,String opinion, Map<String, Object> variables) {
+    public AgreeTaskCmd(Long taskId, String opinion, Map<String, Object> variables) {
         super(taskId,variables);
         this.opinion = opinion;
     }

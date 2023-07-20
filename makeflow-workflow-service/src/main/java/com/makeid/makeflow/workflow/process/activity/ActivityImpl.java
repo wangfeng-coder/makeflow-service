@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.CollectionUtils;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +37,7 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
 
     protected String activityType;
 
-    protected String preActivityId;
+    protected Long preActivityId;
 
     protected FlowNode flowNode;
 
@@ -100,7 +101,7 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
     }
 
     @Override
-    public String getId() {
+    public Long getId() {
         return activity.getId();
     }
 
@@ -175,7 +176,7 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
         return this.activityType.equals(ElementTypeEnum.ACTIVITYTYPE_END.getType());
     }
 
-    public String getFlowInstId() {
+    public Long getFlowInstId() {
         return activity.getFlowInstId();
     }
 
@@ -192,7 +193,7 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
      *
      * @param activityEntityId
      */
-    public void restore(String activityEntityId) {
+    public void restore(Long activityEntityId) {
         ActivityEntity activity = Context.getActivityService().findById(activityEntityId);
         this.activityType = activity.getActivityType();
         this.activityBehavior = ActivityTypeBehaviorProvider.get(activityType);

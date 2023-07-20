@@ -9,6 +9,7 @@ import com.makeid.makeflow.workflow.dao.impl.mysql.mapper.ExecuteMapper;
 import com.makeid.makeflow.workflow.entity.impl.ExecuteEntityImpl;
 
 import javax.annotation.Resource;
+
 import java.util.List;
 
 /**
@@ -30,14 +31,14 @@ public class ExecuteDaoImpl extends BaseDaoImpl<ExecuteEntityImpl, ExecuteMapper
     }
 
     @Override
-    public List<ExecuteEntityImpl> findByParentId(String parentId) {
+    public List<ExecuteEntityImpl> findByParentId(Long parentId) {
         List<ExecuteEntityImpl> executeEntities = mapper.selectList(Wrappers.lambdaQuery(ExecuteEntityImpl.class)
                 .eq(ExecuteEntityImpl::getParentId, parentId));
         return executeEntities;
     }
 
     @Override
-    public List<ExecuteEntityImpl> findByIds(List<String> executionIds) {
+    public List<ExecuteEntityImpl> findByIds(List<Long> executionIds) {
         return mapper.selectBatchIds(executionIds);
     }
 

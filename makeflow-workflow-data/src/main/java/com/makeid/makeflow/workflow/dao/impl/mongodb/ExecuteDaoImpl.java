@@ -8,6 +8,7 @@ import com.makeid.makeflow.workflow.entity.impl.ExecuteEntityImpl;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+
 import java.util.List;
 
 /**
@@ -20,12 +21,13 @@ import java.util.List;
 public class ExecuteDaoImpl extends BaseDaoImpl<ExecuteEntity> implements ExecuteEntityDao<ExecuteEntity> {
 
     @Override
-    public List<ExecuteEntity> findByParentId(String parentId) {
-        return null;
+    public List<ExecuteEntity> findByParentId(Long parentId) {
+        //为实现
+         throw new RuntimeException();
     }
 
     @Override
-    public List<ExecuteEntity> findByIds(List<String> executionIds) {
+    public List<ExecuteEntity> findByIds(List<Long> executionIds) {
         Query query = Query.query(Criteria.where("_id").in(executionIds));
         return mongoTemplate.find(query,ExecuteEntity.class);
     }

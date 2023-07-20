@@ -25,13 +25,27 @@ public class ExecutorConfig {
 
      private static int cpuNum = Runtime.getRuntime().availableProcessors();
 
+    /**
+     * 流程的异步操作
+     * @return
+     */
+    @Bean
+    public Executor AsyncFlowExecutor() {
+         return initExecutor(cpuNum*2,
+                 cpuNum*2,
+                 1024*cpuNum,
+                 new ThreadPoolExecutor.CallerRunsPolicy(),
+                 "makeflow-thread-"
+                 );
+     }
+
 
     /**
      * 异步事件处理线程池
      * @return
      */
     @Bean
-    Executor AsyncEventBusExecutor() {
+   public Executor AsyncEventBusExecutor() {
         return initExecutor(cpuNum+1
                 ,cpuNum+1
                 ,1024*cpuNum

@@ -14,12 +14,13 @@
 package com.makeid.makeflow.workflow.cmd;
 
 
+
 import java.util.Map;
 
 public class StartDefiniteProcessInstanceCmd extends StartProcessInstanceCmd {
 
-	public StartDefiniteProcessInstanceCmd(String processDefinitionId,
-                                           String processInstanceId, Map<String, Object> variables) {
+	public StartDefiniteProcessInstanceCmd(Long processDefinitionId,
+										   Long processInstanceId, Map<String, Object> variables) {
 		super(processDefinitionId, processInstanceId, variables);
 	}
 	

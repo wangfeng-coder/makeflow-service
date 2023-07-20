@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 import java.util.Date;
 
 /**
@@ -34,18 +35,18 @@ public class  ActivityEntityImpl extends BaseEntity implements ActivityEntity {
 
     protected String status;
 
-    protected String flowInstId;
+    protected Long flowInstId;
 
-    protected String executionId;
+    protected Long executionId;
 
-    protected String definitionId;
+    protected Long definitionId;
 
-    protected String parentId;
+    protected Long parentId;
 
     /**
      * 当前节点的前一个节点
      */
-    protected String preActivityId;
+    protected Long preActivityId;
 
 
 }
