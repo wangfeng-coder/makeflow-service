@@ -2,16 +2,13 @@ package com.makeid.makeflow.template.flow.translate;
 
 import com.makeid.makeflow.template.bpmn.model.UserTask;
 import com.makeid.makeflow.template.flow.constants.CheckTypeEnum;
-import com.makeid.makeflow.template.flow.constants.PeopleTypeEnum;
 import com.makeid.makeflow.template.flow.model.activity.ApprovalTaskActivity;
 import com.makeid.makeflow.template.flow.model.activity.OperationGroup;
 import com.makeid.makeflow.template.flow.model.activity.PeopleHolder;
-import com.makeid.makeflow.template.util.ElUtil;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,11 +40,15 @@ public class UserTaskTranslator implements Translator<UserTask, ApprovalTaskActi
         }
         //固定人
         if (!CollectionUtils.isEmpty(candidateUsers)) {
-            participants.addAll(PeopleResolvers.resolve(assignee));
+            for (String candidateUser : candidateUsers) {
+                 participants.addAll(PeopleResolvers.resolve(candidateUser));
+            }
         }
         //固定角色 TODO
         if (!CollectionUtils.isEmpty(candidateGroups)) {
-            participants.addAll(PeopleResolvers.resolve(assignee));
+            for (String candidateGroup : candidateGroups) {
+                participants.addAll(PeopleResolvers.resolve(candidateGroup));
+            }
         }
         OperationGroup operationGroup = new OperationGroup();
         operationGroup.setParticipants(participants);

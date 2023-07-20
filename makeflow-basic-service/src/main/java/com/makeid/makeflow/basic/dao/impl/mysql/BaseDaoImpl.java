@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author feng_wf
@@ -40,13 +41,23 @@ public abstract class BaseDaoImpl<T extends Entity,M extends BatchMapper<T>> imp
         return t;
     }
 
+    public T create() {
+        T t = doCreate();
+        fillBasicProperty(t);
+        return t;
+    }
+
+
+
     @Override
     public T findById(String id) {
         return getMapper().selectById(id);
     }
 
     protected void fillBasicProperty(T t) {
-        t.setId(generateId());
+        if (Objects.isNull(t.getId())) {
+            t.setId(generateId());
+        }
         t.setUpdateTime(new Date());
         t.setCreateTime(new Date());
     }

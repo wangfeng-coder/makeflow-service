@@ -31,9 +31,8 @@ public class ExecuteDaoImpl extends BaseDaoImpl<ExecuteEntity> implements Execut
     }
 
     @Override
-    public ExecuteEntity create() {
+    public ExecuteEntity doCreate() {
         ExecuteEntityImpl executeEntity = new ExecuteEntityImpl();
-        fillBasicProperty(executeEntity);
         return executeEntity;
     }
 }

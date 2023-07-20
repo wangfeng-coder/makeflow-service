@@ -24,7 +24,7 @@ public class ExecuteDaoImpl extends BaseDaoImpl<ExecuteEntityImpl, ExecuteMapper
     private ExecuteMapper mapper;
 
     @Override
-    public ExecuteEntityImpl create() {
+    public ExecuteEntityImpl doCreate() {
         ExecuteEntityImpl executeEntity = new ExecuteEntityImpl();
         return executeEntity;
     }

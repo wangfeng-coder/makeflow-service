@@ -75,6 +75,12 @@ public abstract class BaseDaoImpl<T extends Entity> implements BaseDao<T> {
         t.setCreateTime(new Date());
     }
 
+    public T create() {
+        T t = doCreate();
+        fillBasicProperty(t);
+        return t;
+    }
+
     @Override
     public T create(String creator) {
         T t = create();

@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.core.toolkit.GlobalConfigUtils;
+import com.baomidou.mybatisplus.extension.handlers.AbstractJsonTypeHandler;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -21,6 +24,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Map;
 
 /**
  * MybatisPlus配置
@@ -38,7 +42,6 @@ public class MybatisPlusConfig {
     public CustomizedSqlInjector customizedSqlInjector() {
         return new CustomizedSqlInjector();
     }
-
 
     @Bean(initMethod = "init",destroyMethod = "close")
     @ConfigurationProperties(prefix = "makeflow.data.mysql.druid-data-source")
@@ -69,6 +72,9 @@ public class MybatisPlusConfig {
         GlobalConfig globalConfig = GlobalConfigUtils.defaults();
         globalConfig.setSqlInjector(customizedSqlInjector());
         configuration.setGlobalConfig(globalConfig);
+        TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
+        //Cause: java.lang.IllegalStateException: Type handler was null on parameter mapping for property '__frch_item_0.variables'. It was either not specified and/or could not be found for the javaType (java.util.Map) : jdbcType (null) combination.
+        typeHandlerRegistry.register(Map.class, JacksonTypeHandler.class);
         sqlSessionFactory.setGlobalConfig(globalConfig);
         sqlSessionFactory.setConfiguration(configuration);
         return sqlSessionFactory.getObject();

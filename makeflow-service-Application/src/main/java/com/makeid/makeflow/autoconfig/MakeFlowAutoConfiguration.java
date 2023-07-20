@@ -17,6 +17,7 @@ import static org.springframework.context.annotation.FilterType.ASSIGNABLE_TYPE;
  * @create 2023-07-10
  */
 @Configuration
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @ComponentScan(value = {"com.makeid.makeflow"})
 public class MakeFlowAutoConfiguration {
 

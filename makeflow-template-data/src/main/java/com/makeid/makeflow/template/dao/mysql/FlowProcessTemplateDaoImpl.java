@@ -32,7 +32,7 @@ public class FlowProcessTemplateDaoImpl extends BaseDaoImpl<FlowProcessTemplateE
     }
 
     @Override
-    public FlowProcessTemplateEntityImpl create() {
+    public FlowProcessTemplateEntityImpl doCreate() {
         FlowProcessTemplateEntityImpl flowProcessTemplateEntity = new FlowProcessTemplateEntityImpl();
         fillBasicProperty(flowProcessTemplateEntity);
         return flowProcessTemplateEntity;

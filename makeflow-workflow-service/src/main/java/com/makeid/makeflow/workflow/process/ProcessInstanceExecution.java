@@ -122,6 +122,7 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
         executeEntity.setFlowInstId(this.getFlowInstEntity().getId());
         executeEntity.setVariables(variables);
         executeEntity.setDefinitionId(getProcessDefinitionId());
+        executeEntity.setRootFlowInstId(this.getFlowInstEntity().getId());
         this.executeEntity = executeEntity;
         return executeEntity;
     }

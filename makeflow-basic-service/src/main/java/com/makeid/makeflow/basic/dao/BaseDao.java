@@ -17,6 +17,8 @@ public interface BaseDao<T> {
 
     T create();
 
+    T doCreate();
+
 
 
     T create(String creator);

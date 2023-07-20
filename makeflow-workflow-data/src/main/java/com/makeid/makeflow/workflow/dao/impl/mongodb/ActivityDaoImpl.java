@@ -21,9 +21,8 @@ import java.util.List;
 public class ActivityDaoImpl extends BaseDaoImpl<ActivityEntity> implements ActivityDao<ActivityEntity> {
 
     @Override
-    public ActivityEntity create() {
+    public ActivityEntity doCreate() {
         ActivityEntityImpl activityEntity = new ActivityEntityImpl();
-        fillBasicProperty(activityEntity);
         return activityEntity;
     }
 

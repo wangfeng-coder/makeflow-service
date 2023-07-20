@@ -25,9 +25,8 @@ public class ActivityDaoImpl extends BaseDaoImpl<ActivityEntityImpl,ActivityMapp
     private ActivityMapper mapper;
 
     @Override
-    public ActivityEntityImpl create() {
+    public ActivityEntityImpl doCreate() {
         ActivityEntityImpl activityEntity = new ActivityEntityImpl();
-        fillBasicProperty(activityEntity);
         return activityEntity;
     }
 

@@ -52,4 +52,8 @@ public class MakeFlowApplication {
             flowContext = applicationContext;
         }
     }
+
+    public static ApplicationContext getFlowContext() {
+        return flowContext;
+    }
 }

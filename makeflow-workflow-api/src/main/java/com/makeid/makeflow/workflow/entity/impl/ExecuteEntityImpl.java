@@ -1,11 +1,12 @@
 package com.makeid.makeflow.workflow.entity.impl;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.makeid.makeflow.basic.entity.BaseEntity;
 import com.makeid.makeflow.workflow.entity.ExecuteEntity;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
 */
 @Getter
 @Setter
-@TableName("makeflow_execute")
+@TableName(value = "makeflow_execute",autoResultMap = true)
 public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
 
     protected String flowInstId;
@@ -48,10 +49,10 @@ public class ExecuteEntityImpl extends BaseEntity implements ExecuteEntity {
     /**
      * 流程定义id
      */
-    protected String processDefinitionId;
 
     /**
      * 持久化参数
      */
+    @TableField(typeHandler = JacksonTypeHandler.class)
     protected Map<String,Object> variables;
 }

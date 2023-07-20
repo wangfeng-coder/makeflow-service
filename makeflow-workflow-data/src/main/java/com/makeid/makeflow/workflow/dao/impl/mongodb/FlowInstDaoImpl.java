@@ -17,9 +17,8 @@ import org.springframework.stereotype.Repository;
 public class FlowInstDaoImpl extends BaseDaoImpl<FlowInstEntity> implements FlowInstEntityDao<FlowInstEntity> {
 
     @Override
-    public FlowInstEntity create() {
+    public FlowInstEntity doCreate() {
         FlowInstEntityImpl flowInstEntity = new FlowInstEntityImpl();
-        fillBasicProperty(flowInstEntity);
         return flowInstEntity;
     }
 }

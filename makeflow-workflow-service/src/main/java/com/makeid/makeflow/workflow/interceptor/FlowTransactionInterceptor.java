@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class FlowTransactionInterceptor extends AbstractCommandInterceptor {
     @Override
-//    @Transactional
+    @Transactional
     public <T> T execute(CommandConfig config, Command<T> command) {
         return next.execute(config,command);
     }

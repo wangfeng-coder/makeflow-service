@@ -22,9 +22,8 @@ import java.util.stream.Collectors;
 @Dao
 public class TaskDaoImpl extends BaseDaoImpl<TaskEntity> implements TaskDao<TaskEntity> {
     @Override
-    public TaskEntity create() {
+    public TaskEntity doCreate() {
         TaskEntityImpl taskEntity = new TaskEntityImpl();
-        fillBasicProperty(taskEntity);
         taskEntity.setStatus(TaskStatusEnum.NOT_INIT.status);
         return taskEntity;
     }

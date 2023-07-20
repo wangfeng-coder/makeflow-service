@@ -20,6 +20,10 @@ public interface ExecuteEntity extends Entity, DelegateExecuteReader {
 
     void setFlowInstId(String flowInstId);
 
+    String getRootFlowInstId();
+
+    void setRootFlowInstId(String flowInstId);
+
     String getParentId();
 
     void setParentId(String parentId);

@@ -21,9 +21,8 @@ public class FlowInstDaoImpl extends BaseDaoImpl<FlowInstEntityImpl, FlowInstMap
     private FlowInstMapper mapper;
 
     @Override
-    public FlowInstEntityImpl create() {
+    public FlowInstEntityImpl doCreate() {
         FlowInstEntityImpl flowInstEntity = new FlowInstEntityImpl();
-        fillBasicProperty(flowInstEntity);
         return flowInstEntity;
     }
 

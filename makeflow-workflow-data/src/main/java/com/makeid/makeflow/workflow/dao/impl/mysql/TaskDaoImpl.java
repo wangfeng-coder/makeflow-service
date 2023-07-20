@@ -25,7 +25,7 @@ public class TaskDaoImpl extends BaseDaoImpl<TaskEntityImpl, TaskMapper> impleme
     @Resource
     private TaskMapper mapper;
     @Override
-    public TaskEntityImpl create() {
+    public TaskEntityImpl doCreate() {
         TaskEntityImpl taskEntity = new TaskEntityImpl();
         return taskEntity;
     }
