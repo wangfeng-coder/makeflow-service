@@ -38,7 +38,7 @@ public class AgreeTaskCmd extends CompleteTaskCmd{
         taskEntity.setStatus(TaskStatusEnum.DONE.status);
         taskEntity.setCompleteTime(new Date());
         save(taskEntity);
-
+        //TODO 处理其他任务 如果是或签 还需取消其他任务
     }
 
     @Override
