@@ -78,5 +78,21 @@ public class TaskDaoImpl extends BaseDaoImpl<TaskEntity> implements TaskDao<Task
         return taskEntities;
     }
 
+    @Override
+    public void cancelAllTask(Long activityId) {
+        Query query = Query.query(Criteria.where("activityId").is(activityId))
+                .addCriteria(Criteria.where("delFlag").is(false));
+        Update update = new Update();
+        update.set("status",TaskStatusEnum.CANCEL.status);
+        mongoTemplate.updateMulti(query,update,TaskEntity.class);
+    }
 
+    @Override
+    public List<TaskEntity> findTaskByHandler(String handler, String status) {
+        Query query = Query.query(Criteria.where("handler").is(handler))
+                .addCriteria(Criteria.where("status").is(status))
+                .addCriteria(Criteria.where("delFlag").is(false));
+        List<TaskEntity> taskEntities = mongoTemplate.find(query, getEntityClass());
+        return taskEntities;
+    }
 }

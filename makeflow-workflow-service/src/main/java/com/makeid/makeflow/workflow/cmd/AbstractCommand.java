@@ -106,12 +106,15 @@ public abstract class AbstractCommand<T> implements Command<T>, CheckCommand,
 		return executions;
 	}
 
+
 	protected ExecuteEntity findExecution(Long executionId) {
 		return  Context.getExecutionService().findById(executionId);
 	}
 
 	protected ProcessInstanceExecution transferProcessInstanceExecution(ExecuteEntity executeEntity) {
-		return  Context.getExecutionService().transferExecution(executeEntity);
+		ProcessInstanceExecution processInstanceExecution = Context.getExecutionService().transferExecution(executeEntity);
+		processInstanceExecution.addVariables(this.getVariables());
+		return  processInstanceExecution;
 	}
 
 	protected ProcessInstanceExecution findProcessInstanceExecution(Long executionId) {

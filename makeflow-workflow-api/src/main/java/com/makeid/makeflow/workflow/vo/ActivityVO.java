@@ -17,6 +17,8 @@ import java.util.List;
 @Setter
 public class ActivityVO {
 
+    private Long activityId;
+
     private String name;
 
     private String status;
@@ -25,6 +27,8 @@ public class ActivityVO {
 
     private List<TaskVO> taskVOList;
 
+    private String  activityType;
+
 
     public static ActivityVO from(ActivityEntity activity,List<TaskVO> taskVOList) {
         ActivityVO activityVO = new ActivityVO();
@@ -32,6 +36,8 @@ public class ActivityVO {
         activityVO.setStatus(activity.getStatus());
         activityVO.setPreActivityId(activity.getPreActivityId());
         activityVO.setTaskVOList(taskVOList);
+        activityVO.setActivityType(activity.getActivityType());
+        activityVO.setActivityId(activity.getId());
         return activityVO;
     }
 }

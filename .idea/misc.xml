@@ -10,6 +10,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/demo/pom.xml" />
         <option value="$PROJECT_DIR$/makeflow-document-api/pom.xml" />
         <option value="$PROJECT_DIR$/makeflow-document-service/pom.xml" />
         <option value="$PROJECT_DIR$/makeflow-form-api/pom.xml" />

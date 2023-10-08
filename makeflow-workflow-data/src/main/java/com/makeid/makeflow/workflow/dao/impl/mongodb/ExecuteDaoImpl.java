@@ -37,4 +37,10 @@ public class ExecuteDaoImpl extends BaseDaoImpl<ExecuteEntity> implements Execut
         ExecuteEntityImpl executeEntity = new ExecuteEntityImpl();
         return executeEntity;
     }
+
+    @Override
+    public List<? extends ExecuteEntity> findByFlowInstId(Long id) {
+        Query query = Query.query(Criteria.where("flowInstId").is(id));
+        return mongoTemplate.find(query,ExecuteEntity.class);
+    }
 }

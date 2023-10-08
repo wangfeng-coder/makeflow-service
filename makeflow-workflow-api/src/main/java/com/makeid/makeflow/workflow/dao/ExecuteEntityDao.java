@@ -15,4 +15,6 @@ public interface ExecuteEntityDao<T extends ExecuteEntity> extends BaseDao<T> {
     List<? extends ExecuteEntity> findByParentId(Long parentId);
 
     List<? extends ExecuteEntity> findByIds(List<Long> executionIds);
+
+    List<? extends ExecuteEntity> findByFlowInstId(Long id);
 }

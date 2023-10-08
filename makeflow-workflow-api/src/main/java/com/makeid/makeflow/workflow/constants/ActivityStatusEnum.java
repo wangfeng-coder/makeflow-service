@@ -17,7 +17,9 @@ public enum ActivityStatusEnum {
 
     RETURN("return"),
 
-    CANCEL("cancel");
+    CANCEL("cancel"),
+
+    JUMP("jump");
 
 
 

@@ -7,6 +7,7 @@ import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.dao.TaskDao;
 import com.makeid.makeflow.workflow.entity.TaskEntity;
 import com.makeid.makeflow.workflow.process.PvmActivity;
+import com.makeid.makeflow.workflow.runtime.ActivityPvmExecution;
 import com.makeid.makeflow.workflow.task.PersonHolderCollectors;
 import com.makeid.makeflow.workflow.task.TaskTypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,13 @@ public class TaskService {
     private PersonHolderCollectors personHolderCollectors;
 
 
-    public List<TaskEntity> createTask(List<PeopleHolder> participants, ApprovalSettings approvalSettings, PvmActivity pvmActivity) {
-        List<String> userIds = personHolderCollectors.collect(participants, pvmActivity);
-        return createTask(userIds, pvmActivity);
+    public List<TaskEntity> createTask(List<PeopleHolder> participants, ApprovalSettings approvalSettings, ActivityPvmExecution activityPvmExecution) {
+        List<String> userIds = personHolderCollectors.collect(participants, activityPvmExecution);
+        return createTask(userIds, activityPvmExecution);
     }
 
-    public List<TaskEntity> createTask(List<String> handlers, PvmActivity activity) {
+    public List<TaskEntity> createTask(List<String> handlers, ActivityPvmExecution activityPvmExecution) {
+        PvmActivity activity = activityPvmExecution.findActivityInst();
         String activityType = activity.getActivityType();
         return handlers.stream().map(handler -> {
             TaskEntity taskEntity = (TaskEntity) taskDao.create(Context.getUserId());
@@ -93,8 +95,16 @@ public class TaskService {
         taskDao.cancelOtherTask(activityId,id);
     }
 
+    public void cancelAllTask(Long activityId) {
+        taskDao.cancelAllTask(activityId);
+    }
+
     public List<TaskEntity> findTaskByHandler(String handler) {
        return taskDao.findTaskByHandler(handler);
+    }
+
+    public List<TaskEntity> findTaskByHandler(String handler,String status) {
+        return taskDao.findTaskByHandler(handler,status);
     }
 
     public TaskEntity findTaskById(Long taskId) {

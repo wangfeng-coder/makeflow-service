@@ -206,4 +206,10 @@ public class ActivityImpl extends ScopeImpl implements PvmActivity, InitialProDa
         this.activity.setStatus(ActivityStatusEnum.RETURN.status);
         save();
     }
+
+    public void jump() {
+        this.activity.setStatus(ActivityStatusEnum.JUMP.status);
+        this.activity.setEndTime(new Date());
+        save();
+    }
 }

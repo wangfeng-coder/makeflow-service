@@ -27,7 +27,6 @@ import java.util.List;
 @Configuration
 @ConditionalOnProperty(prefix = "makeflow.data",name = "dataType",havingValue = "mongodb")
 @EnableConfigurationProperties(MongoProperties.class)
-
 public class MongoConfig {
 
 

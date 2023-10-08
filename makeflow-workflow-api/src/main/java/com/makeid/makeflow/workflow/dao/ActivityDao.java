@@ -17,4 +17,5 @@ public interface ActivityDao<T extends ActivityEntity> extends BaseDao<T> {
     List<T> findByFlowInstId(Long flowInstId);
 
 
+    List<T> findByFlowInstIdActivityType(Long flowInstId, String activityType);
 }

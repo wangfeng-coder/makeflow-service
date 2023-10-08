@@ -35,6 +35,14 @@ public class ActivityDaoImpl extends BaseDaoImpl<ActivityEntity> implements Acti
     }
 
     @Override
+    public List<ActivityEntity> findByFlowInstIdActivityType(Long flowInstId, String activityType) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("flowInstId").in(flowInstId))
+                .addCriteria(Criteria.where("activityType").is(activityType));
+        return mongoTemplate.find(query,ActivityEntity.class);
+    }
+
+    @Override
     public List<ActivityEntity> findByFlowInstId(Long flowInstId) {
         Query query = new Query();
         query.addCriteria(Criteria.where("flowInstId").in(flowInstId));

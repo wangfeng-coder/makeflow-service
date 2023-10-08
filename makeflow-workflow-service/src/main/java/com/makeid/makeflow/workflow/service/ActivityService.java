@@ -48,4 +48,8 @@ public class ActivityService {
     public List<ActivityEntity> findByFlowInstId(Long flowInstId) {
         return activityDao.findByFlowInstId(flowInstId);
     }
+
+    public List<ActivityEntity> findByFlowInstIdActivityType(Long flowInstId,String activityType) {
+        return activityDao.findByFlowInstIdActivityType(flowInstId,activityType);
+    }
 }

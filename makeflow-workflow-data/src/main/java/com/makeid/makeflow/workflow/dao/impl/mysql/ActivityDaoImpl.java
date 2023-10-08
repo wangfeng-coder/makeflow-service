@@ -45,7 +45,17 @@ public class ActivityDaoImpl extends BaseDaoImpl<ActivityEntityImpl,ActivityMapp
     }
 
     @Override
+    public List<ActivityEntityImpl> findByFlowInstIdActivityType(Long flowInstId, String activityType) {
+        List<ActivityEntityImpl> activityEntities = mapper.selectList(Wrappers.lambdaQuery(ActivityEntityImpl.class)
+                .eq(ActivityEntity::getFlowInstId, flowInstId)
+                .eq(ActivityEntity::getActivityType,activityType));
+        return activityEntities;
+    }
+
+    @Override
     protected ActivityMapper getMapper() {
         return mapper;
     }
+
+
 }

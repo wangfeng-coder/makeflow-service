@@ -44,6 +44,10 @@ public class ExecutionService {
         return (ExecuteEntity) executeEntityDao.findById(s);
     }
 
+    public List<ExecuteEntity> findByFlowInstId(Long id) {
+        return executeEntityDao.findByFlowInstId(id);
+    }
+
     public List<ExecuteEntity> findByParentId(Long parentId) {
         return executeEntityDao.findByParentId(parentId);
     }

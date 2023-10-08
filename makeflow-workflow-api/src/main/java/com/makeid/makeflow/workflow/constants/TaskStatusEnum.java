@@ -20,6 +20,10 @@ public enum TaskStatusEnum {
 
     RETURN("return"),
 
+    JUMP("jump"),
+
+
+
     //已完成
     DONE("done");
 

@@ -16,34 +16,34 @@ import java.util.Map;
 
 public class StartActivityBehavior extends TaskActivityBehavior {
 
-	public StartActivityBehavior() {
+    public StartActivityBehavior() {
 
-	}
+    }
 
 
-	@Override
-	public void doInternalExecute(ActivityPvmExecution execution, Map<String, Object> taskParams) {
-		PvmActivity activityInst = execution.findActivityInst();
-		//这里要是流程创建人
-		List<TaskEntity> tasks = Context.getGlobalProcessEngineConfiguration()
-				.getTaskService()
-				.createTask(Arrays.asList(Context.getUserId()), activityInst);
-		Context.getGlobalProcessEngineConfiguration()
-				.getTaskService()
-						.completeTasks(tasks,TaskStatusEnum.DONE.status);
-		//保存入库;
-		Context.getGlobalProcessEngineConfiguration()
-						.getTaskService()
-								.save(tasks);
-		//任务已完成 往下个地方
-		completedTask(execution);
-	}
+    @Override
+    public void doInternalExecute(ActivityPvmExecution execution, Map<String, Object> taskParams) {
+        PvmActivity activityInst = execution.findActivityInst();
+        //这里要是流程创建人
+        List<TaskEntity> tasks = Context.getGlobalProcessEngineConfiguration()
+                .getTaskService()
+                .createTask(Arrays.asList(Context.getUserId()), execution);
+        Context.getGlobalProcessEngineConfiguration()
+                .getTaskService()
+                .completeTasks(tasks, TaskStatusEnum.DONE.status);
+        //保存入库;
+        Context.getGlobalProcessEngineConfiguration()
+                .getTaskService()
+                .save(tasks);
+        //任务已完成 往下个地方
+        completedTask(execution);
+    }
 
-	@Override
-	public void completedTask(ActivityPvmExecution execution) {
-		//当前任务都完成了，可以Leave
-		leave(execution);
-	}
+    @Override
+    public void completedTask(ActivityPvmExecution execution) {
+        //当前任务都完成了，可以Leave
+        leave(execution);
+    }
 
 
 }

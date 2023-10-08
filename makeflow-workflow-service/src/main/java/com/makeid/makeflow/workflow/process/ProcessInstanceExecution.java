@@ -223,12 +223,14 @@ public class ProcessInstanceExecution extends CoreExecution implements  InitialP
         //更新流程状态 并保存
         this.executeEntity.setStatus(ExecuteStatusEnum.END.status);
         this.executeEntity.setEndTime(new Date());
+        this.executeEntity.setVariables(this.getVariables());
         Context.getExecutionService().save(executeEntity);
     }
 
     @Override
     public void stay() {
         this.executeEntity.setStatus(ExecuteStatusEnum.STAY.status);
+        this.executeEntity.setVariables(this.getVariables());
         Context.getExecutionService().save(executeEntity);
     }
 

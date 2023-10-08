@@ -23,4 +23,8 @@ public interface TaskDao<T extends TaskEntity> extends BaseDao<T> {
     List<? extends TaskEntity> findByFlowInstId(Long flowInstId);
 
     List<? extends TaskEntity> findFlowInstIdHandlerStatus(Long flowInstId, String handler, String status);
+
+    void cancelAllTask(Long activityId);
+
+    List<? extends TaskEntity> findTaskByHandler(String handler, String status);
 }

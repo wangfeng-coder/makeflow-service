@@ -1,9 +1,6 @@
 package com.makeid.makeflow.workflow.service.impl;
 
-import com.makeid.makeflow.workflow.cmd.AgreeTaskCmd;
-import com.makeid.makeflow.workflow.cmd.DisAgreeCmd;
-import com.makeid.makeflow.workflow.cmd.ReturnCmd;
-import com.makeid.makeflow.workflow.cmd.StartDefiniteProcessInstanceCmd;
+import com.makeid.makeflow.workflow.cmd.*;
 import com.makeid.makeflow.workflow.config.ProcessEngineConfigurationImpl;
 import com.makeid.makeflow.workflow.runtime.PvmProcessInstance;
 import com.makeid.makeflow.workflow.service.RuntimeService;
@@ -47,4 +44,10 @@ public class RuntimeServiceImpl extends ServiceImpl implements RuntimeService {
     public void returnTask(Long taskId, String opinion, String targetCodeId, Map<String, Object> variables) {
         commandExecutor.execute(new ReturnCmd(taskId,variables,targetCodeId,opinion));
     }
+
+    @Override
+    public void freeJump(String targetActivityCodeId,Long sourceActivityId,String opinion,Map<String, Object> variables) {
+        commandExecutor.execute(new JumpCmd(targetActivityCodeId,sourceActivityId,opinion,variables));
+    }
+
 }

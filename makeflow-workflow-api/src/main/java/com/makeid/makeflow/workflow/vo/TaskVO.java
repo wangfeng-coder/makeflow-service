@@ -4,6 +4,7 @@ import com.makeid.makeflow.workflow.entity.TaskEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
 
 
 /**
@@ -21,7 +22,7 @@ public class TaskVO {
 
     private String handler;
 
-    private String handTime;
+    private Date handTime;
 
     private String status;
 
@@ -29,7 +30,7 @@ public class TaskVO {
         TaskVO taskVO = new TaskVO();
         taskVO.setStatus(taskEntity.getStatus());
         taskVO.setHandler(taskEntity.getHandler());
-        taskVO.setHandTime(taskEntity.getHandler());
+        taskVO.setHandTime(taskEntity.getCompleteTime());
         taskVO.setActivityId(taskEntity.getActivityId());
         return taskVO;
     }

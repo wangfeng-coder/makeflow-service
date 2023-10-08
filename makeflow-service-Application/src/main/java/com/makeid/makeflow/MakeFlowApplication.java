@@ -1,22 +1,11 @@
 package com.makeid.makeflow;
 
-import com.makeid.makeflow.autoconfig.MakeFlowAutoConfiguration;
-import com.makeid.makeflow.autoconfig.MakeFlowSpringStartListener;
 import com.makeid.makeflow.template.service.third.FlowTemplateServiceThird;
-import com.makeid.makeflow.workflow.service.third.WorkflowService;
+import com.makeid.makeflow.workflow.service.third.TaskServiceThird;
+import com.makeid.makeflow.workflow.service.third.WorkflowServiceThird;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
@@ -35,9 +24,18 @@ public class MakeFlowApplication {
      *
      * @return 外部操作流程对象
      */
-    public static WorkflowService getWorkFlowService() {
-        return flowContext.getBean(WorkflowService.class);
+    public static WorkflowServiceThird getWorkFlowService() {
+        return flowContext.getBean(WorkflowServiceThird.class);
     }
+
+    /**
+     *
+     * @return
+     */
+    public static TaskServiceThird getTaskServiceThird() {
+        return flowContext.getBean(TaskServiceThird.class);
+    }
+
 
     /**
      *

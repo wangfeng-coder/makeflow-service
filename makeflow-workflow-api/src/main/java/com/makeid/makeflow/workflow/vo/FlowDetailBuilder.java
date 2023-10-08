@@ -45,6 +45,8 @@ public class FlowDetailBuilder {
         flowDetailVO.setCreator(flowInst.getCreator());
         flowDetailVO.setCreateTime(flowInst.getCreateTime());
         flowDetailVO.setActivityVOList(activityVOList);
+        flowDetailVO.setApply(flowInst.getApply());
+        flowDetailVO.setStatus(flowInst.getStatus());
         return flowDetailVO;
     }
 }

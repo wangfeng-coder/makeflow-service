@@ -1,8 +1,14 @@
-
+logging:
+  level:
+    com:
+      baomidou:
+        mybatisplus: DEBUG
+    org:
+      mybatis=DEBUG:
 # MongoDB
 makeflow:
   data:
-    dataType: mongodb
+    dataType: mysql
     mongo:
       replicaSet: 127.0.0.1:27017
       dbname: makeflow

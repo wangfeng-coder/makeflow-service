@@ -2,10 +2,13 @@ package com.makeid.demo;
 
 import com.makeid.makeflow.MakeFlowApplication;
 import com.makeid.makeflow.template.service.third.FlowTemplateServiceThird;
-import com.makeid.makeflow.workflow.service.third.WorkflowService;
+import com.makeid.makeflow.workflow.service.third.WorkflowServiceThird;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.stream.Stream;
 
@@ -31,7 +34,7 @@ public class DemoServive {
     }
 
     public Long apply(){
-        WorkflowService workFlowService = MakeFlowApplication.getWorkFlowService();
+        WorkflowServiceThird workFlowService = MakeFlowApplication.getWorkFlowService();
         Long s = workFlowService.submitFlow(codeId, "wangfeng", new HashMap<>());
         return s;
     }

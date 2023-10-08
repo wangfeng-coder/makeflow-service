@@ -9,7 +9,10 @@
     <artifactId>makeflow-workflow-data</artifactId>
     <name>Archetype - makeflow-workflow-data</name>
     <url>http://maven.apache.org</url>
-
+    <properties>
+        <mysql.version>8.0.17</mysql.version>
+        <mongo.version>3.11.2 </mongo.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.makeid.makeflow</groupId>
@@ -21,6 +24,21 @@
             <groupId>com.makeid.makeflow</groupId>
             <artifactId>makeflow-workflow-api</artifactId>
             <version>1.0</version>
+        </dependency>
+
+        <!-- MySQL驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongo.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

@@ -70,7 +70,24 @@ public class TaskDaoImpl extends BaseDaoImpl<TaskEntityImpl, TaskMapper> impleme
     }
 
     @Override
+    public void cancelAllTask(Long activityId) {
+        mapper.update(null, Wrappers.lambdaUpdate(TaskEntityImpl.class)
+                .eq(TaskEntityImpl::getActivityId,activityId)
+                .eq(TaskEntityImpl::getStatus,TaskStatusEnum.DOING.status)
+                .set(TaskEntityImpl::getStatus, TaskStatusEnum.CANCEL.status));
+    }
+
+    @Override
+    public List<? extends TaskEntity> findTaskByHandler(String handler, String status) {
+        return mapper.selectList(Wrappers.lambdaQuery(TaskEntityImpl.class)
+                .eq(TaskEntityImpl::getHandler,handler)
+                .eq(TaskEntityImpl::getStatus,status));
+    }
+
+    @Override
     protected TaskMapper getMapper() {
         return mapper;
     }
+
+
 }

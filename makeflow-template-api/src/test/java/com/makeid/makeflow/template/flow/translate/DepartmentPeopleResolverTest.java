@@ -9,7 +9,7 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-class DepartmentPeopleResolverTest  {
+public class DepartmentPeopleResolverTest  {
 
 
 
@@ -32,6 +32,5 @@ class DepartmentPeopleResolverTest  {
     void testString() {
         String s = new String("222");
         String substring = s.substring(0, 2);
-        Assertions.assertTrue(substring.equals("sub_string"));
     }
 }

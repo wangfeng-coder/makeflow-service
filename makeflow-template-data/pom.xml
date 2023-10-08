@@ -11,6 +11,10 @@
     <name>Archetype - makeflow-template-data</name>
     <url>http://maven.apache.org</url>
     <version>${parent.version}</version>
+    <properties>
+        <mysql.version>8.0.17</mysql.version>
+        <mongo.version>3.11.2 </mongo.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.makeid.makeflow</groupId>
@@ -22,6 +26,21 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- MySQL驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongo.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

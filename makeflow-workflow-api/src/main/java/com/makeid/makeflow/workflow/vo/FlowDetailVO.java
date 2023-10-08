@@ -24,6 +24,8 @@ public class FlowDetailVO {
 
     private Date applyTime;
 
+    private String status;
+
     private List<ActivityVO> activityVOList;
 
 }

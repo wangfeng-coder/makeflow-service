@@ -30,11 +30,10 @@ public class ApprovalTaskActivityBehavior extends TaskActivityBehavior {
         ApprovalTaskActivity approvalTaskActivity = (ApprovalTaskActivity) execution.findFlowNode(codeId);
         OperationGroup operationGroup = approvalTaskActivity.getOperationGroup();
         List<PeopleHolder> participants = operationGroup.getParticipants();
-
         //根据参与人创建任务,
         List<TaskEntity> taskList = Context.getGlobalProcessEngineConfiguration()
                 .getTaskService()
-                .createTask(participants, approvalTaskActivity.getApprovalSettings(), activityInst);
+                .createTask(participants, approvalTaskActivity.getApprovalSettings(), execution);
         //任务状态处理
         runningAllTask(taskList);
         //任务自动完成 TODO

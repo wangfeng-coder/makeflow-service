@@ -19,6 +19,7 @@ public interface RuntimeService {
 			Long processDefinitionId, Long processInstanceId,
 			Map<String, Object> variables);
 
+
 	void agreeTask(Long taskId,String opinion,Map<String,Object>variables);
 
 	void disAgreeTask(Long taskId, String opinion, Map<String,Object> variables);
@@ -26,5 +27,6 @@ public interface RuntimeService {
 
 	void returnTask(Long taskId,String opinion,String targetCodeId,Map<String,Object> variables);
 
+	void freeJump(String targetActivityCodeId,Long sourceActivityId,String opinion,Map<String, Object> variables);
 
 }
