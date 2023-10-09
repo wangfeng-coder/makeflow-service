@@ -1,6 +1,7 @@
 package com.makeid.makeflow.autoconfig;
 
 import com.makeid.makeflow.MakeFlowApplication;
+import com.makeid.makeflow.workflow.event.FlowEventListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.Environment;
 
 import java.io.PrintStream;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author feng_wf
@@ -30,6 +35,14 @@ public class MakeFlowSpringStartListener implements ApplicationListener<Applicat
         springApplication.setWebApplicationType(WebApplicationType.NONE);
         ConfigurableApplicationContext applicationContext = springApplication.run();
         MakeFlowApplication.setFlowContext(applicationContext);
+        ConfigurableApplicationContext mainSpring = event.getApplicationContext();
+        Map<String, FlowEventListener> listenerMap = mainSpring.getBeansOfType(FlowEventListener.class);
+        List<FlowEventListener> flowEventListenerList = listenerMap.values()
+                .stream()
+                .sorted(Comparator.comparingInt(FlowEventListener::getOrder).reversed())
+                .collect(Collectors.toList());
+        log.info("扫描到外部flowEventListener 【{}】",flowEventListenerList.size());
+        MakeFlowApplication.registerMakeFLowEventListener(flowEventListenerList);
         log.info("【make flow 容器已经启动完成】");
     }
 
