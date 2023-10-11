@@ -13,16 +13,13 @@ import lombok.Getter;
  * @create 2023-06-26
  */
 @Getter
-public class ProcessCreateBeforeEvent implements Event{
-
-    private ProcessInstanceExecution processInstanceExecution;
-
-    public ProcessCreateBeforeEvent(ProcessInstanceExecution processInstanceExecution) {
-        this.processInstanceExecution = processInstanceExecution;
+public class ProcessCreateBeforeEvent extends AbstractEvent<DelegateExecuteReader>{
+    public ProcessCreateBeforeEvent(DelegateExecuteReader data) {
+        super(EventType.PROCESS_CREATED, data);
     }
 
     public DelegateExecuteReader getDelegateExecuteReader(){
-        return  processInstanceExecution.getExecuteEntity();
+        return  getData();
     }
 
 

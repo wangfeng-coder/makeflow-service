@@ -1,14 +1,14 @@
 package com.makeid.makeflow.workflow.cmd;
 
 import com.makeid.makeflow.workflow.constants.TaskStatusEnum;
-import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.entity.TaskEntity;
+import com.makeid.makeflow.workflow.event.EventRegister;
+import com.makeid.makeflow.workflow.event.TaskDoneEvent;
 import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +38,7 @@ public class AgreeTaskCmd extends CompleteTaskCmd{
         taskEntity.setStatus(TaskStatusEnum.DONE.status);
         taskEntity.setCompleteTime(new Date());
         save(taskEntity);
+        EventRegister.post(new TaskDoneEvent(Arrays.asList(taskEntity)));
         //TODO 处理其他任务 如果是或签 还需取消其他任务
     }
 

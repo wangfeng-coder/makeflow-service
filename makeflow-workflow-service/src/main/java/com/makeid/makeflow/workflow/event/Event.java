@@ -6,5 +6,10 @@ package com.makeid.makeflow.workflow.event;
  * @description
  * @create 2023-06-26
  */
-public interface Event {
+public interface Event<T> {
+
+    EventType getEventType();
+
+    T getData();
+
 }

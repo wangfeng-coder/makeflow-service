@@ -41,7 +41,7 @@ public class ProcessDefinitionImpl  implements PvmProcessDefinition, DelegatePro
         StartActivity startActivity = flowProcessTemplate.findInitial();
         processInstance.setStartCodeId(startActivity.getCodeId());
         processInstance.addVariables(variables);
-        EventRegister.post(new ProcessCreateBeforeEvent(processInstance));
+        EventRegister.post(new ProcessCreateBeforeEvent(processInstance.getExecuteEntity()));
         processInstance.createFlowInstEntity();
         processInstance.createExecuteEntity();
         return processInstance;

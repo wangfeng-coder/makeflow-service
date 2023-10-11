@@ -2,7 +2,7 @@ package com.makeid.makeflow.workflow.event.listener;
 
 import com.makeid.makeflow.workflow.delegate.DelegateTaskReader;
 import com.makeid.makeflow.workflow.event.FlowEventListener;
-import com.makeid.makeflow.workflow.event.TaskRunningAfterEvent;
+import com.makeid.makeflow.workflow.event.TaskRunningEvent;
 import com.makeid.makeflow.workflow.eventbus.FlowSubscribe;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -20,10 +20,9 @@ import java.util.List;
 public class TaskRunningListener implements FlowEventListener {
 
     @FlowSubscribe(sync = false)
-    public void sendToDo(TaskRunningAfterEvent taskRunningAfterEvent) {
-        List<DelegateTaskReader> tasks = taskRunningAfterEvent.getTasks();
+    public void sendToDo(TaskRunningEvent taskRunningEvent) {
+        List<? extends DelegateTaskReader> data = taskRunningEvent.getData();
         log.info("taskRunning sendToDo ");
-
     }
 }
 

@@ -6,6 +6,8 @@ import com.makeid.makeflow.workflow.constants.TaskStatusEnum;
 import com.makeid.makeflow.workflow.context.Context;
 import com.makeid.makeflow.workflow.entity.ActivityEntity;
 import com.makeid.makeflow.workflow.entity.TaskEntity;
+import com.makeid.makeflow.workflow.event.EventRegister;
+import com.makeid.makeflow.workflow.event.TaskDisAgreeEvent;
 import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 import com.makeid.makeflow.workflow.process.activity.ActivityImpl;
 
@@ -35,6 +37,7 @@ public class DisAgreeCmd extends CompleteTaskCmd {
         taskEntity.setStatus(TaskStatusEnum.DISAGREE.status);
         taskEntity.setCompleteTime(new Date());
         save(taskEntity);
+        EventRegister.post(new TaskDisAgreeEvent(Arrays.asList(taskEntity)));
     }
 
     @Override

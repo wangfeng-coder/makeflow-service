@@ -1,7 +1,7 @@
 package com.makeid.makeflow.workflow.operation;
 
 import com.makeid.makeflow.workflow.event.EventRegister;
-import com.makeid.makeflow.workflow.event.ProcessStartEvent;
+import com.makeid.makeflow.workflow.event.ProcessStartedEvent;
 import com.makeid.makeflow.workflow.process.ProcessInstanceExecution;
 
 /**
@@ -18,7 +18,7 @@ public class AtomicProcessStartOperation implements AtomicOperation<ProcessInsta
         execution.runFlowInst();
         execution.saveFlowInstEntity();
         execution.saveExecuteEntity();
-        EventRegister.post(new ProcessStartEvent(execution));
+        EventRegister.post(new ProcessStartedEvent(execution.getExecuteEntity()));
         execution.performOperation(AtomicOperations.activity_start);
     }
 }
