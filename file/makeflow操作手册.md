@@ -162,13 +162,13 @@ public class TaskListener implements FlowEventListener {
 - 实现源码
 
 ```url
-https://gitlab.xsoul.cn:9500/wangfeng/makeflow-service
+https://github.com/wangfeng-coder/makeflow-service.git
 ```
 
 - 实现demo
 
 ```url
-https://gitlab.xsoul.cn:9500/wangfeng/makeflow-demo
+ https://github.com/wangfeng-coder/makeflow-demo.git
 ```
 
 
